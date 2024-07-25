@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Test_01">
+    <test name="Chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="org.washingtonpost.Runner.TestNgRunnerClass"/>
+        </classes>
+    </test>
+    <test name="MozillaFirefox">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="org.washingtonpost.Runner.TestNgRunnerClass"/>
+        </classes>
+    </test>
+</suite>
