@@ -29,7 +29,7 @@ public class TheWashingtonPostStepDefinitions {
 //    Handle Exceptions
 
     @Given("User types {string} in the search bar")
-    public void userTypesInTheSearchBar(String arg0) {
+    public void userTypesInTheSearchBar(String search) {
         System.out.println("userTypesInTheSearchBar Method");
 
 //    To-Do :
@@ -37,7 +37,7 @@ public class TheWashingtonPostStepDefinitions {
 //    Try to Optimize with userEnters()
     }
 
-    @Given("User is in Homepage")
+    @Given("User is on the Homepage")
     public void userIsInHomepage() {
         System.out.println("userIsInHomepage Method");
         Assert.assertTrue(homePage.verifyUserIsInHomePage());
@@ -56,13 +56,19 @@ public class TheWashingtonPostStepDefinitions {
         System.out.println("<--- The Washington Post Homepage Opened --->");
     }
 
-    @When("User Clicks on {string} button")
+    @When("User clicks on the {string} button")
     public void userClicksOnButton(String button) {
         System.out.println("userClicksOnButton Method");
 
+        // Assert if button clicked, change data type of func methods
         if(Objects.equals(button, "SignIn")) {
             signInPage.signInButton().click();
             System.out.println("<--- Clicked on 'Sign In' Button --->");
+        }
+
+        else if(Objects.equals(button, "SignUp")) {
+            signInPage.signUpButton().click();
+            System.out.println("<--- Clicked on 'Sign Up' Button --->");
         }
 
         else if(Objects.equals(button, "Next")) {
@@ -70,10 +76,13 @@ public class TheWashingtonPostStepDefinitions {
             System.out.println("<--- Clicked on 'Next' Button --->");
         }
 
+        else if(Objects.equals(button, "Continue")) {
+            signInPage.continueButton().click();
+            System.out.println("<--- Clicked on 'Continue' Button --->");
+        }
+
         // To-Do :
-        // Sign In (2) - done
-        // Next - done
-        // Subscribe, Politics, Opinions, etc etc
+        // Subscribe, Politics, Opinions, etc.
         // Re-create the Page Objects file and add common elements
     }
 
@@ -87,10 +96,32 @@ public class TheWashingtonPostStepDefinitions {
         // Find input fields in other pages
     }
 
-    @Then("User Signed in into The Washington Post")
+    @Then("User is signed in to The Washington Post")
     public void userSignedInIntoTheWashingtonPost() {
         System.out.println("userSignedInIntoTheWashingtonPost Method");
         Assert.assertTrue(signInPage.verifySignIn());
         System.out.println("<--- Sign In Successful --->");
     }
+
+    @And("User clicks on the {string} checkbox")
+    public void userClicksOnCheckBox(String checkboxIntention) {
+        System.out.println("userClicksOnCheckBox Method");
+        Assert.assertTrue(signInPage.verifyCheckBox(checkboxIntention));
+        System.out.println("<--- Check Box checked --->");
+    }
+
+    @Then("User should be able to change the Email ID before Sign-Up")
+    public void userEditsTheIncorrectEmailIDWith() {
+        System.out.println("userEditsTheIncorrectEmailIDWith Method");
+        Assert.assertTrue(signInPage.editEmailId());
+        System.out.println("User can SIgn-Up with another Email ID");
+    }
+
+    @Then("User should be on the Welcome Page")
+    public void userIsInWelcomePage() {
+        System.out.println("userIsInWelcomePage Method");
+        Assert.assertTrue(signInPage.welcomeNote());
+        System.out.println("<--- User received a Welcome note ! --->");
+    }
+
 }
