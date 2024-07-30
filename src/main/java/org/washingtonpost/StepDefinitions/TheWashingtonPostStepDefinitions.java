@@ -7,34 +7,35 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.washingtonpost.Pages.Commons;
 import org.washingtonpost.Pages.HomePage;
 import org.washingtonpost.Pages.SignInPage;
+import org.washingtonpost.Utilities.TestUtils;
 import org.washingtonpost.Utilities.WebDrivers;
+import java.io.IOException;
 import java.util.Objects;
 
 public class TheWashingtonPostStepDefinitions {
 
-    private final WebDriver driver;
-    private final HomePage homePage;
-    private final SignInPage signInPage;
+    WebDriver driver;
+    HomePage homePage;
+    SignInPage signInPage;
+    TestUtils testUtils;
+    Commons commons;
 
     public TheWashingtonPostStepDefinitions() {
         WebDrivers webDrivers = new WebDrivers();
         driver = webDrivers.chromeBrowserDriverInit();
-        homePage = new HomePage();
-        signInPage = new SignInPage();
+        homePage = new HomePage(driver);
+        signInPage = new SignInPage(driver);
+        testUtils = new TestUtils();
+        commons = new Commons(driver);
     }
 
-//    To-Do :
-//    Handle Exceptions
-
-    @Given("User types {string} in the search bar")
-    public void userTypesInTheSearchBar(String search) {
+    @Given("the user navigates to {string}")
+    public void userTypesInTheSearchBar(String URL) {
         System.out.println("userTypesInTheSearchBar Method");
-
-//    To-Do :
-//    Move the method to dedicated page file
-//    Try to Optimize with userEnters()
+        Assert.assertTrue(commons.googleSearch(URL));
     }
 
     @Given("User is on the Homepage")
@@ -44,9 +45,9 @@ public class TheWashingtonPostStepDefinitions {
         System.out.println("<--- The User is in Homepage --->");
     }
 
-    @When("User hits enter key")
-    public void userHitsEnterKey() {
-        System.out.println("userHitsEnterKey Method");
+    @When("User hits {string} key")
+    public void userHitsKey() {
+        System.out.println("userHitsKey Method");
     }
 
     @Then("The Washington Post homepage is opened")
@@ -60,40 +61,27 @@ public class TheWashingtonPostStepDefinitions {
     public void userClicksOnButton(String button) {
         System.out.println("userClicksOnButton Method");
 
-        // Assert if button clicked, change data type of func methods
-        if(Objects.equals(button, "SignIn")) {
+        if (Objects.equals(button, "SignIn")) {
             signInPage.signInButton().click();
             System.out.println("<--- Clicked on 'Sign In' Button --->");
-        }
-
-        else if(Objects.equals(button, "SignUp")) {
+        } else if (Objects.equals(button, "SignUp")) {
             signInPage.signUpButton().click();
             System.out.println("<--- Clicked on 'Sign Up' Button --->");
-        }
-
-        else if(Objects.equals(button, "Next")) {
+        } else if (Objects.equals(button, "Next")) {
             signInPage.nextButton().click();
             System.out.println("<--- Clicked on 'Next' Button --->");
-        }
-
-        else if(Objects.equals(button, "Continue")) {
+        } else if (Objects.equals(button, "Continue")) {
             signInPage.continueButton().click();
             System.out.println("<--- Clicked on 'Continue' Button --->");
         }
-
-        // To-Do :
-        // Subscribe, Politics, Opinions, etc.
-        // Re-create the Page Objects file and add common elements
     }
 
     @And("User enters {string}")
-    public void userEnters(String emailPassword) {
+    public void userEnters(String emailPassword) throws InterruptedException {
         System.out.println("userEnters Method");
+        // fails here as we did not receive a mock account's Email ID & Password
         Assert.assertTrue(signInPage.enterEmailIdPassword(emailPassword));
         System.out.println("<--- Email ID & Password Entered successfully --->");
-
-        // To-Do :
-        // Find input fields in other pages
     }
 
     @Then("User is signed in to The Washington Post")
@@ -111,17 +99,38 @@ public class TheWashingtonPostStepDefinitions {
     }
 
     @Then("User should be able to change the Email ID before Sign-Up")
-    public void userEditsTheIncorrectEmailIDWith() {
+    public void userEditsTheIncorrectEmailIDWith() throws InterruptedException {
         System.out.println("userEditsTheIncorrectEmailIDWith Method");
         Assert.assertTrue(signInPage.editEmailId());
-        System.out.println("User can SIgn-Up with another Email ID");
+        System.out.println("User can Sign-Up with another Email ID");
     }
 
     @Then("User should be on the Welcome Page")
     public void userIsInWelcomePage() {
         System.out.println("userIsInWelcomePage Method");
         Assert.assertTrue(signInPage.welcomeNote());
-        System.out.println("<--- User received a Welcome note ! --->");
+        System.out.println("<--- User received a Welcome note! --->");
     }
 
+    @And("Internet Connection is {string}")
+    public void internetConnectivity(String state) throws IOException {
+        System.out.println("internetConnectivity Method");
+        Assert.assertTrue(testUtils.wifiOnOff(state));
+    }
+
+    @Then("The Site is Reloaded")
+    public void reloadSite() {
+        System.out.println("reloadSite Method");
+        Assert.assertTrue(commons.reloadSite());
+        System.out.println("Site reloaded");
+    }
+
+    @And("Error message is displayed")
+    public void verifyErrorMessage() {
+    }
+
+    @Given("the user is on the browser")
+    public void theUserIsOnTheBrowser() {
+
+    }
 }

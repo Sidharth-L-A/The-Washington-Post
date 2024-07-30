@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b550aa54-1480-400e-8ad8-caf7ee7664ec" name="Changes" comment="Sid : Automated an existing user's Sign-In process. Tests will fail due to a mismatch in the application's response speed and test execution speed.">
+    <list default="true" id="b550aa54-1480-400e-8ad8-caf7ee7664ec" name="Changes" comment="Sid : Automated a new user's Sign-Up process, and a new user attempts to change Email ID during Sign-Up, Implemented test code to verify UI changes on buttons, Validating Passwords.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/Commons.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Features/OpenWaashingtonPost_Negative.feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost_Positive.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/HomePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Runner/TestNgRunnerClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Runner/TestNgRunnerClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Utilities/TestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Utilities/TestUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Utilities/WebDrivers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Utilities/WebDrivers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,26 +54,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sla/Test3/TheWashingtonPost/src/main/resources/TestNg.xml&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/sla/Test3/TheWashingtonPost/src/main/java/org/example/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.1150748&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TestNG.Cucumber TestNg Runner.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/sla/Test3/TheWashingtonPost/src/main/resources/TestNg.xml",
+    "onboarding.tips.debug.path": "C:/Users/sla/Test3/TheWashingtonPost/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.1150748",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;XML&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "XML"
     ]
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -83,12 +92,21 @@
       <option name="project" value="LOCAL" />
       <updated>1721924205041</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Sid : Automated a new user's Sign-Up process, and a new user attempts to change Email ID during Sign-Up, Implemented test code to verify UI changes on buttons, Validating Passwords.">
+      <option name="closed" value="true" />
+      <created>1721998289406</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1721998289406</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Sid : Automated an existing user's Sign-In process. Tests will fail due to a mismatch in the application's response speed and test execution speed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Sid : Automated an existing user's Sign-In process. Tests will fail due to a mismatch in the application's response speed and test execution speed." />
+    <MESSAGE value="Sid : Automated a new user's Sign-Up process, and a new user attempts to change Email ID during Sign-Up, Implemented test code to verify UI changes on buttons, Validating Passwords." />
+    <option name="LAST_COMMIT_MESSAGE" value="Sid : Automated a new user's Sign-Up process, and a new user attempts to change Email ID during Sign-Up, Implemented test code to verify UI changes on buttons, Validating Passwords." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
