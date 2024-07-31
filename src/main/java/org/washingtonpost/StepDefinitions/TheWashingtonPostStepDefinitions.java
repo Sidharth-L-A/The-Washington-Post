@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.washingtonpost.Pages.Commons;
 import org.washingtonpost.Pages.HomePage;
 import org.washingtonpost.Pages.SignInPage;
+import org.washingtonpost.Pages.EmailLinkVerificationPage;
 import org.washingtonpost.Utilities.TestUtils;
 import org.washingtonpost.Utilities.WebDrivers;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class TheWashingtonPostStepDefinitions {
     SignInPage signInPage;
     TestUtils testUtils;
     Commons commons;
+    EmailLinkVerificationPage signInWithEmailPage;
 
     public TheWashingtonPostStepDefinitions() {
         WebDrivers webDrivers = new WebDrivers();
@@ -30,6 +32,7 @@ public class TheWashingtonPostStepDefinitions {
         signInPage = new SignInPage(driver);
         testUtils = new TestUtils();
         commons = new Commons(driver);
+        signInWithEmailPage = new EmailLinkVerificationPage(driver);
     }
 
     @Given("the user navigates to {string}")
@@ -38,7 +41,7 @@ public class TheWashingtonPostStepDefinitions {
         Assert.assertTrue(commons.googleSearch(URL));
     }
 
-    @Given("User is on the Homepage")
+    @Then("User is on the Homepage")
     public void userIsInHomepage() {
         System.out.println("userIsInHomepage Method");
         Assert.assertTrue(homePage.verifyUserIsInHomePage());
@@ -73,6 +76,9 @@ public class TheWashingtonPostStepDefinitions {
         } else if (Objects.equals(button, "Continue")) {
             signInPage.continueButton().click();
             System.out.println("<--- Clicked on 'Continue' Button --->");
+        } else if (Objects.equals(button, "Email a sign in link")) {
+            signInPage.linkSignInButton().click();
+            System.out.println("<--- Clicked on 'Email a sign in link' Button --->");
         }
     }
 
@@ -108,7 +114,7 @@ public class TheWashingtonPostStepDefinitions {
     @Then("User should be on the Welcome Page")
     public void userIsInWelcomePage() {
         System.out.println("userIsInWelcomePage Method");
-        Assert.assertTrue(signInPage.welcomeNote());
+        Assert.assertTrue(signInPage.checkWelcomeNote());
         System.out.println("<--- User received a Welcome note! --->");
     }
 
@@ -126,11 +132,30 @@ public class TheWashingtonPostStepDefinitions {
     }
 
     @And("Error message is displayed")
-    public void verifyErrorMessage() {
+    public void verifyErrorMessage() throws InterruptedException {
+        System.out.println("verifyErrorMessage Method");
+        Assert.assertTrue(signInPage.verifyEmailError());
+        System.out.println("<--- Error Message Displayed Successfully --->");
     }
 
-    @Given("the user is on the browser")
-    public void theUserIsOnTheBrowser() {
+    @Then("User should be on the Link Verification Page")
+    public void userShouldBeOnTheLinkVerificationPage() throws InterruptedException {
+        System.out.println("userShouldBeOnTheLinkVerificationPage Method");
+        Assert.assertTrue(signInWithEmailPage.linkSentNote());
+        System.out.println("<--- User is prompted to check inbox for a Sign-in link --->");
+    }
 
+    @Then("User should be able to access all links")
+    public void userShouldBeAbleToAccessAllLinks() throws InterruptedException {
+        System.out.println("userShouldBeAbleToAccessAllLinks Method");
+        Assert.assertTrue(signInWithEmailPage.resendNotificationVerify());
+        System.out.println("<--- User is able to access all links from the Link Verification Page --->");
+    }
+
+    @Then("Help for Sign-in is prompted {string}")
+    public void helpForSignInIsPrompted(String emailId) throws InterruptedException {
+        System.out.println("helpForSignInIsPrompted Method");
+        Assert.assertTrue(signInPage.needHelpToSignInLink(emailId));
+        System.out.println("<--- User received a hyperlink to Sign-in --->");
     }
 }

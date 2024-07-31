@@ -7,10 +7,10 @@
             <class name="org.washingtonpost.Runner.TestNgRunnerClass"/>
         </classes>
     </test>
-    <test name="MozillaFirefox">
-        <parameter name="browser" value="firefox"/>
-        <classes>
-            <class name="org.washingtonpost.Runner.TestNgRunnerClass"/>
-        </classes>
-    </test>
+<!--    <test name="MozillaFirefox">-->
+<!--        <parameter name="browser" value="firefox"/>-->
+<!--        <classes>-->
+<!--            <class name="org.washingtonpost.Runner.TestNgRunnerClass"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>

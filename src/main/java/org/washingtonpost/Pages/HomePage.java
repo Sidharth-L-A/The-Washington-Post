@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class HomePage {
     WebDriver driver;
+    WebElement masterLogo;
 
     // Constructor to initialize WebDriver
     public HomePage(WebDriver driver) {
@@ -15,9 +16,8 @@ public class HomePage {
     public boolean verifyUserIsInHomePage() {
         System.out.println("verifyUserIsInHomePage Method");
 
-        WebElement twpLogo = driver.findElement(By.xpath("//*[@id='__next']/div/div[3]/div/div/a/span"));
+        masterLogo = driver.findElement(By.xpath("//*[@class='wpds-c-fBqPWp masthead_svg__wplogo']"));
         System.out.println("'The Washington Post' Logo found");
-
-        return twpLogo.isDisplayed();
+        return masterLogo.isDisplayed();
     }
 }

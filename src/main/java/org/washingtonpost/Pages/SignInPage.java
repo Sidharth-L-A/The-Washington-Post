@@ -1,40 +1,55 @@
 package org.washingtonpost.Pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.openqa.selenium.support.Color;
 
+import java.time.Duration;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SignInPage {
     WebDriver driver;
+    WebDriverWait wait;
     WebElement button, field, checkBox;
-    String buttonName, fieldName, signUpPrompt;
+    String buttonName, fieldName, signUpPrompt, errorMessage;
+    Commons commons;
+    EmailLinkVerificationPage linkVerificationPage;
+    PrivacyPolicy privacyPolicy;
+    NeedHelpPage needHelpPage;
 
-    // Constructor to initialize WebDriver
     public SignInPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        commons = new Commons(driver);
+        linkVerificationPage = new EmailLinkVerificationPage(driver);
+        privacyPolicy = new PrivacyPolicy(driver);
+        needHelpPage = new NeedHelpPage(driver);
+    }
+
+    public boolean verifySignInPage() {
+        field = driver.findElement(By.xpath("//h1[@data-test-id='signin-header']"));
+        return field.getText().equalsIgnoreCase("Sign In");
     }
 
     public WebElement signInButton() {
         System.out.println("signInButton Method");
 
-        buttonName = driver.findElement(By.xpath("//*[@id='__next']/div/div[1]/nav/div[2]/a")).getText();
-        System.out.println("Button Name: " + buttonName);
+        String [] xpaths = { "//a[@aria-label='Sign in']", "//button[text()='Sign In']" };
 
-        if (Objects.equals(buttonName, "Sign in")) {
-            button = driver.findElement(By.xpath("//*[@id='__next']/div/div[1]/nav/div[2]/a"));
-            System.out.println("Sign In Button found");
-
-//            to be added to UI test script
-//            Assert.assertTrue(buttonColorChange(button));
-//            System.out.println("Sign In Button color changes");
+        for (String xpath : xpaths) {
+            try {
+                button = driver.findElement(By.xpath(xpath));
+                buttonName = button.getText();
+                System.out.println("Button Found : " + buttonName);
+                break;
+            } catch (NoSuchElementException e) {
+                System.out.println("Button not found using xpath [" + xpath + "]");
+            }
         }
         return button;
     }
@@ -65,7 +80,7 @@ public class SignInPage {
     public WebElement nextButton() {
         System.out.println("nextButton Method");
 
-        button = driver.findElement(By.xpath("//*[@id='__next']/div/div[2]/div/div/form/button"));
+        button = driver.findElement(By.xpath("//button[@data-test-id='sign-in-btn']"));
         buttonName = button.getText();
         System.out.println("Button Found : " + buttonName);
 
@@ -91,6 +106,12 @@ public class SignInPage {
         }
         return button;
     }
+    public WebElement linkSignInButton(){
+        System.out.println("linkSignInButton Method");
+        button = driver.findElement(By.xpath("//button[@data-test-id='pml-btn']"));
+        System.out.println("Button Found : " + button.getText());
+        return button;
+    }
 
     // This method shall be called while scripting UI test cases
     public boolean buttonColorChange(WebElement button) {
@@ -113,11 +134,6 @@ public class SignInPage {
 
         if (emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) {
             inputField().sendKeys(emailIdPwd);
-//            try {
-//                Thread.sleep(3000);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
             System.out.println("Email Address entered");
             return true;
         } else if (!(emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) &&
@@ -155,7 +171,7 @@ public class SignInPage {
     public WebElement inputField() throws InterruptedException {
         System.out.println("inputField Method");
 
-        Thread.sleep(5000);
+        Thread.sleep(2500);
         fieldName = driver.findElement(By.xpath("//span[@role='label']")).getText();
         System.out.println("Field Name: " + fieldName);
 
@@ -169,9 +185,115 @@ public class SignInPage {
         return field;
     }
 
+    public boolean needHelpToSignInLink(String emailId) throws InterruptedException {
+        System.out.println("needHelpToSignInLink Method");
+        Thread.sleep(3000);
+
+        button = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[@class='red underline']"))));
+        System.out.println("Error Message : " + button.getText());
+
+        // need help signing in button click 1
+        button.click();
+        Thread.sleep(3000);
+
+        // //*[@class='wpds-c-bdLjjU'] - forgot password page verify with this heading 2
+        Assert.assertTrue(forgotPasswordPage().isDisplayed());
+        Thread.sleep(3000);
+
+        // if empty email ID - @class="red font-xxxs" - error message - put in commmons page 3
+        forgotPasswordButton().click();
+        Assert.assertTrue(verifyEmailError());
+        Thread.sleep(3000);
+
+        // input box verify (Email ID) 4
+        inputField().click();
+        inputField().sendKeys(emailId);
+        Thread.sleep(3000);
+
+        // data-test-id="forgot-password-btn" - send link to reset password button 5
+        forgotPasswordButton().click();
+        Thread.sleep(3000);
+
+        // @class="mt-md font-md font-bold font--headline" check ur mail page 6
+        linkVerificationPage.linkSentNote();
+        Thread.sleep(3000);
+
+        // Not You ? button @data-qa="forgot-password-email-change" click 7
+        notYouButton().click();
+        Thread.sleep(3000);
+
+        // forgot password page - provide mail ID 8
+        Assert.assertTrue(forgotPasswordPage().isDisplayed());
+        Thread.sleep(3000);
+
+        // privacy policy button 9
+        linkVerificationPage.verifyPrivacyPolicyButton();
+        Thread.sleep(3000);
+
+        // need help ? button 10
+        commons.needHelpButton().click();
+        Assert.assertTrue(needHelpPage.verifyNeedHelpPage());
+        Thread.sleep(3000);
+
+        // back to sign in button @data-test-id="signin-header" header of page 11
+        backToSignInButton().click();
+        Assert.assertTrue(verifySignInPage());
+        Thread.sleep(3000);
+
+//        For Sid's Future Reference, Ignore :
+//        If failed continuously, new Page : Check your email for a one-time sign in link
+//        Signin another way button (button) @data-qa="sign-in-another-way"
+//        If Clicked, verifySigInPage()
+//        Privacy Policy
+//        Need help
+
+
+        return true;
+    }
+
+    public WebElement backToSignInButton() {
+        System.out.println("backToSignInButton Method");
+        button = driver.findElement(By.xpath("//a[@class='wpds-c-funcLJ']"));
+        System.out.println("Button Found : " + button.getText());
+        return button;
+    }
+
+    public WebElement notYouButton() {
+        System.out.println("notYouButton Method");
+        button = driver.findElement(By.xpath("//*[@data-qa='forgot-password-email-change']"));
+        System.out.println("Button Found : " + button.getText());
+        return button;
+    }
+    public WebElement forgotPasswordPage(){
+        System.out.println("needHelpToSignInButton Method");
+        field = driver.findElement(By.xpath("//*[@class='wpds-c-bdLjjU']"));
+        System.out.println("Current Page : " + field.getText());
+        return field;
+    }
+    public WebElement forgotPasswordButton() {
+        System.out.println("needHelpToSignInButton Method");
+        button = driver.findElement(By.xpath("//*[@class='wpds-c-bdLjjU']"));
+        System.out.println("Button Found : " + button.getText());
+        return button;
+    }
+
+    public boolean verifyEmailError() throws InterruptedException {
+        System.out.println("verifyEmailError Method");
+        Thread.sleep(3000);
+
+        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[@class=red font-xxxs']"))));
+        System.out.println("Error Message : " + field.getText());
+        return field.isDisplayed();
+    }
+
     public boolean verifySignIn() {
         System.out.println("verifySignIn Method");
-        buttonName = driver.findElement(By.xpath("//*[@id='__next']/div/div[1]/nav/div[2]/button/span")).getText();
+        try {
+            Thread.sleep(3500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        buttonName = driver.findElement(By.xpath("//span[@class='wpds-c-gRqkNc']")).getText();
         System.out.println("Account Name: " + buttonName);
         return true;
     }
@@ -200,12 +322,14 @@ public class SignInPage {
         System.out.println("Previously Entered Email ID: " + fieldName);
 
         // Change button
-        driver.findElement(By.xpath("//*[@id='__next']/div/div[2]/div/div/form/div[2]/button")).click();
-        System.out.println("Clicked on 'Change' Button");
+        button = commons.changeButton();
+        button.click();
         return true;
     }
 
-    public boolean welcomeNote() {
+    public boolean checkWelcomeNote() {
+        System.out.println("checkWelcomeNote Method");
         return driver.findElement(By.xpath("//*[@id='__next']/div/div[2]/div/div/form/div[2]/button")).getText().equals("Welcome to The Washington Post!");
     }
+
 }

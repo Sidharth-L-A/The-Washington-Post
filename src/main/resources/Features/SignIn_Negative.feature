@@ -1,7 +1,19 @@
 Feature: To Sign in into The Washington Post Account
 
 ##  Test Passed
-#  Scenario Outline: Existing User Sign In
+#  Scenario Outline: Existing User Sign In with invalid Email ID
+#    Given the user navigates to "https://www.washingtonpost.com/"
+#    Then User is on the Homepage
+#    When User clicks on the "SignIn" button
+#    And User enters "<EmailID>"
+#    And User clicks on the "Next" button
+#    Then Error message is displayed
+#    Examples:
+#      | EmailID                                |
+#      | xthe.washington.post.testing@gmail.com |
+
+#  Requires continuous testing to dodge captcha, to skin error and move to
+#  Scenario Outline: Existing User Sign In with valid Email ID & invalid password
 #    Given the user navigates to "https://www.washingtonpost.com/"
 #    Then User is on the Homepage
 #    When User clicks on the "SignIn" button
@@ -9,11 +21,12 @@ Feature: To Sign in into The Washington Post Account
 #    And User clicks on the "Next" button
 #    And User enters "<Password>"
 #    And User clicks on the "SignIn" button
-#    Then User is signed in to The Washington Post
+#    Then Error message is displayed
+#    Then Help for Sign-in is prompted "<EmailID>"
 #    Examples:
 #      | EmailID                               | Password    |
-#      | the.washington.post.testing@gmail.com | UberP@ss123 |
-#
+#      | the.washington.post.testing@gmail.com | xUberP@ss123 |
+
 ##  Need New Account creds
 #  Scenario: New user Sign Up
 #    Given the user navigates to "https://www.washingtonpost.com/"
