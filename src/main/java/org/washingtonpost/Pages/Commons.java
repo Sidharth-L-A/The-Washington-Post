@@ -1,8 +1,18 @@
 package org.washingtonpost.Pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Commons {
     /*
@@ -11,11 +21,25 @@ public class Commons {
     */
 
     WebDriver driver;
+    WebDriverWait wait;
     WebElement button;
+    JavascriptExecutor jsExecutor;
+    String buttonColor;
+    SignInPage signInPage;
+
+    List <String> pathsOfButtons = Arrays.asList(
+            "button[data-qa='auth--amazon']",
+            "button[data-qa='auth--facebook']",
+            "button[data-qa='auth--google']",
+            "button[data-qa='auth--amazon']"
+    );
 
     // Constructor to initialize WebDriver
     public Commons(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        jsExecutor = (JavascriptExecutor) driver;
+        signInPage = new SignInPage(driver);
     }
 
     public boolean googleSearch(String URL) {
@@ -65,5 +89,50 @@ public class Commons {
         button = driver.findElement(By.xpath("//a[@class='dib gray-dark pl-md pr-md lh-xl pt-xxs pb-xxs']"));
         System.out.println("Button Found : " + button.getText());
         return button;
+    }
+
+    public boolean verifyBlueButtonInitialColor() throws InterruptedException {
+        System.out.println("Commons.verifyBlueButtonColor() Method");
+        driver.wait(1000);
+        buttonColor = (String) jsExecutor.executeScript("return window.getComputedStyle(document.querySelector('button[data-test-id='sign-in-btn']')).getPropertyValue('background-color')");
+        System.out.println("Verifying Button Color");
+        driver.wait(1000);
+        return buttonColor.contains("rgb(22, 109, 252)");
+    }
+
+    public boolean verifyGrayButtonInitialColor() throws InterruptedException {
+        System.out.println("Commons.verifyGrayButtonInitialColor() Method");
+        driver.wait(1000);
+        buttonColor = (String) jsExecutor.executeScript("return window.getComputedStyle(document.querySelector('button[data-test-id='pml-btn']')).getPropertyValue('background-color')");
+        System.out.println("Verifying Button Color");
+        driver.wait(1000);
+        return buttonColor.contains("rgb(255, 255, 255)");
+    }
+
+    public void verifyWhiteButtonInitialColor() throws InterruptedException {
+        System.out.println("Commons.verifyWhiteButtonInitialColor() Method");
+        driver.wait(1000);
+
+        List<WebElement> buttons = Arrays.asList(
+                wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@data-qa='auth--amazon']")))),
+                wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@data-qa='auth--facebook']")))),
+                wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@data-qa='auth--google']")))),
+                wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@data-qa='auth--apple']"))))
+        );
+
+        for(String button : pathsOfButtons) {
+            buttonColor = (String) jsExecutor.executeScript("return window.getComputedStyle(document.querySelector('" + button + "')).getPropertyValue('background-color')");
+            System.out.println("Verifying " + button + "Button Color");
+            driver.wait(1000);
+            Assert.assertTrue(buttonColor.contains("rgb(255, 255, 255)"));
+            driver.wait(1000);
+            System.out.println("Verified " + button + "Button Color");
+        }
+
+        for(WebElement button : buttons) {
+            driver.wait(1000);
+            Assert.assertTrue(signInPage.buttonColorChange(button));
+            driver.wait(1000);
+        }
     }
 }

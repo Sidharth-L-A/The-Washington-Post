@@ -16,7 +16,7 @@ public class NeedHelpPage {
     public boolean verifyNeedHelpPage() throws InterruptedException {
         field = driver.findElement(By.xpath("//span[@class='hero-title']"));
         System.out.println("Current Page : " + field.getText());
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         originalHandle = driver.getWindowHandle();
         for (String handle : driver.getWindowHandles()) {

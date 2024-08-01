@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.openqa.selenium.support.Color;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +22,8 @@ public class SignInPage {
     EmailLinkVerificationPage linkVerificationPage;
     PrivacyPolicy privacyPolicy;
     NeedHelpPage needHelpPage;
+    Actions actions;
+    JavascriptExecutor jsExecutor;
 
     public SignInPage(WebDriver driver) {
         this.driver = driver;
@@ -29,6 +32,8 @@ public class SignInPage {
         linkVerificationPage = new EmailLinkVerificationPage(driver);
         privacyPolicy = new PrivacyPolicy(driver);
         needHelpPage = new NeedHelpPage(driver);
+        actions = new Actions(driver);
+        jsExecutor = (JavascriptExecutor) driver;
     }
 
     public boolean verifySignInPage() {
@@ -46,15 +51,24 @@ public class SignInPage {
                 button = driver.findElement(By.xpath(xpath));
                 buttonName = button.getText();
                 System.out.println("Button Found : " + buttonName);
+
+                Assert.assertTrue(commons.verifyBlueButtonInitialColor());
+                System.out.println("Sign In Button Color Verified");
+                driver.wait(1000);
+                Assert.assertTrue(buttonColorChange(button));
+                System.out.println("Sign In Button color changes");
+
                 break;
             } catch (NoSuchElementException e) {
                 System.out.println("Button not found using xpath [" + xpath + "]");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
         return button;
     }
 
-    public WebElement signUpButton() {
+    public WebElement signUpButton() throws InterruptedException {
         System.out.println("signUpButton Method");
 
         signUpPrompt = driver.findElement(By.xpath("//*[@id='__next']/div/div[2]/div/div/div/div[3]")).getText();
@@ -70,27 +84,31 @@ public class SignInPage {
         button = driver.findElement(By.xpath("//*[@id='__next']/div/div[2]/div/div/div/div[3]/a"));
         System.out.println("Sign Up Button found");
 
-//            to be added to UI test script
-//            Assert.assertTrue(buttonColorChange(button));
-//            System.out.println("Sign Up Button color changes");
-//        }
+        Assert.assertTrue(commons.verifyBlueButtonInitialColor());
+        System.out.println("Sign Up Button Color Verified");
+        driver.wait(1000);
+        Assert.assertTrue(buttonColorChange(button));
+        System.out.println("Sign Up Button color changes");
+
         return button;
     }
 
-    public WebElement nextButton() {
+    public WebElement nextButton() throws InterruptedException {
         System.out.println("nextButton Method");
 
         button = driver.findElement(By.xpath("//button[@data-test-id='sign-in-btn']"));
         buttonName = button.getText();
         System.out.println("Button Found : " + buttonName);
 
-//            to be added to UI test script
-//            Assert.assertTrue(buttonColorChange(button));
-//            System.out.println("Next Button color changes");
+        Assert.assertTrue(commons.verifyBlueButtonInitialColor());
+        System.out.println("Sign Up Button Color Verified");
+        driver.wait(1000);
+        Assert.assertTrue(buttonColorChange(button));
+        System.out.println("Next Button color changes");
         return button;
     }
 
-    public WebElement continueButton() {
+    public WebElement continueButton() throws InterruptedException {
         System.out.println("continueButton Method");
 
         buttonName = driver.findElement(By.xpath("//*[@id='__next']/div/div[2]/div/div/div/button")).getText();
@@ -100,16 +118,28 @@ public class SignInPage {
             button = driver.findElement(By.xpath("//*[@id='__next']/div/div[2]/div/div/div/button"));
             System.out.println("Continue Button found");
 
-//            to be added to UI test script
-//            Assert.assertTrue(buttonColorChange(button));
-//            System.out.println("Continue Button color changes");
+            Assert.assertTrue(commons.verifyBlueButtonInitialColor());
+            System.out.println("Sign Up Button Color Verified");
+            driver.wait(1000);
+            Assert.assertTrue(buttonColorChange(button));
+            System.out.println("Sign Up Button color changes");
+            System.out.println("Continue Button color changes");
         }
         return button;
     }
-    public WebElement linkSignInButton(){
+
+    public WebElement linkSignInButton() throws InterruptedException {
         System.out.println("linkSignInButton Method");
         button = driver.findElement(By.xpath("//button[@data-test-id='pml-btn']"));
+
+        Assert.assertTrue(commons.verifyGrayButtonInitialColor());
+        System.out.println("Sign Up Button Color Verified");
+        driver.wait(1000);
+        Assert.assertTrue(buttonColorChange(button));
+        System.out.println("Sign Up Button color changes");
+
         System.out.println("Button Found : " + button.getText());
+        commons.verifyWhiteButtonInitialColor(); // verifies all buttons in signIn page
         return button;
     }
 
@@ -117,7 +147,6 @@ public class SignInPage {
     public boolean buttonColorChange(WebElement button) {
         String initialColor = button.getCssValue("background-color");
         System.out.println("Button Color before hovering: " + initialColor);
-        Actions actions = new Actions(driver);
         actions.moveToElement(button).perform();
 
         String hoverColor = button.getCssValue("background-color");
@@ -136,14 +165,83 @@ public class SignInPage {
             inputField().sendKeys(emailIdPwd);
             System.out.println("Email Address entered");
             return true;
-        } else if (!(emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) &&
-                !(emailIdPwd.length() < 8) &&
-                pwdValidator(emailIdPwd)) {
+        } else if (!(emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com"))) {
+            System.out.println("Validating Password in UI");
+
+            driver.wait(1000);
+            Assert.assertTrue(symbolHover());
+            System.out.println("Valid Symbols Prompted");
+
+            //validate color of the circles
+            driver.wait(1000);
+            Assert.assertTrue(colorOfCharCountCircle().equalsIgnoreCase("#D5D5D5"));
+            driver.wait(1000);
+            Assert.assertTrue(colorOfSymbolCircle().equalsIgnoreCase("#D5D5D5"));
+            System.out.println("Colors of Circles validated : Gray");
+
+            driver.wait(1000);
+            Assert.assertFalse(signInButton().isEnabled());
+            System.out.println("Sign In Button is Disabled");
+
+            driver.wait(1000);
             inputField().sendKeys(emailIdPwd);
             System.out.println("Password entered");
-            return true;
+
+            //validating color of the circles and SignIn button
+            if (emailIdPwd.length() < 8 && !(pwdValidator(emailIdPwd))) {
+//                Password contains less than 8 characters and does not contain any symbol
+                Assert.assertFalse(colorOfCharCountCircle().equalsIgnoreCase("#61A125"));
+                Assert.assertFalse(colorOfSymbolCircle().equalsIgnoreCase("#61A125"));
+                Assert.assertFalse(signInButton().isEnabled());
+                System.out.println("Invalid Password");
+                return true;
+            } else if (emailIdPwd.length() < 8 && pwdValidator(emailIdPwd)) {
+//                Password contains less than 8 characters and contains valid symbols
+                Assert.assertFalse(colorOfCharCountCircle().equalsIgnoreCase("#61A125"));
+                Assert.assertTrue(colorOfSymbolCircle().equalsIgnoreCase("#61A125"));
+                Assert.assertFalse(signInButton().isEnabled());
+                System.out.println("Invalid Password");
+                return true;
+            } else if (!(emailIdPwd.length() < 8) && pwdValidator(emailIdPwd)) {
+//                Password contains at least 8 characters and contains valid symbols
+                Assert.assertTrue(colorOfCharCountCircle().equalsIgnoreCase("#61A125"));
+                Assert.assertTrue(colorOfSymbolCircle().equalsIgnoreCase("#61A125"));
+                Assert.assertTrue(signInButton().isEnabled());
+                System.out.println("Valid Password");
+                return true;
+            } else if (!(emailIdPwd.length() < 8) && !(pwdValidator(emailIdPwd))) {
+//                Password contains minimum 8 character and does not contain any symbol
+                Assert.assertTrue(colorOfCharCountCircle().equalsIgnoreCase("#61A125"));
+                Assert.assertFalse(colorOfSymbolCircle().equalsIgnoreCase("#61A125"));
+                Assert.assertFalse(signInButton().isEnabled());
+                System.out.println("Invalid Password");
+                return true;
+            }
         }
         return false;
+    }
+
+    public String colorOfCharCountCircle() throws InterruptedException {
+        driver.wait(2000);
+        field = (WebElement) jsExecutor.executeScript("return document.querySelector('circle')[0];");
+        driver.wait(1000);
+        return field.getAttribute("fill");
+    }
+
+    public String colorOfSymbolCircle() throws InterruptedException {
+        driver.wait(2000);
+        field = (WebElement) jsExecutor.executeScript("return document.querySelector('circle')[1];");
+        driver.wait(1000);
+        return field.getAttribute("fill");
+    }
+
+    public boolean symbolHover() throws InterruptedException {
+        System.out.println("symbolHover Method");
+        field = driver.findElement(By.xpath("//span[@class='wpds-c-iOLYdL wpds-c-hfqIQj']"));
+        driver.wait(2000);
+        actions.moveToElement(field).perform();
+        driver.wait(2000);
+        return driver.findElement(By.xpath("//p")).isDisplayed();
     }
 
     public boolean pwdValidator(String emailIdPwd) {
@@ -171,7 +269,7 @@ public class SignInPage {
     public WebElement inputField() throws InterruptedException {
         System.out.println("inputField Method");
 
-        Thread.sleep(2500);
+        driver.wait(3000);
         fieldName = driver.findElement(By.xpath("//span[@role='label']")).getText();
         System.out.println("Field Name: " + fieldName);
 
@@ -187,58 +285,58 @@ public class SignInPage {
 
     public boolean needHelpToSignInLink(String emailId) throws InterruptedException {
         System.out.println("needHelpToSignInLink Method");
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         button = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[@class='red underline']"))));
         System.out.println("Error Message : " + button.getText());
 
         // need help signing in button click 1
         button.click();
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         // //*[@class='wpds-c-bdLjjU'] - forgot password page verify with this heading 2
         Assert.assertTrue(forgotPasswordPage().isDisplayed());
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         // if empty email ID - @class="red font-xxxs" - error message - put in commmons page 3
         forgotPasswordButton().click();
         Assert.assertTrue(verifyEmailError());
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         // input box verify (Email ID) 4
         inputField().click();
         inputField().sendKeys(emailId);
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         // data-test-id="forgot-password-btn" - send link to reset password button 5
         forgotPasswordButton().click();
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         // @class="mt-md font-md font-bold font--headline" check ur mail page 6
         linkVerificationPage.linkSentNote();
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         // Not You ? button @data-qa="forgot-password-email-change" click 7
         notYouButton().click();
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         // forgot password page - provide mail ID 8
         Assert.assertTrue(forgotPasswordPage().isDisplayed());
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         // privacy policy button 9
         linkVerificationPage.verifyPrivacyPolicyButton();
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         // need help ? button 10
         commons.needHelpButton().click();
         Assert.assertTrue(needHelpPage.verifyNeedHelpPage());
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         // back to sign in button @data-test-id="signin-header" header of page 11
         backToSignInButton().click();
         Assert.assertTrue(verifySignInPage());
-        Thread.sleep(3000);
+        driver.wait(3000);
 
 //        For Sid's Future Reference, Ignore :
 //        If failed continuously, new Page : Check your email for a one-time sign in link
@@ -246,7 +344,6 @@ public class SignInPage {
 //        If Clicked, verifySigInPage()
 //        Privacy Policy
 //        Need help
-
 
         return true;
     }
@@ -279,7 +376,7 @@ public class SignInPage {
 
     public boolean verifyEmailError() throws InterruptedException {
         System.out.println("verifyEmailError Method");
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[@class=red font-xxxs']"))));
         System.out.println("Error Message : " + field.getText());
@@ -289,7 +386,7 @@ public class SignInPage {
     public boolean verifySignIn() {
         System.out.println("verifySignIn Method");
         try {
-            Thread.sleep(3500);
+            driver.wait(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -298,7 +395,7 @@ public class SignInPage {
         return true;
     }
 
-    public boolean verifyCheckBox(String checkboxIntention) {
+    public boolean verifyCheckBox(String checkboxIntention) throws InterruptedException {
         System.out.println("verifyCheckBox Method");
 
         checkBox = driver.findElement(By.xpath("//*[@role='checkbox']"));
@@ -306,8 +403,17 @@ public class SignInPage {
 
         if (checkboxIntention.equalsIgnoreCase("agreeT&C")) {
             if (checkBox.getAttribute("data-state").contains("unchecked")) {
+                driver.wait(1000);
+                Assert.assertFalse(nextButton().isEnabled());
+                System.out.println("Next Button is Disabled");
+
+                driver.wait(1000);
                 checkBox.click();
                 System.out.println("Clicked on T&C CheckBox");
+
+                driver.wait(1000);
+                Assert.assertTrue(nextButton().isEnabled());
+                System.out.println("Next Button is Enabled");
                 return true;
             }
             return true;
@@ -317,7 +423,7 @@ public class SignInPage {
 
     public boolean editEmailId() throws InterruptedException {
         System.out.println("editEmailId Method");
-        Thread.sleep(3000);
+        driver.wait(3000);
         fieldName = driver.findElement(By.xpath("//div[@data-test-id='current-email']")).getText();
         System.out.println("Previously Entered Email ID: " + fieldName);
 
