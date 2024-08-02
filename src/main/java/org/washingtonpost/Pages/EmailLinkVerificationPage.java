@@ -14,7 +14,7 @@ public class EmailLinkVerificationPage {
 
     WebDriver driver;
     WebDriverWait wait;
-    WebElement button, field, checkBox;
+    WebElement button, field;
     String originalHandle;
     Commons commons;
     SignInPage signIn;
@@ -32,6 +32,30 @@ public class EmailLinkVerificationPage {
         System.out.println("EmailLinkVerificationPage.linkSentNote() Method");
         Thread.sleep(6000);
         field = driver.findElement(By.xpath("//h2[@class='mt-md font-md font-bold font--headline']"));
+        System.out.println("Message Displayed : " + field.getText());
+        return field.isDisplayed();
+    }
+
+    public boolean SigninwithApple() throws InterruptedException {
+        System.out.println("AppleSignInVerificationPage.SigninwithApple() Method");
+        Thread.sleep(6000);
+        field = driver.findElement(By.xpath("//div[@class='ac-localnav-title']"));
+        System.out.println("Message Displayed : " + field.getText());
+        return field.isDisplayed();
+    }
+
+    public boolean SigninwithGoogle() throws InterruptedException {
+        System.out.println("GoogleSignInVerificationPage.SigninwithGoogle() Method");
+        Thread.sleep(6000);
+        field = driver.findElement(By.xpath("//div[.='Sign in with Google']"));
+        System.out.println("Message Displayed : " + field.getText());
+        return field.isDisplayed();
+    }
+
+    public boolean SigninwithGooglePasswordPage() throws InterruptedException {
+        System.out.println("EmailLinkVerificationPage.SigninwithGooglePasswordPage() Method");
+        Thread.sleep(6000);
+        field = driver.findElement(By.xpath("//div[.='Sign in with Google']"));
         System.out.println("Message Displayed : " + field.getText());
         return field.isDisplayed();
     }

@@ -4,7 +4,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.washingtonpost.Pages.Commons;
@@ -20,19 +19,23 @@ public class TheWashingtonPostStepDefinitions {
 
     WebDriver driver;
     HomePage homePage;
-    SignInPage signInPage;
+    SignInPage signInPage,googleSignInPage;
     TestUtils testUtils;
     Commons commons;
-    EmailLinkVerificationPage signInWithEmailPage;
+    EmailLinkVerificationPage signInWithEmailPage, signInWithGooglePage, signInWithApplePage;
+
 
     public TheWashingtonPostStepDefinitions() {
         WebDrivers webDrivers = new WebDrivers();
         driver = webDrivers.chromeBrowserDriverInit();
         homePage = new HomePage(driver);
         signInPage = new SignInPage(driver);
+        googleSignInPage = new SignInPage(driver);
         testUtils = new TestUtils();
         commons = new Commons(driver);
-        signInWithEmailPage = new EmailLinkVerificationPage(driver);
+      signInWithEmailPage = new EmailLinkVerificationPage(driver);
+      signInWithGooglePage = new EmailLinkVerificationPage(driver);
+        signInWithApplePage = new EmailLinkVerificationPage(driver);
     }
 
     @Given("the user navigates to {string}")
@@ -41,24 +44,31 @@ public class TheWashingtonPostStepDefinitions {
         Assert.assertTrue(commons.googleSearch(URL));
     }
 
-    @Then("User is on the Homepage")
+    @Then("User is on the {string} Page")
     public void userIsInHomepage() {
         System.out.println("userIsInHomepage Method");
         Assert.assertTrue(homePage.verifyUserIsInHomePage());
         System.out.println("<--- The User is in Homepage --->");
     }
 
+//    @Then("User is on the {string} Page")
+//    public void userIsInWashingtonHomepage() {
+//        System.out.println("userIsInWashingtonHomepage Method");
+//        Assert.assertTrue(homePage.userIsInWashingtonHomepage());
+//        System.out.println("<--- The User is in Homepage --->");
+//    }
+
     @When("User hits {string} key")
     public void userHitsKey() {
         System.out.println("userHitsKey Method");
     }
 
-    @Then("The Washington Post homepage is opened")
-    public void theWashingtonPostHomepageIsOpened() {
-        System.out.println("theWashingtonPostHomepageIsOpened Method");
-        Assert.assertTrue(driver.findElement(By.xpath("//*[@id='__next']/div/div[3]/div/div/a/span")).isDisplayed());
-        System.out.println("<--- The Washington Post Homepage Opened --->");
-    }
+//    @Then("The Washington Post homepage is opened")
+//    public void theWashingtonPostHomepageIsOpened() {
+//        System.out.println("theWashingtonPostHomepageIsOpened Method");
+//        Assert.assertTrue(driver.findElement(By.xpath("//*[@id='__next']/div/div[3]/div/div/a/span")).isDisplayed());
+//        System.out.println("<--- The Washington Post Homepage Opened --->");
+//    }
 
     @When("User clicks on the {string} button")
     public void userClicksOnButton(String button) {
@@ -79,15 +89,49 @@ public class TheWashingtonPostStepDefinitions {
         } else if (Objects.equals(button, "Email a sign in link")) {
             signInPage.linkSignInButton().click();
             System.out.println("<--- Clicked on 'Email a sign in link' Button --->");
+        } else if (Objects.equals(button, "Google")) {
+            signInPage.signInWithGoogleButton().click();
+            System.out.println("<--- Clicked on 'Sign in with Google' Button --->");
+        } else if (Objects.equals(button, "Google sign in next button")) {
+            signInPage.signinwithGoogleNextButton().click();
+            System.out.println("<--- Clicked on 'sign in with Google Next' Button --->");
+        } else if (Objects.equals(button, "Google sign in password next button")) {
+            signInPage.signinwithGooglePasswordNextButton().click();
+            System.out.println("<--- Clicked on 'sign in with Google password Next' Button --->");
+        } else if (Objects.equals(button, "Apple")) {
+            signInPage.signInWithAppleButton().click();
+            System.out.println("<--- Clicked on 'Sign in with Apple' Button --->");
+        } else if (Objects.equals(button, "Apple Sign In Arrow")) {
+            signInPage.signInWithAppleSignInArrowButton().click();
+            System.out.println("<--- Clicked on 'Sign in with Apple Sign In Arrow' Button --->");
+        }else if (Objects.equals(button, "Apple Password Arrow")) {
+            signInPage.signInWithApplePasswordArrowButton().click();
+            System.out.println("<--- Clicked on 'Sign in with Apple Password Arrow' Button --->");
+        }else if (Objects.equals(button, "AppleID Continue Button")) {
+            signInPage.signInWithAppleIDContinueButton().click();
+            System.out.println("<--- Clicked on 'Sign in with AppleID Continue' Button --->");
         }
-    }
 
+    }
     @And("User enters {string}")
     public void userEnters(String emailPassword) throws InterruptedException {
         System.out.println("userEnters Method");
         // fails here as we did not receive a mock account's Email ID & Password
         Assert.assertTrue(signInPage.enterEmailIdPassword(emailPassword));
         System.out.println("<--- Email ID & Password Entered successfully --->");
+    }
+
+    @And("User enters {string}")
+    public void GooglesigninEnters(String emailPassword) throws InterruptedException {
+        System.out.println("GooglesigninEnters Method");
+        Assert.assertTrue(signInPage.enterGoogleEmail(emailPassword));
+        System.out.println("<--- Email Google ID & Password  Entered successfully --->");
+    }
+    @And("User enters {string}")
+    public void ApplesigninEnters(String emailPassword) throws InterruptedException {
+        System.out.println("ApplesigninEnters Method");
+        Assert.assertTrue(signInPage.enterAppleEmail(emailPassword));
+        System.out.println("<--- Email Apple ID & Password  Entered successfully --->");
     }
 
     @Then("User is signed in to The Washington Post")
@@ -138,17 +182,60 @@ public class TheWashingtonPostStepDefinitions {
         System.out.println("<--- Error Message Displayed Successfully --->");
     }
 
+    @And("Error message is displayed")
+    public void verifyErrorMessageGoogleID() throws InterruptedException {
+        System.out.println("verifyErrorMessageGoogleID Method");
+        Assert.assertTrue(signInPage.verifyGoogleIDEmailError());
+        System.out.println("<--- Error Message Displayed Successfully --->");
+    }
+
+    @And("Error message is displayed")
+    public void verifyErrorMessageGoogleIDPassword() throws InterruptedException {
+        System.out.println("verifyErrorMessageGoogleIDPassword Method");
+        Assert.assertTrue(signInPage.verifyGoogleIDPasswordEmailError());
+        System.out.println("<--- Error Message Displayed Successfully --->");
+    }
+
+    @And("Error message is displayed")
+    public void verifyErrorMessageAppleIDPassword() throws InterruptedException {
+        System.out.println("verifyErrorMessageAppleIDPassword Method");
+        Assert.assertTrue(signInPage.verifyAppleIDPasswordEmailError());
+        System.out.println("<--- Error Message Displayed Successfully --->");
+    }
+
+    @And("Error message is displayed")
+    public void verifyErrorMessageAppleID() throws InterruptedException {
+        System.out.println("verifyErrorMessageAppleID Method");
+        Assert.assertTrue(signInPage.verifyAppleIDEmailError());
+        System.out.println("<--- Error Message Displayed Successfully --->");
+    }
+
     @Then("User should be on the Link Verification Page")
     public void userShouldBeOnTheLinkVerificationPage() throws InterruptedException {
         System.out.println("userShouldBeOnTheLinkVerificationPage Method");
         Assert.assertTrue(signInWithEmailPage.linkSentNote());
         System.out.println("<--- User is prompted to check inbox for a Sign-in link --->");
+
+    }
+
+    @Then("User should be on the Sign in with Google Page")
+    public void userShouldBeOnTheSigninwithGooglePage() throws InterruptedException {
+        System.out.println("userShouldBeOnTheSigninwithGooglePage Method");
+        Assert.assertTrue(signInWithGooglePage.SigninwithGoogle());
+        System.out.println("<--- User is in Google sign in page --->");
+    }
+
+    @Then("User should be on the Sign in with Google Page")
+    public void userShouldBeOnTheSigninwithGooglePasswordPage() throws InterruptedException {
+        System.out.println("userShouldBeOnTheSigninwithGooglePasswordPage Method");
+        Assert.assertTrue(signInWithGooglePage.SigninwithGooglePasswordPage());
+        System.out.println("<--- User is in Google password page --->");
     }
 
     @Then("User should be able to access all links")
     public void userShouldBeAbleToAccessAllLinks() throws InterruptedException {
         System.out.println("userShouldBeAbleToAccessAllLinks Method");
-        Assert.assertTrue(signInWithEmailPage.resendNotificationVerify());
+        Assert.assertTrue(signInWithGooglePage.resendNotificationVerify());
         System.out.println("<--- User is able to access all links from the Link Verification Page --->");
     }
 
@@ -157,5 +244,23 @@ public class TheWashingtonPostStepDefinitions {
         System.out.println("helpForSignInIsPrompted Method");
         Assert.assertTrue(signInPage.needHelpToSignInLink(emailId));
         System.out.println("<--- User received a hyperlink to Sign-in --->");
+    }
+
+    @Then("User Account name is Displayed")
+    public void userAccountNameIsDisplayed() {
+        System.out.println("userSignedInIntoTheWashingtonPost Method");
+        Assert.assertTrue(homePage.verifyUserNameDisplayed());
+        System.out.println("<--- Sign In Successful --->");
+    }
+
+    @Then("User should be on the Sign in with Apple Page")
+    public void userShouldBeOnTheSigninwithApplePage() throws InterruptedException {
+        System.out.println("userShouldBeOnTheSigninwithApplePage Method");
+        Assert.assertTrue(signInWithApplePage.SigninwithApple());
+        System.out.println("<--- User is in Apple sign in page --->");
+    }
+
+    @Then("User should be on the the Sign in with Apple Page")
+    public void userShouldBeOnTheTheSignInWithApplePage() {
     }
 }

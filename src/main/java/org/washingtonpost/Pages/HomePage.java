@@ -15,9 +15,15 @@ public class HomePage {
 
     public boolean verifyUserIsInHomePage() {
         System.out.println("verifyUserIsInHomePage Method");
-
         masterLogo = driver.findElement(By.xpath("//*[@class='wpds-c-fBqPWp masthead_svg__wplogo']"));
         System.out.println("'The Washington Post' Logo found");
+        return masterLogo.isDisplayed();
+    }
+
+    public boolean verifyUserNameDisplayed() {
+        System.out.println("verifyUserNameDisplayed Method");
+        masterLogo = driver.findElement(By.xpath("//span[contains(text(),'the.washington.post.testing')]"));
+        System.out.println("'user name' Text found");
         return masterLogo.isDisplayed();
     }
 }
