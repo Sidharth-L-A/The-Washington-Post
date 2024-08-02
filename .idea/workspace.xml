@@ -5,19 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b550aa54-1480-400e-8ad8-caf7ee7664ec" name="Changes" comment="Sid : Failures Exist.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/ContactUsPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/EmailLinkVerificationPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/NeedHelpPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/PrivacyPolicy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Negative.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/Commons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/Commons.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/HomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/EmailLinkVerificationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/EmailLinkVerificationPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Utilities/WebDrivers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Utilities/WebDrivers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/OpenWaashingtonPost_Negative.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/OpenWaashingtonPost_Negative.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost_Positive.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost_Positive.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Negative.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Negative.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/TestNg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TestNg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="sla_01" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,9 +61,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "TestNG.Cucumber TestNg Runner.executor": "Run",
-    "git-widget-placeholder": "sla__01",
+    "git-widget-placeholder": "alka__signin__using__amazon__and__facebook",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/sla/Test3/TheWashingtonPost/src/main/resources/TestNg.xml",
+    "node.js.selected.package.tslint": "(autodetect)",
     "onboarding.tips.debug.path": "C:/Users/sla/Test3/TheWashingtonPost/src/main/java/org/example/Main.java",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
