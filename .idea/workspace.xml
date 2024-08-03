@@ -4,15 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b550aa54-1480-400e-8ad8-caf7ee7664ec" name="Changes" comment="Sid : Failures Exist.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/EmailLinkVerificationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/EmailLinkVerificationPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/OpenWaashingtonPost_Negative.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/OpenWaashingtonPost_Negative.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost_Positive.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost_Positive.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Negative.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Negative.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" afterDir="false" />
+    <list default="true" id="b550aa54-1480-400e-8ad8-caf7ee7664ec" name="Changes" comment="Sid : Sign Pending : Amazon, FaceBook, Google, Apple, basic UI &amp; all Negative Cases.">
+        <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+        <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/EmailLinkVerificationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/EmailLinkVerificationPage.java" afterDir="false" />
+        <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" afterDir="false" />
+        <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" afterDir="false" />
+        <change beforePath="$PROJECT_DIR$/src/main/resources/Features/OpenWaashingtonPost_Negative.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/OpenWaashingtonPost_Negative.feature" afterDir="false" />
+        <change beforePath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost_Positive.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost_Positive.feature" afterDir="false" />
+        <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Negative.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Negative.feature" afterDir="false" />
+        <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" afterDir="false" />
+        <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/Commons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/Commons.java" afterDir="false" />
+        <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/NeedHelpPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/NeedHelpPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +63,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "TestNG.Cucumber TestNg Runner.executor": "Run",
-    "git-widget-placeholder": "alka__signin__using__amazon__and__facebook",
+
+    "git-widget-placeholder": "sla__02",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/sla/Test3/TheWashingtonPost/src/main/resources/TestNg.xml",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -102,13 +105,33 @@
       <option name="project" value="LOCAL" />
       <updated>1721998289406</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Sid : Sign Pending : Amazon, FaceBook, Google, Apple, &amp; all Negative Cases.">
+      <option name="closed" value="true" />
+      <created>1722456853956</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1722456853956</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Sid : Automated an existing user's Sign-In process. Tests will fail due to a mismatch in the application's response speed and test execution speed." />
     <MESSAGE value="Sid : Automated a new user's Sign-Up process, and a new user attempts to change Email ID during Sign-Up, Implemented test code to verify UI changes on buttons, Validating Passwords." />
-    <option name="LAST_COMMIT_MESSAGE" value="Sid : Automated a new user's Sign-Up process, and a new user attempts to change Email ID during Sign-Up, Implemented test code to verify UI changes on buttons, Validating Passwords." />
+    <MESSAGE value="Sid : Sign Pending : Amazon, FaceBook, Google, Apple, &amp; all Negative Cases." />
+    <option name="LAST_COMMIT_MESSAGE" value="Sid : Sign Pending : Amazon, FaceBook, Google, Apple, &amp; all Negative Cases." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

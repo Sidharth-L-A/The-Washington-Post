@@ -62,8 +62,30 @@ public class TheWashingtonPostStepDefinitions {
         System.out.println("<--- The Washington Post Homepage Opened --->");
     }
 
+    @When("User should not be able to click {string} button")
+    public void userCannotClickButton(String button) throws InterruptedException {
+        System.out.println("userCannotClickButton Method");
+
+        if (Objects.equals(button, "SignIn")) {
+            Assert.assertFalse(signInPage.signInButton().isEnabled());
+            System.out.println("<--- 'Sign In' Button Disabled --->");
+        } else if (Objects.equals(button, "SignUp")) {
+            Assert.assertFalse(signInPage.signUpButton().isEnabled());
+            System.out.println("<--- 'Sign Up' Button Disabled--->");
+        } else if (Objects.equals(button, "Next")) {
+            Assert.assertFalse(signInPage.nextButton().isEnabled());
+            System.out.println("<--- 'Next' Button Disabled --->");
+        } else if (Objects.equals(button, "Continue")) {
+            Assert.assertFalse(signInPage.continueButton().isEnabled());
+            System.out.println("<--- 'Continue' Button Disabled --->");
+        } else if (Objects.equals(button, "Email a sign in link")) {
+            Assert.assertFalse(signInPage.linkSignInButton().isEnabled());
+            System.out.println("<--- 'Email a sign in link' Button Disabled --->");
+        }
+    }
+
     @When("User clicks on the {string} button")
-    public void userClicksOnButton(String button) {
+    public void userClicksOnButton(String button) throws InterruptedException {
         System.out.println("userClicksOnButton Method");
 
         if (Objects.equals(button, "SignIn")) {
@@ -146,7 +168,7 @@ public class TheWashingtonPostStepDefinitions {
     }
 
     @And("User clicks on the {string} checkbox")
-    public void userClicksOnCheckBox(String checkboxIntention) {
+    public void userClicksOnCheckBox(String checkboxIntention) throws InterruptedException {
         System.out.println("userClicksOnCheckBox Method");
         Assert.assertTrue(signInPage.verifyCheckBox(checkboxIntention));
         System.out.println("<--- Check Box checked --->");

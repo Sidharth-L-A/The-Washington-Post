@@ -1,14 +1,11 @@
 package org.washingtonpost.Pages;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-
 import java.time.Duration;
 
 public class EmailLinkVerificationPage {
@@ -30,10 +27,9 @@ public class EmailLinkVerificationPage {
         privacyPolicy = new PrivacyPolicy(driver);
     }
 
-
     public boolean linkSentNote() throws InterruptedException {
         System.out.println("EmailLinkVerificationPage.linkSentNote() Method");
-        Thread.sleep(6000);
+        driver.wait(3000);
         field = driver.findElement(By.xpath("//h2[@class='mt-md font-md font-bold font--headline']"));
         System.out.println("Message Displayed : " + field.getText());
         return field.isDisplayed();
@@ -63,19 +59,19 @@ public class EmailLinkVerificationPage {
     public boolean resendNotificationVerify() throws InterruptedException {
         System.out.println("EmailLinkVerificationPage.resendNotificationVerify() Method");
 
-        Thread.sleep(2000);
+        driver.wait(2000);
         Assert.assertTrue(verifyResendButton());
         System.out.println("Resend Button Verified");
 
-        Thread.sleep(2000);
+        driver.wait(2000);
         Assert.assertTrue(verifyContactUsButton());
         System.out.println("Contact Us Button Verified");
 
-        Thread.sleep(2000);
+        driver.wait(2000);
         Assert.assertTrue(verifyPrivacyPolicyButton());
         System.out.println("Privacy Policy Button Verified");
 
-        Thread.sleep(2000);
+        driver.wait(2000);
         Assert.assertTrue(verifyChangeButton());
         System.out.println("Change Button Verified");
         driver.close();
@@ -96,7 +92,7 @@ public class EmailLinkVerificationPage {
         System.out.println("Notification 2 : " + field.getText());
         Assert.assertTrue(field.getText().equalsIgnoreCase("Email sent!"));
 
-        Thread.sleep(5000);
+        driver.wait(5000);
         button = driver.findElement(By.xpath("//a[@data-test-id='resend-btn-link']"));
         System.out.println("Button Found : " + button.getText());
         return true;
@@ -115,7 +111,7 @@ public class EmailLinkVerificationPage {
         commons.contactUsButton().click();
         System.out.println("Contact Us Button Clicked");
 
-        Thread.sleep(3000);
+        driver.wait(3000);
         System.out.println("Current URL : " + driver.getCurrentUrl());
 
         originalHandle = driver.getWindowHandle();
@@ -133,11 +129,12 @@ public class EmailLinkVerificationPage {
         driver.switchTo().window(originalHandle);
         return true;
     }
+
     public boolean verifyPrivacyPolicyButton() throws InterruptedException {
         System.out.println("EmailLinkVerificationPage.verifyPrivacyPolicyButton() Method");
         commons.privacyPolicyButton().click();
         System.out.println("privacyPolicyButton Button Clicked");
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         originalHandle = driver.getWindowHandle();
         for (String handle : driver.getWindowHandles()) {
@@ -152,5 +149,4 @@ public class EmailLinkVerificationPage {
         driver.switchTo().window(originalHandle);
         return true;
     }
-
 }
