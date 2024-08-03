@@ -1,12 +1,9 @@
 package org.washingtonpost.Pages;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.openqa.selenium.support.Color;
-
 import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +14,7 @@ public class SignInPage {
     WebDriver driver;
     WebDriverWait wait;
     WebElement button, field, checkBox;
-    String buttonName, fieldName, signUpPrompt, errorMessage;
+    String buttonName, fieldName, signUpPrompt;
     Commons commons;
     EmailLinkVerificationPage linkVerificationPage;
     PrivacyPolicy privacyPolicy;
@@ -142,6 +139,42 @@ public class SignInPage {
         commons.verifyWhiteButtonInitialColor(); // verifies all buttons in signIn page
         return button;
     }
+    public WebElement signinwithAmazonButton() {
+        System.out.println("signinwithAmazonButton Method");
+        button = driver.findElement(By.xpath("button[@data-qa='auth--amazon']"));
+        System.out.println("Button Found : " + button.getText());
+        return button;
+    }
+    public WebElement signinwithFacebookButton() {
+        System.out.println("signinwithFacebooktButton Method");
+        button = driver.findElement(By.xpath("//button[@data-qa='auth--facebook']"));
+        System.out.println("Button Found : " + button.getText());
+        return button;
+    }
+    public WebElement signinwithFacebookLogInButton() {
+        System.out.println("signinwithFacebookLogInButton Method");
+        button = driver.findElement(By.xpath("//button[@id='loginbutton']"));
+        System.out.println("Button Found : " + button.getText());
+        return button;
+    }
+    public WebElement SigninwithFacebook6digitcodeButton() {
+        System.out.println("signinwithFacebook6digitcodeButton Method");
+        button = driver.findElement(By.xpath("//button[@id='loginbutton']"));
+        System.out.println("Button Found : " + button.getText());
+        return button;
+    }
+    public WebElement signinwithAmazonContinueButton() {
+        System.out.println("signinwithAmazonContinueButton Method");
+        button = driver.findElement(By.xpath("//input[@id='continue']"));
+        System.out.println("Continue Button Found : " + button.getText());
+        return button;
+    }
+
+    public WebElement signinwithAmazoPasswordButton() {
+        System.out.println("signinwithAmazoPasswordButton Method");
+        button = driver.findElement(By.xpath("//input[@class='a-button-input']"));
+        System.out.println("Sign in with password Button Found : " + button.getText());
+        return button;
 
     // This method shall be called while scripting UI test cases
     public boolean buttonColorChange(WebElement button) {
@@ -157,6 +190,22 @@ public class SignInPage {
 
         return !initialHexColor.equals(hoverHexColor);
     }
+
+//    // This method shall be called while scripting UI test cases
+//    public boolean buttonColorChange(WebElement button) {
+//        String initialColor = button.getCssValue("background-color");
+//        System.out.println("Button Color before hovering: " + initialColor);
+//        Actions actions = new Actions(driver);
+//        actions.moveToElement(button).perform();
+//
+//        String hoverColor = button.getCssValue("background-color");
+//        System.out.println("Button Color after hovering: " + hoverColor);
+//
+//        String initialHexColor = Color.fromString(initialColor).asHex();
+//        String hoverHexColor = Color.fromString(hoverColor).asHex();
+//
+//        return !initialHexColor.equals(hoverHexColor);
+//    }
 
     public boolean enterEmailIdPassword(String emailIdPwd) throws InterruptedException {
         System.out.println("enterEmailIdPassword Method");
@@ -221,6 +270,56 @@ public class SignInPage {
         return false;
     }
 
+    public boolean enterAmazonEmail(String emailId) throws InterruptedException {
+        System.out.println("enterAmazonEmail Method");
+
+        if (emailId.contains("@gmail.com") || emailId.contains("@yahoo.com")) {
+            inputField().sendKeys(emailId);
+            System.out.println("Email Address entered");
+            return true;
+        } else if (!(emailId.contains("@gmail.com") || emailId.contains("@yahoo.com")) &&
+                !(emailId.length() < 8) &&
+                pwdValidator(emailId)) {
+            inputField().sendKeys(emailId);
+            System.out.println("Password entered");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean enterFacebookEmail(String emailPassword) throws InterruptedException {
+        System.out.println("enterFacebookEmail Method");
+
+        if (emailPassword.contains("@gmail.com") || emailPassword.contains("@yahoo.com")) {
+            inputField().sendKeys(emailPassword);
+            System.out.println("Email Address entered");
+            return true;
+        } else if (!(emailPassword.contains("@gmail.com") || emailPassword.contains("@yahoo.com")) &&
+                !(emailPassword.length() < 8) &&
+                pwdValidator(emailPassword)) {
+            inputField().sendKeys(emailPassword);
+            System.out.println("Password entered");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean enterFacebookEmailInvalidPassword(String emailinvalidPassword) throws InterruptedException {
+        System.out.println("enterFacebookEmail Method");
+
+        if (emailinvalidPassword.contains("@gmail.com") || emailinvalidPassword.contains("@yahoo.com")) {
+            inputField().sendKeys(emailinvalidPassword);
+            System.out.println("Email Address entered");
+            return true;
+        } else if (!(emailinvalidPassword.contains("@gmail.com") || emailinvalidPassword.contains("@yahoo.com")) &&
+                !(emailinvalidPassword.length() < 8) &&
+                pwdValidator(emailinvalidPassword)) {
+            inputField().sendKeys(emailinvalidPassword);
+            System.out.println("Password entered");
+            return true;
+        }
+        return false;
+    }
     public String colorOfCharCountCircle() throws InterruptedException {
         driver.wait(2000);
         field = (WebElement) jsExecutor.executeScript("return document.querySelector('circle')[0];");
@@ -378,10 +477,44 @@ public class SignInPage {
         System.out.println("verifyEmailError Method");
         driver.wait(3000);
 
-        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[@class=red font-xxxs']"))));
+        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[@class='red font-xxxs']"))));
         System.out.println("Error Message : " + field.getText());
         return field.isDisplayed();
     }
+
+    public boolean verifyAmazonIDEmailError() throws InterruptedException {
+        System.out.println("verifyAmazonIDEmailError Method");
+        Thread.sleep(3000);
+        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id='ap_email']"))));
+        System.out.println("Error Message : " + field.getText());
+        return field.isDisplayed();
+    }
+
+    public boolean verifyFacebookIDEmailError() throws InterruptedException {
+        System.out.println("verifyFacebookIDEmaiErro Method");
+        Thread.sleep(3000);
+        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id='email']"))));
+        System.out.println("Error Message : " + field.getText());
+        return field.isDisplayed();
+    }
+
+    public boolean verifyAmazonIDPasswordEmailError() throws InterruptedException {
+        System.out.println("verifyAmazonIDPasswordEmailError Method");
+        Thread.sleep(3000);
+        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id=\"pass\"]"))));
+        System.out.println("Error Message : " + field.getText());
+        return field.isDisplayed();
+    }
+
+    public boolean verifyFacebookIDPasswordEmailError() throws InterruptedException {
+        System.out.println("verifyFacebookIDPasswordEmailError Method");
+        Thread.sleep(3000);
+        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id=\"pass\"]"))));
+        System.out.println("Error Message : " + field.getText());
+        return field.isDisplayed();
+    }
+
+
 
     public boolean verifySignIn() {
         System.out.println("verifySignIn Method");

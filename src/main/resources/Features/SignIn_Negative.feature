@@ -1,17 +1,28 @@
 Feature: To Sign in into The Washington Post Account
 
-##  Test Passed
-#  Scenario Outline: Existing User Sign In with invalid Email ID
-#    Given the user navigates to "https://www.washingtonpost.com/"
-#    Then User is on the Homepage
-#    When User clicks on the "SignIn" button
-#    And User enters "<EmailID>"
-#    And User clicks on the "Next" button
-#    Then Error message is displayed
-#    Examples:
-#      | EmailID                                |
-#      | xthe.washington.post.testing@gmail.com |
+  Scenario Outline: Existing User Sign In with invalid Email ID
+    Given the user navigates to "https://www.washingtonpost.com/"
+    Then User is on the "Home" Page
+    When User clicks on the "SignIn" button
+    And User enters "<EmailID>"
+    Examples:
+      | EmailID |
+      | xthe.washington.post.testing@gmail.com |
 
+  Scenario Outline: Existing User Sign In with invalid AmazonID
+    Given the user navigates to "https://www.washingtonpost.com/"
+    Then User is on the "Home" Page
+    When User clicks on the "SignIn" button
+    And User enters "<EmailID>"
+    And User clicks on the "Amazon" button
+    Then User should be on the Amazon signIn Page
+    And User enters "<EmailID>"
+    And User clicks on the "Continue" button
+    Then Error message is displayed
+    Examples:
+      | EmailID                                |
+      | xthe.washington.post.testing@gmail.com |
+      
 #  Requires continuous testing to dodge captcha, to skin error and move to
 #  Scenario Outline: Existing User Sign In with valid Email ID & invalid password
 #    Given the user navigates to "https://www.washingtonpost.com/"
@@ -69,42 +80,47 @@ Feature: To Sign in into The Washington Post Account
 #      | EmailID                     |
 #      | sidharthdecember3@gmail.com |
 
+  Scenario Outline: Existing User Sign In with valid EmailId & invalid AmazonID Password
+    Given the user navigates to "https://www.washingtonpost.com/"
+    Then User is on the "Home" Page
+    When User clicks on the "SignIn" button
+    And User enters "<EmailID>"
+    And User clicks on the "Amazon" button
+    Then User should be on the Amazon signIn Page
+    And User enters "<EmailID>"
+    And User clicks on the "Continue" button
+    And User enters "<Password>"
+    When User clicks on the "SignIn" button
+    Then Error message is displayed
+    Examples:
+      | EmailID                               | Password    |
+      | the.washington.post.testing@gmail.com | xUberP@ss123 |
 
-#  -----
+  Scenario Outline: Existing User Sign In with invalid FacebookID
+    Given the user navigates to "https://www.washingtonpost.com/"
+    Then User is on the "Home" Page
+    When User clicks on the "SignIn" button
+    And User enters "<EmailID>"
+    And User clicks on the "Facebook" button
+    Then User should be on the Facebook signIn Page
+    And User enters "<EmailID>"
+    And User clicks on the "FacebookLogin" button
+    Then Error message is displayed
+    Examples:
+      | EmailID                               |
+      | xthe.washington.post.testing@gmail.com |
 
-
-##    Alka
-#  Scenario: Existing User Sign In using Amazon
-#    Given the user navigates to "https://www.washingtonpost.com/"
-#    Then User is on the Homepage
-#    When User clicks on the "SignIn" button
-#    And User enters "<EmailID>"
-#    And User clicks on the "Email a sign in link" button
-#    Then User should be on the Link Verification Page
-#
-##    Alka
-#  Scenario: Existing User Sign In using Facebook
-#    Given the user navigates to "https://www.washingtonpost.com/"
-#    Then User is on the Homepage
-#    When User clicks on the "SignIn" button
-#    And User enters "<EmailID>"
-#    And User clicks on the "Continue with Facebook" button
-#    Then User should be on the Link Verification Page
-#
-##    Goutham
-#  Scenario: Existing User Sign In using Google
-#    Given the user navigates to "https://www.washingtonpost.com/"
-#    Then User is on the Homepage
-#    When User clicks on the "SignIn" button
-#    And User enters "<EmailID>"
-#    And User clicks on the "Email a sign in link" button
-#    Then User should be on the Link Verification Page
-#
-##    Goutham
-#  Scenario: Existing User Sign In using AppleID
-#    Given the user navigates to "https://www.washingtonpost.com/"
-#    Then User is on the Homepage
-#    When User clicks on the "SignIn" button
-#    And User enters "<EmailID>"
-#    And User clicks on the "Email a sign in link" button
-#    Then User should be on the Link Verification Page
+  Scenario Outline: Existing User Sign In with  valid EmailId & invalid FacebookID Password
+    Given the user navigates to "https://www.washingtonpost.com/"
+    Then User is on the "Home" Page
+    When User clicks on the "SignIn" button
+    And User enters "<EmailID>"
+    And User clicks on the "Facebook" button
+    Then User should be on the Facebook signIn Page
+    And User enters "<EmailID>"
+    And User enters "<Password>"
+    And User clicks on the "FacebookLogin" button
+    Then Error message is displayed
+    Examples:
+      | EmailID                               | Password    |
+      | the.washington.post.testing@gmail.com | xUberP@ss123 |
