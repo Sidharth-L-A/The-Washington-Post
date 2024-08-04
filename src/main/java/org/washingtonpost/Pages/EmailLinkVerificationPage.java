@@ -56,6 +56,30 @@ public class EmailLinkVerificationPage {
         return field.isDisplayed();
     }
 
+    public boolean SigninwithApple() throws InterruptedException {
+        System.out.println("AppleSignInVerificationPage.SigninwithApple() Method");
+        Thread.sleep(6000);
+        field = driver.findElement(By.xpath("//div[@class='ac-localnav-title']"));
+        System.out.println("Message Displayed : " + field.getText());
+        return field.isDisplayed();
+    }
+
+    public boolean SigninwithGoogle() throws InterruptedException {
+        System.out.println("GoogleSignInVerificationPage.SigninwithGoogle() Method");
+        Thread.sleep(6000);
+        field = driver.findElement(By.xpath("//div[.='Sign in with Google']"));
+        System.out.println("Message Displayed : " + field.getText());
+        return field.isDisplayed();
+    }
+
+    public boolean SigninwithGooglePasswordPage() throws InterruptedException {
+        System.out.println("EmailLinkVerificationPage.SigninwithGooglePasswordPage() Method");
+        Thread.sleep(6000);
+        field = driver.findElement(By.xpath("//div[.='Sign in with Google']"));
+        System.out.println("Message Displayed : " + field.getText());
+        return field.isDisplayed();
+    }
+
     public boolean resendNotificationVerify() throws InterruptedException {
         System.out.println("EmailLinkVerificationPage.resendNotificationVerify() Method");
 
