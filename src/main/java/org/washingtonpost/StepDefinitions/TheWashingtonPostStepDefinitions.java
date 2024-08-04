@@ -41,7 +41,7 @@ public class TheWashingtonPostStepDefinitions {
         Assert.assertTrue(commons.googleSearch(URL));
     }
 
-    @Then("User is on the Homepage")
+    @Then("User is on the {string} Page")
     public void userIsInHomepage() {
         System.out.println("userIsInHomepage Method");
         Assert.assertTrue(homePage.verifyUserIsInHomePage());
@@ -68,7 +68,7 @@ public class TheWashingtonPostStepDefinitions {
             Assert.assertFalse(signInPage.signInButton().isEnabled());
             System.out.println("<--- 'Sign In' Button Disabled --->");
         } else if (Objects.equals(button, "SignUp")) {
-            Assert.assertFalse(signInPage.signUpButton().isEnabled());
+            Assert.assertFalse(signInPage.signUpHyperlink().isEnabled());
             System.out.println("<--- 'Sign Up' Button Disabled--->");
         } else if (Objects.equals(button, "Next")) {
             Assert.assertFalse(signInPage.nextButton().isEnabled());
@@ -89,6 +89,9 @@ public class TheWashingtonPostStepDefinitions {
         if (Objects.equals(button, "SignIn")) {
             signInPage.signInButton().click();
             System.out.println("<--- Clicked on 'Sign In' Button --->");
+        } else if (Objects.equals(button, "SignUpHyperlink")) {
+            signInPage.signUpHyperlink().click();
+            System.out.println("<--- Clicked on 'Sign Up' Hyperlink --->");
         } else if (Objects.equals(button, "SignUp")) {
             signInPage.signUpButton().click();
             System.out.println("<--- Clicked on 'Sign Up' Button --->");
@@ -112,10 +115,10 @@ public class TheWashingtonPostStepDefinitions {
         System.out.println("<--- Email ID & Password Entered successfully --->");
     }
 
-    @Then("User is signed in to The Washington Post")
-    public void userSignedInIntoTheWashingtonPost() {
+    @Then("User is signed in to The Washington Post {string}")
+    public void userSignedInIntoTheWashingtonPost(String accountName) {
         System.out.println("userSignedInIntoTheWashingtonPost Method");
-        Assert.assertTrue(signInPage.verifySignIn());
+        Assert.assertTrue(signInPage.verifySignIn(accountName));
         System.out.println("<--- Sign In Successful --->");
     }
 
@@ -179,5 +182,12 @@ public class TheWashingtonPostStepDefinitions {
         System.out.println("helpForSignInIsPrompted Method");
         Assert.assertTrue(signInPage.needHelpToSignInLink(emailId));
         System.out.println("<--- User received a hyperlink to Sign-in --->");
+    }
+
+    @Then("User can see account name {string} on the reopened homepage")
+    public void userCanSeeAccountNameOnTheHomepage(String accountName) throws InterruptedException {
+        System.out.println("helpForSignInIsPrompted Method");
+        Assert.assertTrue(homePage.verifyAccountNamePostSignin(accountName));
+        System.out.println("<--- User's Account Name a Displayed on the Home Page --->");
     }
 }

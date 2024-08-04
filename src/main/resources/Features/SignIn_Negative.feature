@@ -1,16 +1,16 @@
 Feature: To Sign in into The Washington Post Account
 
 ##  Test Passed
-#  Scenario Outline: Existing User Sign In with invalid Email ID
-#    Given the user navigates to "https://www.washingtonpost.com/"
-#    Then User is on the Homepage
-#    When User clicks on the "SignIn" button
-#    And User enters "<EmailID>"
-#    And User clicks on the "Next" button
-#    Then Error message is displayed
-#    Examples:
-#      | EmailID                                |
-#      | xthe.washington.post.testing@gmail.com |
+  Scenario Outline: Existing User Sign In with invalid Email ID
+    Given the user navigates to "https://www.washingtonpost.com/"
+    Then User is on the "Home" Page
+    When User clicks on the "SignIn" button
+    And User enters "<EmailID>"
+    And User clicks on the "Next" button
+    Then Error message is displayed
+    Examples:
+      | EmailID                                |
+      | xthe.washington.post.testing@gmail.com |
 
 #  Requires continuous testing to dodge captcha, to skin error and move to
 #  Scenario Outline: Existing User Sign In with valid Email ID & invalid password
@@ -32,7 +32,7 @@ Feature: To Sign in into The Washington Post Account
 #    Given the user navigates to "https://www.washingtonpost.com/"
 #    Then User is on the Homepage
 #    When User clicks on the "SignIn" button
-#    And User clicks on the "SignUp" button
+#    And User clicks on the "SignUpHyperlink" button
 #    And User enters "<EmailID>"
 #    And User clicks on the "agreeT&C" checkbox
 #    # Refer above statement while validating 'Disagree T&C' for negative test cases
