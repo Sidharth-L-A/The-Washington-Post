@@ -13,7 +13,7 @@ public class EmailLinkVerificationPage {
 
     WebDriver driver;
     WebDriverWait wait;
-    WebElement button, field;
+    WebElement button, field, checkBox;
     String originalHandle;
     Commons commons;
     SignInPage signIn;
@@ -31,51 +31,6 @@ public class EmailLinkVerificationPage {
         System.out.println("EmailLinkVerificationPage.linkSentNote() Method");
         driver.wait(3000);
         field = driver.findElement(By.xpath("//h2[@class='mt-md font-md font-bold font--headline']"));
-        System.out.println("Message Displayed : " + field.getText());
-        return field.isDisplayed();
-    }
-    public boolean SigninwithAmazon() throws InterruptedException {
-        System.out.println("AmazonSignInVerificationPage.SigninwithAmazon() Method");
-        driver.wait(3000);
-        field = driver.findElement(By.xpath("//h1[@class='a-spacing-small']"));
-        System.out.println("Message Displayed : " + field.getText());
-        return field.isDisplayed();
-    }
-    public boolean SigninwithFacebook() throws InterruptedException {
-        System.out.println("FacebookSignInVerificationPage.SigninwithFacebook() Method");
-        driver.wait(3000);
-        field = driver.findElement(By.xpath("//div[@class='_9axz']"));
-        System.out.println("Message Displayed : " + field.getText());
-        return field.isDisplayed();
-    }
-    public boolean verifySixDigitVerificationPage() throws InterruptedException {
-        System.out.println("FacebookSignIn6digitcodeVerificationPage.verify6DigitVerificationPage() Method");
-        driver.wait(3000);
-        field = driver.findElement(By.xpath("//span[@class='x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x1lliihq x1s928wv xhkezso x1gmr53x x1cpjm7i x1fgarty x1943h6x x14z4hjw x3x7a5m xngnso2 x1qb5hxa x1xlr1w8 xzsf02u x1yc453h']"));
-        System.out.println("Message Displayed : " + field.getText());
-        return field.isDisplayed();
-    }
-
-    public boolean SigninwithApple() throws InterruptedException {
-        System.out.println("AppleSignInVerificationPage.SigninwithApple() Method");
-        Thread.sleep(6000);
-        field = driver.findElement(By.xpath("//div[@class='ac-localnav-title']"));
-        System.out.println("Message Displayed : " + field.getText());
-        return field.isDisplayed();
-    }
-
-    public boolean SigninwithGoogle() throws InterruptedException {
-        System.out.println("GoogleSignInVerificationPage.SigninwithGoogle() Method");
-        Thread.sleep(6000);
-        field = driver.findElement(By.xpath("//div[.='Sign in with Google']"));
-        System.out.println("Message Displayed : " + field.getText());
-        return field.isDisplayed();
-    }
-
-    public boolean SigninwithGooglePasswordPage() throws InterruptedException {
-        System.out.println("EmailLinkVerificationPage.SigninwithGooglePasswordPage() Method");
-        Thread.sleep(6000);
-        field = driver.findElement(By.xpath("//div[.='Sign in with Google']"));
         System.out.println("Message Displayed : " + field.getText());
         return field.isDisplayed();
     }

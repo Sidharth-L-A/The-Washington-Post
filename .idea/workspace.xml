@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<list default="true" id="b550aa54-1480-400e-8ad8-caf7ee7664ec" name="Changes" comment="Sid : Sign Pending : Amazon, FaceBook, Google, Apple, basic UI &amp; all Negative Cases.">
-    <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/EmailLinkVerificationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/EmailLinkVerificationPage.java" afterDir="false" />
-    <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" afterDir="false" />
-    <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" afterDir="false" />
-    <change beforePath="$PROJECT_DIR$/src/main/resources/Features/OpenWaashingtonPost_Negative.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/OpenWaashingtonPost_Negative.feature" afterDir="false" />
-    <change beforePath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost_Positive.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost_Positive.feature" afterDir="false" />
-    <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Negative.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Negative.feature" afterDir="false" />
-    <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" afterDir="false" />
-    <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/Commons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/Commons.java" afterDir="false" />
-    <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/NeedHelpPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/NeedHelpPage.java" afterDir="false" />
-</list>
+    <list default="true" id="b550aa54-1480-400e-8ad8-caf7ee7664ec" name="Changes" comment="Sid : Initial UI segregation for all components" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,9 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-
         <entry key="$PROJECT_DIR$" value="sla_01" />
-
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -44,12 +31,12 @@
     &quot;assignee&quot;: &quot;Sidharth-L-A&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Sidharth-L-A/The-Washington-Post",
-    "accountId": "504a2bf2-ac2d-44dc-9bfd-e829c40d5534"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Sidharth-L-A/The-Washington-Post.git&quot;,
+    &quot;accountId&quot;: &quot;bfdd5225-92fc-433d-b5f7-96c7f1e0aeb7&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -62,15 +49,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
-    "Cucumber Java.Feature: SignIn_Positive.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "TestNG.Cucumber TestNg Runner.executor": "Run",
-
-    "git-widget-placeholder": "sla__02",
+    "git-widget-placeholder": "Merging sla__02",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/sla/Test3/TheWashingtonPost/src/main/resources/TestNg.xml",
-    "node.js.selected.package.tslint": "(autodetect)",
     "onboarding.tips.debug.path": "C:/Users/sla/Test3/TheWashingtonPost/src/main/java/org/example/Main.java",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
@@ -83,57 +67,6 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="TestNG.Cucumber TestNG Runner">
-    <configuration name="Feature: SignIn_Positive" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
-      <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" />
-      <option name="GLUE" value="org.washingtonpost.StepDefinitions" />
-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
-      <module name="TheWashingtonPost" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
-      <option name="SUGGESTED_NAME" value="Feature: SignIn_Positive" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Cucumber TestNG Runner" type="TestNG">
-      <module name="TheWashingtonPost" />
-      <shortenClasspath name="NONE" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="ALTERNATIVE_JRE_PATH" value="22 (3)" />
-      <option name="SUITE_NAME" value="$PROJECT_DIR$/src/main/resources/TestNg.xml" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="GROUP_NAME" value="" />
-      <option name="TEST_OBJECT" value="SUITE" />
-      <option name="PARAMETERS" value="" />
-      <option name="OUTPUT_DIRECTORY" value="" />
-      <option name="USE_DEFAULT_REPORTERS" value="true" />
-      <option name="PROPERTIES_FILE" value="" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Cucumber Java.Feature: SignIn_Positive" />
-      <item itemvalue="TestNG.Cucumber TestNG Runner" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Cucumber Java.Feature: SignIn_Positive" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -167,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722456853956</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Sid : Sign-Up elements UI (Positions) pending.">
+      <option name="closed" value="true" />
+      <created>1722536257280</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722536257280</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,7 +126,8 @@
     <MESSAGE value="Sid : Automated an existing user's Sign-In process. Tests will fail due to a mismatch in the application's response speed and test execution speed." />
     <MESSAGE value="Sid : Automated a new user's Sign-Up process, and a new user attempts to change Email ID during Sign-Up, Implemented test code to verify UI changes on buttons, Validating Passwords." />
     <MESSAGE value="Sid : Sign Pending : Amazon, FaceBook, Google, Apple, &amp; all Negative Cases." />
-    <option name="LAST_COMMIT_MESSAGE" value="Sid : Sign Pending : Amazon, FaceBook, Google, Apple, &amp; all Negative Cases." />
+    <MESSAGE value="Sid : Sign-Up elements UI (Positions) pending." />
+    <option name="LAST_COMMIT_MESSAGE" value="Sid : Sign-Up elements UI (Positions) pending." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
