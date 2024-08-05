@@ -1,5 +1,4 @@
 package org.washingtonpost.Pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +12,7 @@ public class EmailLinkVerificationPage {
 
     WebDriver driver;
     WebDriverWait wait;
-    WebElement button, field, checkBox;
+    WebElement button, field;
     String originalHandle;
     Commons commons;
     SignInPage signIn;
@@ -27,10 +26,32 @@ public class EmailLinkVerificationPage {
         privacyPolicy = new PrivacyPolicy(driver);
     }
 
+
     public boolean linkSentNote() throws InterruptedException {
         System.out.println("EmailLinkVerificationPage.linkSentNote() Method");
-        driver.wait(3000);
+        Thread.sleep(6000);
         field = driver.findElement(By.xpath("//h2[@class='mt-md font-md font-bold font--headline']"));
+        System.out.println("Message Displayed : " + field.getText());
+        return field.isDisplayed();
+    }
+    public boolean SigninwithAmazon() throws InterruptedException {
+        System.out.println("AmazonSignInVerificationPage.SigninwithAmazon() Method");
+        driver.wait(3000);
+        field = driver.findElement(By.xpath("//h1[@class='a-spacing-small']"));
+        System.out.println("Message Displayed : " + field.getText());
+        return field.isDisplayed();
+    }
+    public boolean SigninwithFacebook() throws InterruptedException {
+        System.out.println("FacebookSignInVerificationPage.SigninwithFacebook() Method");
+        driver.wait(3000);
+        field = driver.findElement(By.xpath("//div[@class='_9axz']"));
+        System.out.println("Message Displayed : " + field.getText());
+        return field.isDisplayed();
+    }
+    public boolean verifySixDigitVerificationPage() throws InterruptedException {
+        System.out.println("FacebookSignIn6digitcodeVerificationPage.verify6DigitVerificationPage() Method");
+        driver.wait(3000);
+        field = driver.findElement(By.xpath("//span[@class='x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x1lliihq x1s928wv xhkezso x1gmr53x x1cpjm7i x1fgarty x1943h6x x14z4hjw x3x7a5m xngnso2 x1qb5hxa x1xlr1w8 xzsf02u x1yc453h']"));
         System.out.println("Message Displayed : " + field.getText());
         return field.isDisplayed();
     }
@@ -38,19 +59,19 @@ public class EmailLinkVerificationPage {
     public boolean resendNotificationVerify() throws InterruptedException {
         System.out.println("EmailLinkVerificationPage.resendNotificationVerify() Method");
 
-        driver.wait(2000);
+        Thread.sleep(2000);
         Assert.assertTrue(verifyResendButton());
         System.out.println("Resend Button Verified");
 
-        driver.wait(2000);
+        Thread.sleep(2000);
         Assert.assertTrue(verifyContactUsButton());
         System.out.println("Contact Us Button Verified");
 
-        driver.wait(2000);
+        Thread.sleep(2000);
         Assert.assertTrue(verifyPrivacyPolicyButton());
         System.out.println("Privacy Policy Button Verified");
 
-        driver.wait(2000);
+        Thread.sleep(2000);
         Assert.assertTrue(verifyChangeButton());
         System.out.println("Change Button Verified");
         driver.close();
@@ -71,7 +92,7 @@ public class EmailLinkVerificationPage {
         System.out.println("Notification 2 : " + field.getText());
         Assert.assertTrue(field.getText().equalsIgnoreCase("Email sent!"));
 
-        driver.wait(5000);
+        Thread.sleep(5000);
         button = driver.findElement(By.xpath("//a[@data-test-id='resend-btn-link']"));
         System.out.println("Button Found : " + button.getText());
         return true;
@@ -90,7 +111,7 @@ public class EmailLinkVerificationPage {
         commons.contactUsButton().click();
         System.out.println("Contact Us Button Clicked");
 
-        driver.wait(3000);
+        Thread.sleep(3000);
         System.out.println("Current URL : " + driver.getCurrentUrl());
 
         originalHandle = driver.getWindowHandle();
@@ -108,12 +129,11 @@ public class EmailLinkVerificationPage {
         driver.switchTo().window(originalHandle);
         return true;
     }
-
     public boolean verifyPrivacyPolicyButton() throws InterruptedException {
         System.out.println("EmailLinkVerificationPage.verifyPrivacyPolicyButton() Method");
         commons.privacyPolicyButton().click();
         System.out.println("privacyPolicyButton Button Clicked");
-        driver.wait(3000);
+        Thread.sleep(3000);
 
         originalHandle = driver.getWindowHandle();
         for (String handle : driver.getWindowHandles()) {
@@ -128,4 +148,5 @@ public class EmailLinkVerificationPage {
         driver.switchTo().window(originalHandle);
         return true;
     }
+
 }
