@@ -25,25 +25,25 @@ public class HomePage {
         return button;
     }
 
-    public boolean verifyAccountNamePostSignin(String accountName) throws InterruptedException {
-        System.out.println("helpForSignInIsPrompted Method");
-        Assert.assertTrue(verifyUserIsInHomePage());
-        ((JavascriptExecutor) driver).executeScript("window.open();");
-
-        currentTab = driver.getWindowHandle();
-        for (String newTab : driver.getWindowHandles()) {
-            if (!newTab.equals(currentTab)) {
-                driver.switchTo().window(newTab);
-                break;
-            }
-        }
-
-        driver.wait(2000);
-        driver.get("https://www.washingtonpost.com");
-        driver.wait(2000);
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.washingtonpost.com");
-        return signInPage.verifySignIn(accountName);
-    }
+//    public boolean verifyAccountNamePostSignin(String accountName) throws InterruptedException {
+//        System.out.println("helpForSignInIsPrompted Method");
+//        Assert.assertTrue(verifyUserIsInHomePage());
+//        ((JavascriptExecutor) driver).executeScript("window.open();");
+//
+//        currentTab = driver.getWindowHandle();
+//        for (String newTab : driver.getWindowHandles()) {
+//            if (!newTab.equals(currentTab)) {
+//                driver.switchTo().window(newTab);
+//                break;
+//            }
+//        }
+//
+//        driver.wait(2000);
+//        driver.get("https://www.washingtonpost.com");
+//        driver.wait(2000);
+//        Assert.assertEquals(driver.getCurrentUrl(), "https://www.washingtonpost.com");
+//        return signInPage.verifySignIn(accountName);
+//    }
 
     public boolean verifyUserIsInHomePage() {
         System.out.println("verifyUserIsInHomePage Method");
