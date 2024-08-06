@@ -18,6 +18,12 @@ public class Commons {
         this.driver = driver;
     }
 
+    public void backButton(){
+        System.out.println("Commons.backButton() method");
+        driver.navigate().back();
+        System.out.println("Clicked on Back Button");
+    }
+
     public boolean googleSearch(String URL) {
         System.out.println("Commons.googleSearch() method");
         driver.get(URL);
