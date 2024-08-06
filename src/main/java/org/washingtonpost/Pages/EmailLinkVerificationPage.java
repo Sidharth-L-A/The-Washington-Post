@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
 import java.time.Duration;
 
 public class EmailLinkVerificationPage {
@@ -52,6 +53,30 @@ public class EmailLinkVerificationPage {
         System.out.println("FacebookSignIn6digitcodeVerificationPage.verify6DigitVerificationPage() Method");
         driver.wait(3000);
         field = driver.findElement(By.xpath("//span[@class='x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x1lliihq x1s928wv xhkezso x1gmr53x x1cpjm7i x1fgarty x1943h6x x14z4hjw x3x7a5m xngnso2 x1qb5hxa x1xlr1w8 xzsf02u x1yc453h']"));
+        System.out.println("Message Displayed : " + field.getText());
+        return field.isDisplayed();
+    }
+
+    public boolean SigninwithApple() throws InterruptedException {
+        System.out.println("AppleSignInVerificationPage.SigninwithApple() Method");
+        Thread.sleep(6000);
+        field = driver.findElement(By.xpath("//div[@class='ac-localnav-title']"));
+        System.out.println("Message Displayed : " + field.getText());
+        return field.isDisplayed();
+    }
+
+    public boolean SigninwithGoogle() throws InterruptedException {
+        System.out.println("GoogleSignInVerificationPage.SigninwithGoogle() Method");
+        Thread.sleep(6000);
+        field = driver.findElement(By.xpath("//div[.='Sign in with Google']"));
+        System.out.println("Message Displayed : " + field.getText());
+        return field.isDisplayed();
+    }
+
+    public boolean SigninwithGooglePasswordPage() throws InterruptedException {
+        System.out.println("EmailLinkVerificationPage.SigninwithGooglePasswordPage() Method");
+        Thread.sleep(6000);
+        field = driver.findElement(By.xpath("//div[.='Sign in with Google']"));
         System.out.println("Message Displayed : " + field.getText());
         return field.isDisplayed();
     }
