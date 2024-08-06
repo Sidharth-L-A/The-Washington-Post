@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.openqa.selenium.support.Color;
-
 import java.time.Duration;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -162,7 +161,66 @@ public class SignInPage {
         System.out.println("signInWithAppleIDContinueButton Method");
         button = driver.findElement(By.xpath("//div[@class='overflow-text']"));
         System.out.println("Next Button Found : " + button.getText());
+return button;
+    }
+    public WebElement linkSignInButton(){
+        System.out.println("linkSignInButton Method");
+        button = driver.findElement(By.xpath("//button[@data-test-id='pml-btn']"));
+        System.out.println("Button Found : " + button.getText());
         return button;
+    }
+    public WebElement signinwithAmazonButton() {
+        System.out.println("signinwithAmazonButton Method");
+        button = driver.findElement(By.xpath("button[@data-qa='auth--amazon']"));
+        System.out.println("Button Found : " + button.getText());
+        return button;
+    }
+    public WebElement signinwithFacebookButton() {
+        System.out.println("signinwithFacebooktButton Method");
+        button = driver.findElement(By.xpath("//button[@data-qa='auth--facebook']"));
+        System.out.println("Button Found : " + button.getText());
+        return button;
+    }
+    public WebElement signinwithFacebookLogInButton() {
+        System.out.println("signinwithFacebookLogInButton Method");
+        button = driver.findElement(By.xpath("//button[@id='loginbutton']"));
+        System.out.println("Button Found : " + button.getText());
+        return button;
+    }
+    public WebElement SigninwithFacebook6digitcodeButton() {
+        System.out.println("signinwithFacebook6digitcodeButton Method");
+        button = driver.findElement(By.xpath("//button[@id='loginbutton']"));
+        System.out.println("Button Found : " + button.getText());
+        return button;
+    }
+    public WebElement signinwithAmazonContinueButton() {
+        System.out.println("signinwithAmazonContinueButton Method");
+        button = driver.findElement(By.xpath("//input[@id='continue']"));
+        System.out.println("Continue Button Found : " + button.getText());
+        return button;
+    }
+
+    public WebElement signinwithAmazoPasswordButton() {
+        System.out.println("signinwithAmazoPasswordButton Method");
+        button = driver.findElement(By.xpath("//input[@class='a-button-input']"));
+        System.out.println("Sign in with password Button Found : " + button.getText());
+        return button;
+    }
+
+    // This method shall be called while scripting UI test cases
+    public boolean buttonColorChange(WebElement button) {
+        String initialColor = button.getCssValue("background-color");
+        System.out.println("Button Color before hovering: " + initialColor);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(button).perform();
+
+        String hoverColor = button.getCssValue("background-color");
+        System.out.println("Button Color after hovering: " + hoverColor);
+
+        String initialHexColor = Color.fromString(initialColor).asHex();
+        String hoverHexColor = Color.fromString(hoverColor).asHex();
+
+        return !initialHexColor.equals(hoverHexColor);
     }
 
     // This method shall be called while scripting UI test cases
@@ -209,6 +267,22 @@ public class SignInPage {
                 !(emailPassword.length() < 8) &&
                 pwdValidator(emailPassword)) {
             inputField().sendKeys(emailPassword);
+System.out.println("Password entered");
+            return true;
+        }
+        return false;
+    }
+    public boolean enterAmazonEmail(String emailId) throws InterruptedException {
+        System.out.println("enterAmazonEmail Method");
+
+        if (emailId.contains("@gmail.com") || emailId.contains("@yahoo.com")) {
+            inputField().sendKeys(emailId);
+            System.out.println("Email Address entered");
+            return true;
+        } else if (!(emailId.contains("@gmail.com") || emailId.contains("@yahoo.com")) &&
+                !(emailId.length() < 8) &&
+                pwdValidator(emailId)) {
+            inputField().sendKeys(emailId);
             System.out.println("Password entered");
             return true;
         }
@@ -217,6 +291,8 @@ public class SignInPage {
     public boolean enterAppleEmail(String emailPassword) throws InterruptedException {
         System.out.println("enterGoogleEmail Method");
 
+    public boolean enterFacebookEmail(String emailPassword) throws InterruptedException {
+        System.out.println("enterFacebookEmail Method");
         if (emailPassword.contains("@gmail.com") || emailPassword.contains("@yahoo.com")) {
             inputField().sendKeys(emailPassword);
             System.out.println("Email Address entered");
@@ -231,6 +307,22 @@ public class SignInPage {
         return false;
     }
 
+    public boolean enterFacebookEmailInvalidPassword(String emailinvalidPassword) throws InterruptedException {
+        System.out.println("enterFacebookEmail Method");
+
+        if (emailinvalidPassword.contains("@gmail.com") || emailinvalidPassword.contains("@yahoo.com")) {
+            inputField().sendKeys(emailinvalidPassword);
+            System.out.println("Email Address entered");
+            return true;
+        } else if (!(emailinvalidPassword.contains("@gmail.com") || emailinvalidPassword.contains("@yahoo.com")) &&
+                !(emailinvalidPassword.length() < 8) &&
+                pwdValidator(emailinvalidPassword)) {
+            inputField().sendKeys(emailinvalidPassword);
+            System.out.println("Password entered");
+            return true;
+        }
+        return false;
+    }
     public boolean pwdValidator(String emailIdPwd) {
         String lowercasePattern = ".*[a-z].*";
         String uppercasePattern = ".*[A-Z].*";
@@ -255,7 +347,6 @@ public class SignInPage {
 
     public WebElement inputField() throws InterruptedException {
         System.out.println("inputField Method");
-
         driver.wait(2500);
         fieldName = driver.findElement(By.xpath("//span[@role='label']")).getText();
         System.out.println("Field Name: " + fieldName);
@@ -364,8 +455,9 @@ public class SignInPage {
 
     public boolean verifyEmailError() throws InterruptedException {
         System.out.println("verifyEmailError Method");
-        Thread.sleep(3000);
-        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[@class=red font-xxxs']"))));
+        driver.wait(3000);
+      field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[@class='red font-xxxs']"))));
+
         System.out.println("Error Message : " + field.getText());
         return field.isDisplayed();
     }
@@ -374,29 +466,58 @@ public class SignInPage {
         System.out.println("verifyGoogleIDEmailError Method");
         Thread.sleep(3000);
         field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='Ekjuhf Jj6Lae']"))));
+System.out.println("Error Message : " + field.getText());
+        return field.isDisplayed();
+    }
+    public boolean verifyAmazonIDEmailError() throws InterruptedException {
+        System.out.println("verifyAmazonIDEmailError Method");
+        driver.wait(3000);
+        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id='ap_email']"))));
         System.out.println("Error Message : " + field.getText());
         return field.isDisplayed();
     }
 
     public boolean verifyAppleIDEmailError() throws InterruptedException {
         System.out.println("verifyAppleIDEmailError Method");
-        Thread.sleep(3000);
+        driver.wait(3000);
         field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//p[@id='errMsg']"))));
+System.out.println("Error Message : " + field.getText());
+        return field.isDisplayed();
+    }
+    public boolean verifyFacebookIDEmailError() throws InterruptedException {
+        System.out.println("verifyFacebookIDEmaiErro Method");
+        driver.wait(3000);
+        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id='email']"))));
         System.out.println("Error Message : " + field.getText());
         return field.isDisplayed();
     }
 
     public boolean verifyGoogleIDPasswordEmailError() throws InterruptedException {
         System.out.println("verifyGoogleIDPasswordEmailError Method");
-        Thread.sleep(3000);
+        driver.wait(3000);
         field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[.='Wrong password. Try again or click ‘Forgot password’ to reset it.']"))));
         System.out.println("Error Message : " + field.getText());
         return field.isDisplayed();
     }
     public boolean verifyAppleIDPasswordEmailError() throws InterruptedException {
         System.out.println("verifyAppleIDPasswordEmailError Method");
-        Thread.sleep(3000);
+        driver.wait(3000);
         field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//p[@id='errMsg']"))));
+System.out.println("Error Message : " + field.getText());
+        return field.isDisplayed();
+    }
+    public boolean verifyAmazonIDPasswordEmailError() throws InterruptedException {
+        System.out.println("verifyAmazonIDPasswordEmailError Method");
+        driver.wait(3000);
+        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id=\"pass\"]"))));
+        System.out.println("Error Message : " + field.getText());
+        return field.isDisplayed();
+    }
+
+    public boolean verifyFacebookIDPasswordEmailError() throws InterruptedException {
+        System.out.println("verifyFacebookIDPasswordEmailError Method");
+        driver.wait(3000);
+        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id=\"pass\"]"))));
         System.out.println("Error Message : " + field.getText());
         return field.isDisplayed();
     }
@@ -404,7 +525,7 @@ public class SignInPage {
     public boolean verifySignIn(String accountName) {
         System.out.println("verifySignIn Method");
         try {
-            Thread.sleep(3500);
+            driver.wait(3500);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
