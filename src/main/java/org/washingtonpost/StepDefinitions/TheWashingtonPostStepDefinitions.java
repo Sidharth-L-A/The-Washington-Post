@@ -19,6 +19,10 @@ public class TheWashingtonPostStepDefinitions {
     TestUtils testUtils;
     Commons commons;
     PoliticsPage politicsPage;
+    OpinionsPage opinionsPage;
+    StylePage stylePage;
+    SearchMorePage searchMorePage;
+    NewsAlertsPage newsAlertsPage;
     EmailLinkVerificationPage signInWithEmailPage, signInWithGooglePage, signInWithApplePage, signInWithAmazonPage, signInWithFacebookPage;
 
     public TheWashingtonPostStepDefinitions() {
@@ -33,6 +37,11 @@ public class TheWashingtonPostStepDefinitions {
         signInWithGooglePage = new EmailLinkVerificationPage(driver);
         signInWithApplePage = new EmailLinkVerificationPage(driver);
         politicsPage = new PoliticsPage (driver);
+        opinionsPage = new OpinionsPage(driver);
+        stylePage = new StylePage(driver);
+        searchMorePage = new SearchMorePage(driver);
+        newsAlertsPage = new NewsAlertsPage(driver);
+
         signInWithAmazonPage = new EmailLinkVerificationPage(driver);
         signInWithFacebookPage = new EmailLinkVerificationPage(driver);
     }
@@ -51,9 +60,29 @@ public class TheWashingtonPostStepDefinitions {
                 Assert.assertTrue(homePage.verifyUserIsInHomePage());
                 System.out.println("<--- The User is in Homepage --->");
             }
+            case "SearchMorePage" -> {
+                System.out.println("userIsInSearchMorePage Method");
+                Assert.assertTrue(searchMorePage.verifyUserIsInSearchMorePage());
+                System.out.println("<--- The User is in SearchMore Page --->");
+            }
+            case "NewsAlertsPage" -> {
+                System.out.println("userIsInNewsAlertsPage Method");
+                Assert.assertTrue(newsAlertsPage.verifyUserIsInNewsAlertsPage());
+                System.out.println("<--- The User is in NewsAlerts Page --->");
+            }
             case "Politics" -> {
                 Assert.assertTrue(politicsPage.verifyUserIsInPoliticsPage());
-                System.out.println("<--- The User is in Homepage --->");
+                System.out.println("<--- The User is in Politics Page --->");
+            }
+            case "Opinions" -> {
+                System.out.println("userIsInOpinionspage Method");
+                Assert.assertTrue(opinionsPage.verifyUserIsInOpinionsPage());
+                System.out.println("<--- The User is in Opinions Page --->");
+            }
+            case "Style" -> {
+                System.out.println("userIsInStylepage Method");
+                Assert.assertTrue(stylePage.verifyUserIsInStylePage());
+                System.out.println("<--- The User is in Style Page --->");
             }
         }
     }
@@ -65,7 +94,7 @@ public class TheWashingtonPostStepDefinitions {
 //        Assert.assertTrue(homePage.userIsInWashingtonHomepage());
 //        System.out.println("<--- The User is in Homepage --->");
 //    }
-  
+
 //    @Then("The Washington Post homepage is opened")
 //    public void theWashingtonPostHomepageIsOpened() {
 //        System.out.println("theWashingtonPostHomepageIsOpened Method");
@@ -131,15 +160,14 @@ public class TheWashingtonPostStepDefinitions {
             }
             case null, default -> {
                 homePage.allButtons(button).click();
-                System.out.println("<--- Clicked on 'Search&MoreButton' Button --->");
+                System.out.println("<--- Clicked on 'SearchMore' Button --->");
             }
         }
     }
-  
+
     @And("User enters {string}")
     public void userEnters(String emailPassword) throws InterruptedException {
         System.out.println("userEnters Method");
-        // fails here as we did not receive a mock account's Email ID & Password
         Assert.assertTrue(signInPage.enterEmailIdPassword(emailPassword));
         System.out.println("<--- Email ID & Password Entered successfully --->");
     }
@@ -159,8 +187,8 @@ public class TheWashingtonPostStepDefinitions {
 
     @Then("User is signed in to The Washington Post {string}")
     public void userSignedInIntoTheWashingtonPost(String accountName) {
-System.out.println("userSignedInIntoTheWashingtonPost Method");
-        Assert.assertTrue(signInPage.verifySignIn());
+        System.out.println("userSignedInIntoTheWashingtonPost Method");
+        Assert.assertTrue(signInPage.verifySignIn(accountName));
         System.out.println("<--- Sign In Successful --->");
     }
 
@@ -185,14 +213,6 @@ System.out.println("userSignedInIntoTheWashingtonPost Method");
         System.out.println("FacebooksigninEntersInvalidPassword Method");
         Assert.assertTrue(signInPage.enterFacebookEmailInvalidPassword(emailinvalidPassword));
         System.out.println("<--- Email Facebook ID  Entered successfully --->");
-    }
-
-
-    @Then("User is signed in to The Washington Post")
-    public void userSignedInIntoTheWashingtonPost() {
-        System.out.println("userSignedInIntoTheWashingtonPost Method");
-        Assert.assertTrue(signInPage.verifySignIn());
-        System.out.println("<--- Sign In Successful --->");
     }
 
     @And("User clicks on the {string} checkbox")
@@ -264,14 +284,6 @@ System.out.println("userSignedInIntoTheWashingtonPost Method");
         System.out.println("<--- Error Message Displayed Successfully --->");
     }
 
-    @Then("User should be on the Link Verification Page")
-    public void userShouldBeOnTheLinkVerificationPage() throws InterruptedException {
-        System.out.println("userShouldBeOnTheLinkVerificationPage Method");
-        Assert.assertTrue(signInWithEmailPage.linkSentNote());
-        System.out.println("<--- User is prompted to check inbox for a Sign-in link --->");
-
-    }
-
     @Then("User should be on the Sign in with Google Page")
     public void userShouldBeOnTheSigninwithGooglePage() throws InterruptedException {
         System.out.println("userShouldBeOnTheSigninwithGooglePage Method");
@@ -293,12 +305,12 @@ System.out.println("userSignedInIntoTheWashingtonPost Method");
         System.out.println("<--- User is able to access all links from the Link Verification Page --->");
     }
 
-/*    @Then("Help for Sign-in is prompted {string}")
+    @Then("Help for Sign-in is prompted {string}")
     public void helpForSignInIsPrompted(String emailId) throws InterruptedException {
         System.out.println("helpForSignInIsPrompted Method");
         Assert.assertTrue(signInPage.needHelpToSignInLink(emailId));
         System.out.println("<--- User received a hyperlink to Sign-in --->");
-    }*/
+    }
 
   /*  @Then("User should be on the Amazon signIn Page")
     public void userShouldBeOnTheAmazonSignInPage() throws InterruptedException {
@@ -327,7 +339,7 @@ System.out.println("userSignedInIntoTheWashingtonPost Method");
         Assert.assertTrue(signInWithApplePage.SigninwithApple());
         System.out.println("<--- User is in Apple sign in page --->");
     }
-    
+
     @Then("User should be on the Facebook signIn Page")
     public void userShouldBeOnTheFacebookSignInPage() throws InterruptedException {
         System.out.println("userShouldBeOnTheSigninwithFacebookPage Method");
@@ -376,5 +388,19 @@ System.out.println("userSignedInIntoTheWashingtonPost Method");
         System.out.println("userShouldBeOnThe 6 digit Verification Facebook Page Method");
         Assert.assertTrue(signInWithEmailPage.verifySixDigitVerificationPage());
         System.out.println("<--- User is prompted to check inbox for a Sign-in link --->");
+    }
+
+    @And("User enters {string} in Google")
+    public void userEntersGoogleEmailIdPassword(String emailIdPassword) throws InterruptedException {
+        System.out.println("userEnters Method");
+        Assert.assertTrue(signInPage.enterGoogleEmailId(emailIdPassword));
+        System.out.println("<--- Email ID Entered successfully --->");
+    }
+
+    @And("User enters {string} in AppleID")
+    public void userEntersAppleEmailIdPassword(String emailIdPassword) throws InterruptedException {
+        System.out.println("userEnters Method");
+        Assert.assertTrue(signInPage.enterAppleEmailId(emailIdPassword));
+        System.out.println("<--- Email ID Entered successfully --->");
     }
 }

@@ -23,11 +23,11 @@ Feature: To Land on The Washington Post Home Page
     Given the user navigates to "https://www.washingtonpost.com/"
     Then User is on the "Home" Page
 #gbm
-    When User clicks on the "Search & More" button
-    Then User is on the "Search & More" Page
+    When User clicks on the "SearchMore" button
+    Then User is on the "SearchMore" Page
 #    Add Steps if necessary
-    When User clicks on the "News Alerts" button
-    Then User is on the "News Alerts" Page
+    When User clicks on the "NewsAlerts" button
+    Then User is on the "NewsAlerts" Page
 #    Add Steps if necessary
     When User clicks on the "Politics" button
     Then User is on the "Politics" Page
