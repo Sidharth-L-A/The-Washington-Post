@@ -11,11 +11,13 @@ public class HomePage {
     WebElement button, masterLogo;
     String currentTab;
     SignInPage signInPage;
+    HomePage homePage;
 
     // Constructor to initialize WebDriver
     public HomePage(WebDriver driver) {
         this.driver = driver;
         signInPage = new SignInPage(driver);
+        homePage = new HomePage(driver);
     }
 
     public WebElement subscribeButton() {
@@ -23,6 +25,17 @@ public class HomePage {
         button = driver.findElement(By.xpath("//a[@data-qa='subs-offer']"));
         System.out.println("'Subscribe' Button found");
         return button;
+    }
+
+    public WebElement allButtons(String buttonsName) {
+        int buttonCount = (driver.findElements(By.xpath("//p[@class='wpds-c-bwYbD']"))).size();
+        for(int buttonNum = 0; buttonNum <= buttonCount; buttonNum++) {
+            String buttonName = (driver.findElement(By.xpath("(//p[@class='wpds-c-bwYbD'])[" + buttonNum + "]"))).getText();
+            if (buttonName.equals(buttonsName)) {
+                return button;
+            }
+        }
+        return null;
     }
 
     public boolean verifyAccountNamePostSignin(String accountName) throws InterruptedException {

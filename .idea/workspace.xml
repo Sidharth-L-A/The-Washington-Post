@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b550aa54-1480-400e-8ad8-caf7ee7664ec" name="Changes" comment="Sid : Initial UI segregation for all components">
+    <list default="true" id="b550aa54-1480-400e-8ad8-caf7ee7664ec" name="Changes" comment="Gbm re_merge signin features">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/PoliticsPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/Commons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/Commons.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/EmailLinkVerificationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/EmailLinkVerificationPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/HomePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost_Negative.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost_Negative.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Negative.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Negative.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/HomePage_Positive.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/HomePage_Positive.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +41,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Sidharth-L-A/The-Washington-Post.git&quot;,
-    &quot;accountId&quot;: &quot;bfdd5225-92fc-433d-b5f7-96c7f1e0aeb7&quot;
+    &quot;accountId&quot;: &quot;d6c054aa-934c-44e6-bf14-460c77dcdf0b&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -55,28 +53,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TestNG.Cucumber TestNg Runner.executor": "Run",
-    "git-widget-placeholder": "Gbm__HomePage",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/sla/Test3/TheWashingtonPost/src/main/resources/TestNg.xml",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "onboarding.tips.debug.path": "C:/Users/sla/Test3/TheWashingtonPost/src/main/java/org/example/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.1150748",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TestNG.Cucumber TestNg Runner.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#6 on Gbm__HomePage&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sla/Test3/TheWashingtonPost/src/main/resources/TestNg.xml&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/sla/Test3/TheWashingtonPost/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.1150748&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "XML"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;XML&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -118,7 +115,23 @@
       <option name="project" value="LOCAL" />
       <updated>1722536257280</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Gbm re_merge">
+      <option name="closed" value="true" />
+      <created>1722834205093</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1722834205093</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Gbm re_merge signin features">
+      <option name="closed" value="true" />
+      <created>1722926047971</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1722926047971</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -137,7 +150,9 @@
     <MESSAGE value="Sid : Automated a new user's Sign-Up process, and a new user attempts to change Email ID during Sign-Up, Implemented test code to verify UI changes on buttons, Validating Passwords." />
     <MESSAGE value="Sid : Sign Pending : Amazon, FaceBook, Google, Apple, &amp; all Negative Cases." />
     <MESSAGE value="Sid : Sign-Up elements UI (Positions) pending." />
-    <option name="LAST_COMMIT_MESSAGE" value="Sid : Sign-Up elements UI (Positions) pending." />
+    <MESSAGE value="Gbm re_merge" />
+    <MESSAGE value="Gbm re_merge signin features" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gbm re_merge signin features" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

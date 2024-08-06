@@ -6,14 +6,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.washingtonpost.Pages.Commons;
-import org.washingtonpost.Pages.HomePage;
-import org.washingtonpost.Pages.SignInPage;
-import org.washingtonpost.Pages.EmailLinkVerificationPage;
+import org.washingtonpost.Pages.*;
 import org.washingtonpost.Utilities.TestUtils;
 import org.washingtonpost.Utilities.WebDrivers;
 import java.io.IOException;
-import java.util.Objects;
 
 public class TheWashingtonPostStepDefinitions {
 
@@ -22,6 +18,7 @@ public class TheWashingtonPostStepDefinitions {
     SignInPage signInPage,googleSignInPage;
     TestUtils testUtils;
     Commons commons;
+    PoliticsPage politicsPage;
     EmailLinkVerificationPage signInWithEmailPage, signInWithGooglePage, signInWithApplePage, signInWithAmazonPage, signInWithFacebookPage;
 
     public TheWashingtonPostStepDefinitions() {
@@ -35,6 +32,7 @@ public class TheWashingtonPostStepDefinitions {
         signInWithEmailPage = new EmailLinkVerificationPage(driver);
         signInWithGooglePage = new EmailLinkVerificationPage(driver);
         signInWithApplePage = new EmailLinkVerificationPage(driver);
+        politicsPage = new PoliticsPage (driver);
         signInWithAmazonPage = new EmailLinkVerificationPage(driver);
         signInWithFacebookPage = new EmailLinkVerificationPage(driver);
     }
@@ -46,11 +44,20 @@ public class TheWashingtonPostStepDefinitions {
     }
 
     @Then("User is on the {string} Page")
-    public void userIsInHomepage(String pageName) {
-        System.out.println("userIsInHomepage Method");
-        Assert.assertTrue(homePage.verifyUserIsInHomePage());
-        System.out.println("<--- The User is in Homepage --->");
+    public void userIsOnTargetpage(String pageName) {
+      System.out.println("userIsOnTargetpage Method");
+        switch (pageName) {
+            case "Home" -> {
+                Assert.assertTrue(homePage.verifyUserIsInHomePage());
+                System.out.println("<--- The User is in Homepage --->");
+            }
+            case "Politics" -> {
+                Assert.assertTrue(politicsPage.verifyUserIsInPoliticsPage());
+                System.out.println("<--- The User is in Homepage --->");
+            }
+        }
     }
+
 
 //    @Then("User is on the {string} Page")
 //    public void userIsInWashingtonHomepage() {
@@ -58,11 +65,6 @@ public class TheWashingtonPostStepDefinitions {
 //        Assert.assertTrue(homePage.userIsInWashingtonHomepage());
 //        System.out.println("<--- The User is in Homepage --->");
 //    }
-
-    @When("User hits {string} key")
-    public void userHitsKey() {
-        System.out.println("userHitsKey Method");
-    }
   
 //    @Then("The Washington Post homepage is opened")
 //    public void theWashingtonPostHomepageIsOpened() {
@@ -74,64 +76,63 @@ public class TheWashingtonPostStepDefinitions {
     @When("User clicks on the {string} button")
     public void userClicksOnButton(String button)  {
         System.out.println("userClicksOnButton Method");
-
-        if (Objects.equals(button, "SignIn")) {
-            signInPage.signInButton().click();
-            System.out.println("<--- Clicked on 'Sign In' Button --->");
-        } else if (Objects.equals(button, "SignUp")) {
-            signInPage.signUpButton().click();
-            System.out.println("<--- Clicked on 'Sign Up' Button --->");
-        } else if (Objects.equals(button, "Next")) {
-            signInPage.nextButton().click();
-            System.out.println("<--- Clicked on 'Next' Button --->");
-        } else if (Objects.equals(button, "Continue")) {
-            signInPage.continueButton().click();
-            System.out.println("<--- Clicked on 'Continue' Button --->");
-        } else if (Objects.equals(button, "")) {
-            signInPage.continueButton().click();
-            System.out.println("<--- Clicked on 'Continue' Button --->");
-        } else if (Objects.equals(button, "Email a sign in link")) {
-            signInPage.linkSignInButton().click();
-            System.out.println("<--- Clicked on 'Email a sign in link' Button --->");
-        } else if (Objects.equals(button, "Google")) {
-            signInPage.signInWithGoogleButton().click();
-            System.out.println("<--- Clicked on 'Sign in with Google' Button --->");
-        } else if (Objects.equals(button, "Google sign in next button")) {
-            signInPage.signinwithGoogleNextButton().click();
-            System.out.println("<--- Clicked on 'sign in with Google Next' Button --->");
-        } else if (Objects.equals(button, "Google sign in password next button")) {
-            signInPage.signinwithGooglePasswordNextButton().click();
-            System.out.println("<--- Clicked on 'sign in with Google password Next' Button --->");
-        } else if (Objects.equals(button, "Apple")) {
-            signInPage.signInWithAppleButton().click();
-            System.out.println("<--- Clicked on 'Sign in with Apple' Button --->");
-        } else if (Objects.equals(button, "Apple Sign In Arrow")) {
-            signInPage.signInWithAppleSignInArrowButton().click();
-            System.out.println("<--- Clicked on 'Sign in with Apple Sign In Arrow' Button --->");
-        }else if (Objects.equals(button, "Apple Password Arrow")) {
-            signInPage.signInWithApplePasswordArrowButton().click();
-            System.out.println("<--- Clicked on 'Sign in with Apple Password Arrow' Button --->");
-        }else if (Objects.equals(button, "AppleID Continue Button")) {
-            signInPage.signInWithAppleIDContinueButton().click();
-            System.out.println("<--- Clicked on 'Sign in with AppleID Continue' Button --->");
-        } else if (Objects.equals(button, "Amazon")) {
-            signInPage.signinwithAmazonButton().click();
-            System.out.println("<--- Clicked on 'sign in with Amazon' Button --->");
-        } else if (Objects.equals(button, "Amazon sign in continue button")) {
-            signInPage.signinwithAmazonContinueButton().click();
-            System.out.println("<--- Clicked on 'sign in with Amazon Continue' Button --->");
-        } else if (Objects.equals(button, "Amazon Password sign in  button")) {
-            signInPage.signinwithAmazoPasswordButton().click();
-            System.out.println("<--- Clicked on 'sign in with Amazon Password' Button --->");
-        } else if (Objects.equals(button, "Facebook")) {
-            signInPage.signinwithFacebookButton().click();
-            System.out.println("<--- Clicked on 'sign in with Facebook' Button --->");
-        } else if (Objects.equals(button, "FacebookLogInButton")) {
-            signInPage.signinwithFacebookLogInButton().click();
-            System.out.println("<--- Clicked on 'sign in with FacebookLogIn' Button --->");
-        }else if (Objects.equals(button, "Facebook6digitcodeButton")) {
-            signInPage.SigninwithFacebook6digitcodeButton().click();
-            System.out.println("<--- Clicked on 'sign in with Facebook 6 digit code ' Button --->");
+        switch (button) {
+            case "SignIn" -> {
+                signInPage.signInButton().click();
+                System.out.println("<--- Clicked on 'Sign In' Button --->");
+            }
+            case "SignUp" -> {
+                signInPage.signUpButton().click();
+                System.out.println("<--- Clicked on 'Sign Up' Button --->");
+            }
+            case "Next" -> {
+                signInPage.nextButton().click();
+                System.out.println("<--- Clicked on 'Next' Button --->");
+            }
+            case "Continue" -> {
+                signInPage.continueButton().click();
+                System.out.println("<--- Clicked on 'Continue' Button --->");
+            }
+            case "Email a sign in link" -> {
+                signInPage.linkSignInButton().click();
+                System.out.println("<--- Clicked on 'Email a sign in link' Button --->");
+            }
+            case "Google" -> {
+                signInPage.signInWithGoogleButton().click();
+                System.out.println("<--- Clicked on 'Sign in with Google' Button --->");
+            }
+            case "Google sign in next button" -> {
+                signInPage.signinwithGoogleNextButton().click();
+                System.out.println("<--- Clicked on 'sign in with Google Next' Button --->");
+            }
+            case "Google sign in password next button" -> {
+                signInPage.signinwithGooglePasswordNextButton().click();
+                System.out.println("<--- Clicked on 'sign in with Google password Next' Button --->");
+            }
+            case "Apple" -> {
+                signInPage.signInWithAppleButton().click();
+                System.out.println("<--- Clicked on 'Sign in with Apple' Button --->");
+            }
+            case "Apple Sign In Arrow" -> {
+                signInPage.signInWithAppleSignInArrowButton().click();
+                System.out.println("<--- Clicked on 'Sign in with Apple Sign In Arrow' Button --->");
+            }
+            case "Apple Password Arrow" -> {
+                signInPage.signInWithApplePasswordArrowButton().click();
+                System.out.println("<--- Clicked on 'Sign in with Apple Password Arrow' Button --->");
+            }
+            case "AppleID Continue Button" -> {
+                signInPage.signInWithAppleIDContinueButton().click();
+                System.out.println("<--- Clicked on 'Sign in with AppleID Continue' Button --->");
+            }
+            case "Back" -> {
+                commons.backButton();
+                System.out.println("<--- Clicked on 'Navigate Back' Button --->");
+            }
+            case null, default -> {
+                homePage.allButtons(button).click();
+                System.out.println("<--- Clicked on 'Search&MoreButton' Button --->");
+            }
         }
     }
   
