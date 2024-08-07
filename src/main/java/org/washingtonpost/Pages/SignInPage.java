@@ -108,13 +108,6 @@ public class SignInPage {
         return button;
     }
 
-    public WebElement linkSignInButton() {
-        System.out.println("linkSignInButton Method");
-        button = driver.findElement(By.xpath("//button[@data-test-id='pml-btn']"));
-        System.out.println("Button Found : " + button.getText());
-        return button;
-    }
-
     public WebElement signInWithAppleButton() {
         System.out.println("signInWithAppleButton Method");
         button = driver.findElement(By.xpath("//button[@data-qa='auth--apple']"));
@@ -161,7 +154,7 @@ public class SignInPage {
         System.out.println("signInWithAppleIDContinueButton Method");
         button = driver.findElement(By.xpath("//div[@class='overflow-text']"));
         System.out.println("Next Button Found : " + button.getText());
-return button;
+        return button;
     }
     public WebElement linkSignInButton(){
         System.out.println("linkSignInButton Method");
@@ -183,12 +176,6 @@ return button;
     }
     public WebElement signinwithFacebookLogInButton() {
         System.out.println("signinwithFacebookLogInButton Method");
-        button = driver.findElement(By.xpath("//button[@id='loginbutton']"));
-        System.out.println("Button Found : " + button.getText());
-        return button;
-    }
-    public WebElement SigninwithFacebook6digitcodeButton() {
-        System.out.println("signinwithFacebook6digitcodeButton Method");
         button = driver.findElement(By.xpath("//button[@id='loginbutton']"));
         System.out.println("Button Found : " + button.getText());
         return button;
@@ -223,22 +210,6 @@ return button;
         return !initialHexColor.equals(hoverHexColor);
     }
 
-    // This method shall be called while scripting UI test cases
-    public boolean buttonColorChange(WebElement button) {
-        String initialColor = button.getCssValue("background-color");
-        System.out.println("Button Color before hovering: " + initialColor);
-        Actions actions = new Actions(driver);
-        actions.moveToElement(button).perform();
-
-        String hoverColor = button.getCssValue("background-color");
-        System.out.println("Button Color after hovering: " + hoverColor);
-
-        String initialHexColor = Color.fromString(initialColor).asHex();
-        String hoverHexColor = Color.fromString(hoverColor).asHex();
-
-        return !initialHexColor.equals(hoverHexColor);
-    }
-
     public boolean enterEmailIdPassword(String emailIdPwd) throws InterruptedException {
         System.out.println("enterEmailIdPassword Method");
 
@@ -255,44 +226,42 @@ return button;
         }
         return false;
     }
+    public boolean enterAmazonEmailId(String emailIdPwd) throws InterruptedException {
+        System.out.println("enterAmazonEmailId Method");
 
-    public boolean enterGoogleEmail(String emailPassword) throws InterruptedException {
-        System.out.println("enterGoogleEmail Method");
-
-        if (emailPassword.contains("@gmail.com") || emailPassword.contains("@yahoo.com")) {
-            inputField().sendKeys(emailPassword);
+        if (emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) {
+            amazonInputField().sendKeys(emailIdPwd);
             System.out.println("Email Address entered");
             return true;
-        } else if (!(emailPassword.contains("@gmail.com") || emailPassword.contains("@yahoo.com")) &&
-                !(emailPassword.length() < 8) &&
-                pwdValidator(emailPassword)) {
-            inputField().sendKeys(emailPassword);
-System.out.println("Password entered");
-            return true;
-        }
-        return false;
-    }
-    public boolean enterAmazonEmail(String emailId) throws InterruptedException {
-        System.out.println("enterAmazonEmail Method");
-
-        if (emailId.contains("@gmail.com") || emailId.contains("@yahoo.com")) {
-            inputField().sendKeys(emailId);
-            System.out.println("Email Address entered");
-            return true;
-        } else if (!(emailId.contains("@gmail.com") || emailId.contains("@yahoo.com")) &&
-                !(emailId.length() < 8) &&
-                pwdValidator(emailId)) {
-            inputField().sendKeys(emailId);
+        } else if (!(emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) &&
+                !(emailIdPwd.length() < 8) &&
+                pwdValidator(emailIdPwd)) {
+            amazonInputField().sendKeys(emailIdPwd);
             System.out.println("Password entered");
             return true;
         }
         return false;
     }
-    public boolean enterAppleEmail(String emailPassword) throws InterruptedException {
+    public boolean enterFacebookEmailId(String emailIdPwd) throws InterruptedException {
+        System.out.println("enterFacebookEmailId Method");
+
+        if (emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) {
+            facebookInputField().sendKeys(emailIdPwd);
+            System.out.println("Email Address entered");
+            return true;
+        } else if (!(emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) &&
+                !(emailIdPwd.length() < 8) &&
+                pwdValidator(emailIdPwd)) {
+            facebookInputField().sendKeys(emailIdPwd);
+            System.out.println("Password entered");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean enterGoogleEmail(String emailPassword) throws InterruptedException {
         System.out.println("enterGoogleEmail Method");
 
-    public boolean enterFacebookEmail(String emailPassword) throws InterruptedException {
-        System.out.println("enterFacebookEmail Method");
         if (emailPassword.contains("@gmail.com") || emailPassword.contains("@yahoo.com")) {
             inputField().sendKeys(emailPassword);
             System.out.println("Email Address entered");
@@ -323,6 +292,7 @@ System.out.println("Password entered");
         }
         return false;
     }
+
     public boolean pwdValidator(String emailIdPwd) {
         String lowercasePattern = ".*[a-z].*";
         String uppercasePattern = ".*[A-Z].*";
@@ -360,10 +330,36 @@ System.out.println("Password entered");
         }
         return field;
     }
+    public WebElement amazonInputField() throws InterruptedException {
+        System.out.println("amazonInputField Method");
+        driver.wait(2500);
+
+        if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='email']")))).isDisplayed()) {
+            System.out.println("Email Address text field found");
+            return field;
+        } else if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='password']")))).isDisplayed()) {
+            System.out.println("Password text field found");
+            return field;
+        }
+        return null;
+    }
+    public WebElement facebookInputField() throws InterruptedException {
+        System.out.println("facebookInputField Method");
+        driver.wait(2500);
+
+        if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@placeholder='Email address or phone number']")))).isDisplayed()) {
+            System.out.println("Email Address text field found");
+            return field;
+        } else if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@placeholder='Password']")))).isDisplayed()) {
+            System.out.println("Password text field found");
+            return field;
+        }
+        return null;
+    }
 
     public boolean needHelpToSignInLink(String emailId) throws InterruptedException {
         System.out.println("needHelpToSignInLink Method");
-        Thread.sleep(3000);
+        driver.wait(3000);
 
         button = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[@class='red underline']"))));
         System.out.println("Error Message : " + button.getText());
