@@ -70,10 +70,10 @@ Feature: To Sign in into The Washington Post Account
     And User enters "<EmailID>"
     And User clicks on the "Google" button
     Then User should be on the Sign in with Google Page
-    And User enters "<EmailID>"
+    And User enters "<EmailID>" in Google
     And User clicks on the "Next" button
     Then User should be on the Sign in with Google Page
-    And User enters "<Password>"
+    And User enters "<Password>" in Google
     And User clicks on the "Next" button
     Then User is on the "Home" Page
     Then User is signed in to The Washington Post "<EmailID>"
@@ -88,9 +88,9 @@ Feature: To Sign in into The Washington Post Account
     And User enters "<EmailID>"
     And User clicks on the "Apple" button
     Then User should be on the Sign in with Apple Page
-    And User enters "<EmailID>"
+    And User enters "<EmailID>" in AppleID
     And User clicks on the "SignInArrow" button
-    And User enters "<Password>"
+    And User enters "<Password>" in AppleID
     And User clicks on the "PasswordArrow" button
     Then User should be on the Sign in with Apple Page
     And User clicks on the "Continue" button
@@ -98,3 +98,39 @@ Feature: To Sign in into The Washington Post Account
     Examples:
       | EmailID                               | Password    |
       | the.washington.post.testing@gmail.com | UberP@ss123 |
+
+  Scenario Outline: Existing User Sign In using Amazon
+    Given the user navigates to "https://www.washingtonpost.com/"
+    Then User is on the "Home" Page
+    When User clicks on the "SignIn" button
+    And User enters "<EmailID>"
+    And User clicks on the "Amazon" button
+    Then User should be on the Amazon signIn Page
+    And User enters "<EmailID>" in AmazonID
+    And User clicks on the "Continue" button
+    And User enters "<Password>" in AmazonID
+    When User clicks on the "SignIn" button
+    Then User is signed in to The Washington Post "<EmailID>"
+    Examples:
+      | EmailID                               | Password |
+      | the.washington.post.testing@gmail.com | UberP@ss123 |
+
+  Scenario Outline: Existing User Sign In using Facebook
+    Given the user navigates to "https://www.washingtonpost.com/"
+    Then User is on the "Home" Page
+    When User clicks on the "SignIn" button
+    And User enters "<EmailID>"
+    And User clicks on the "Facebook" button
+    Then User should be on the Facebook signIn Page
+    And User enters "<EmailID>" in FacebookID
+    And User enters "<Password>" in FacebookID
+    And User clicks on the "FacebookLogin" button
+    Then User should be on the six digit Verification Facebook Page
+#    upload image
+    And User clicks on the "Continue" button
+#    page : appeal submitted
+    Then User is signed in to The Washington Post "<EmailID>"
+    Examples:
+      | EmailID                               | Password    |
+      | the.washington.post.testing@gmail.com | UberP@ss123 |
+
