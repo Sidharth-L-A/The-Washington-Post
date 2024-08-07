@@ -15,10 +15,17 @@ public class TheWashingtonPostStepDefinitions {
 
     WebDriver driver;
     HomePage homePage;
-    SignInPage signInPage,googleSignInPage;
+    SignInPage signInPage, googleSignInPage;
     TestUtils testUtils;
     Commons commons;
     PoliticsPage politicsPage;
+    InvestigationsPage investigationsPage;
+    ClimatePage climatePage;
+    WellBeingPage wellBeingPage;
+    TechPage techPage;
+    WorldPage worldPage;
+    DCMdVaPage dCMdVaPage;
+    SportsPage sportsPage;
     OpinionsPage opinionsPage;
     StylePage stylePage;
     SearchMorePage searchMorePage;
@@ -36,12 +43,19 @@ public class TheWashingtonPostStepDefinitions {
         signInWithEmailPage = new EmailLinkVerificationPage(driver);
         signInWithGooglePage = new EmailLinkVerificationPage(driver);
         signInWithApplePage = new EmailLinkVerificationPage(driver);
+        politicsPage = new PoliticsPage(driver);
+        investigationsPage = new InvestigationsPage(driver);
+        climatePage = new ClimatePage(driver);
+        wellBeingPage = new WellBeingPage(driver);
+        techPage = new TechPage(driver);
+        worldPage = new WorldPage(driver);
+        dCMdVaPage = new DCMdVaPage(driver);
+        sportsPage = new SportsPage(driver);
         politicsPage = new PoliticsPage (driver);
         opinionsPage = new OpinionsPage(driver);
         stylePage = new StylePage(driver);
         searchMorePage = new SearchMorePage(driver);
         newsAlertsPage = new NewsAlertsPage(driver);
-
         signInWithAmazonPage = new EmailLinkVerificationPage(driver);
         signInWithFacebookPage = new EmailLinkVerificationPage(driver);
     }
@@ -54,7 +68,7 @@ public class TheWashingtonPostStepDefinitions {
 
     @Then("User is on the {string} Page")
     public void userIsOnTargetpage(String pageName) {
-      System.out.println("userIsOnTargetpage Method");
+        System.out.println("userIsOnTargetpage Method");
         switch (pageName) {
             case "Home" -> {
                 Assert.assertTrue(homePage.verifyUserIsInHomePage());
@@ -84,9 +98,41 @@ public class TheWashingtonPostStepDefinitions {
                 Assert.assertTrue(stylePage.verifyUserIsInStylePage());
                 System.out.println("<--- The User is in Style Page --->");
             }
+            case "Investigations" -> {
+                Assert.assertTrue(investigationsPage.verifyUserIsInInvestigationsPage());
+                System.out.println("<--- The User is in Investigations page --->");
+            }
+            case "Climate" -> {
+                Assert.assertTrue(climatePage.verifyUserIsInClimatePage());
+                System.out.println("<--- The User is in Climate page --->");
+            }
+            case "Well+Being" -> {
+                Assert.assertTrue(wellBeingPage.verifyUserIsInWellBeingPage());
+                System.out.println("<--- The User is in Well+Being page --->");
+            }
+            case "Tech" -> {
+                Assert.assertTrue(techPage.verifyUserIsInTechPage());
+                System.out.println("<--- The User is in Tech page --->");
+            }
+            case "World" -> {
+                Assert.assertTrue(worldPage.verifyUserIsInWorldPage());
+                System.out.println("<--- The User is in World page --->");
+            }
+            case "D.C., Md. & Va." -> {
+                Assert.assertTrue(dCMdVaPage.verifyUserIsInDCMdVaPage());
+                System.out.println("<--- The User is in DCMdVa page --->");
+            }
+            case "Sports" -> {
+                Assert.assertTrue(sportsPage.verifyUserIsInSportsPage());
+                System.out.println("<--- The User is in Sports page --->");
+            }
         }
     }
 
+    @When("User hits {string} key")
+    public void userHitsKey() {
+        System.out.println("userHitsKey Method");
+    }
 
 //    @Then("User is on the {string} Page")
 //    public void userIsInWashingtonHomepage() {
@@ -103,7 +149,7 @@ public class TheWashingtonPostStepDefinitions {
 //    }
 
     @When("User clicks on the {string} button")
-    public void userClicksOnButton(String button)  {
+    public void userClicksOnButton(String button) {
         System.out.println("userClicksOnButton Method");
         switch (button) {
             case "SignIn" -> {
@@ -173,45 +219,23 @@ public class TheWashingtonPostStepDefinitions {
     }
 
     @And("User enters {string}")
-    public void GooglesigninEnters(String emailPassword) throws InterruptedException {
-        System.out.println("GooglesigninEnters Method");
+    public void googleSignInEnters(String emailPassword) throws InterruptedException {
+        System.out.println("googleSignInEnters Method");
         Assert.assertTrue(signInPage.enterGoogleEmail(emailPassword));
         System.out.println("<--- Email Google ID & Password  Entered successfully --->");
     }
-    @And("User enters {string}")
-    public void ApplesigninEnters(String emailPassword) throws InterruptedException {
-        System.out.println("ApplesigninEnters Method");
-        Assert.assertTrue(signInPage.enterAppleEmail(emailPassword));
-        System.out.println("<--- Email Apple ID & Password  Entered successfully --->");
-    }
-
+  
     @Then("User is signed in to The Washington Post {string}")
     public void userSignedInIntoTheWashingtonPost(String accountName) {
         System.out.println("userSignedInIntoTheWashingtonPost Method");
         Assert.assertTrue(signInPage.verifySignIn(accountName));
         System.out.println("<--- Sign In Successful --->");
     }
-
-    @And("User enters {string}")
-    public void amazonsigninEnters(String emailId) throws InterruptedException {
-        System.out.println("amazonsigninEnters Method");
-        Assert.assertTrue(signInPage.enterAmazonEmail(emailId));
-        System.out.println("<--- Email Amazon ID  Entered successfully --->");
-    }
-
-
+  
     @And("User enters {string}")
     public void FacebooksigninEnters(String emailPassword) throws InterruptedException {
         System.out.println("FacebooksigninEnters Method");
         Assert.assertTrue(signInPage.enterFacebookEmail(emailPassword));
-        System.out.println("<--- Email Facebook ID  Entered successfully --->");
-    }
-
-
-    @And("User enters {string}")
-    public void FacebooksigninEntersInvalidPassword(String emailinvalidPassword) throws InterruptedException {
-        System.out.println("FacebooksigninEntersInvalidPassword Method");
-        Assert.assertTrue(signInPage.enterFacebookEmailInvalidPassword(emailinvalidPassword));
         System.out.println("<--- Email Facebook ID  Entered successfully --->");
     }
 
@@ -284,6 +308,13 @@ public class TheWashingtonPostStepDefinitions {
         System.out.println("<--- Error Message Displayed Successfully --->");
     }
 
+    @Then("User should be on the Link Verification Page")
+    public void userShouldBeOnTheLinkVerificationPage() throws InterruptedException {
+        System.out.println("userShouldBeOnTheLinkVerificationPage Method");
+        Assert.assertTrue(signInWithEmailPage.linkSentNote());
+        System.out.println("<--- User is prompted to check inbox for a Sign-in link --->");
+    }
+  
     @Then("User should be on the Sign in with Google Page")
     public void userShouldBeOnTheSigninwithGooglePage() throws InterruptedException {
         System.out.println("userShouldBeOnTheSigninwithGooglePage Method");
@@ -328,7 +359,7 @@ public class TheWashingtonPostStepDefinitions {
 
     @Then("User Account name is Displayed {string}")
     public void userAccountNameIsDisplayed(String accountName) throws InterruptedException {
-        System.out.println("userSignedInIntoTheWashingtonPost Method");
+        System.out.println("userAccountNameIsDisplayed Method");
         Assert.assertTrue(homePage.verifyAccountNamePostSignin(accountName));
         System.out.println("<--- Sign In Successful --->");
     }
@@ -376,19 +407,26 @@ public class TheWashingtonPostStepDefinitions {
         System.out.println("<--- Error Message Displayed Successfully --->");
     }
 
-    @Then("User should be on the Link Verification Page")
-    public void userShouldBeOnTheLinkVerificationPage() throws InterruptedException {
-        System.out.println("userShouldBeOnTheLinkVerificationPage Method");
-        Assert.assertTrue(signInWithEmailPage.linkSentNote());
-        System.out.println("<--- User is prompted to check inbox for a Sign-in link --->");
-    }
-
     @Then("User should be on the six digit Verification Facebook Page")
     public void userShouldBeOnThe6digitVerificationFacebookPage() throws InterruptedException {
         System.out.println("userShouldBeOnThe 6 digit Verification Facebook Page Method");
         Assert.assertTrue(signInWithEmailPage.verifySixDigitVerificationPage());
         System.out.println("<--- User is prompted to check inbox for a Sign-in link --->");
     }
+
+    @And("User enters {string} in AmazonID")
+    public void userEntersAmazonEmailIdPassword(String emailIdPassword) throws InterruptedException {
+        System.out.println("userEnters Method");
+        Assert.assertTrue(signInPage.enterAmazonEmailId(emailIdPassword));
+        System.out.println("<--- Email ID Entered successfully --->");
+    }
+
+    @And("User enters {string} in FacebookID")
+    public void userEntersFacebookEmailIdPassword(String emailIdPassword) throws InterruptedException {
+        System.out.println("userEnters Method");
+        Assert.assertTrue(signInPage.enterFacebookEmailId(emailIdPassword));
+        System.out.println("<--- Email ID Entered successfully --->");
+        }
 
     @And("User enters {string} in Google")
     public void userEntersGoogleEmailIdPassword(String emailIdPassword) throws InterruptedException {
@@ -402,5 +440,6 @@ public class TheWashingtonPostStepDefinitions {
         System.out.println("userEnters Method");
         Assert.assertTrue(signInPage.enterAppleEmailId(emailIdPassword));
         System.out.println("<--- Email ID Entered successfully --->");
+
     }
 }
