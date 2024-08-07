@@ -212,7 +212,6 @@ public class SignInPage {
 
     public boolean enterEmailIdPassword(String emailIdPwd) throws InterruptedException {
         System.out.println("enterEmailIdPassword Method");
-
         if (emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) {
             inputField().sendKeys(emailIdPwd);
             System.out.println("Email Address entered");
@@ -221,6 +220,73 @@ public class SignInPage {
                 !(emailIdPwd.length() < 8) &&
                 pwdValidator(emailIdPwd)) {
             inputField().sendKeys(emailIdPwd);
+            System.out.println("Password entered");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean enterGoogleEmailId(String emailIdPwd) throws InterruptedException {
+        System.out.println("enterGoogleEmailId Method");
+
+        if (emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) {
+            googleInputField().sendKeys(emailIdPwd);
+            System.out.println("Email Address entered");
+            return true;
+        } else if (!(emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) &&
+                !(emailIdPwd.length() < 8) &&
+                pwdValidator(emailIdPwd)) {
+           googleInputField().sendKeys(emailIdPwd);
+            System.out.println("Password entered");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean enterAppleEmailId(String emailIdPwd) throws InterruptedException {
+        System.out.println("enterAppleEmailId Method");
+
+        if (emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) {
+            appleInputField().sendKeys(emailIdPwd);
+            System.out.println("Email Address entered");
+            return true;
+        } else if (!(emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) &&
+                !(emailIdPwd.length() < 8) &&
+                pwdValidator(emailIdPwd)) {
+            appleInputField().sendKeys(emailIdPwd);
+            System.out.println("Password entered");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean enterGoogleEmailPassword(String emailIdPwd) throws InterruptedException {
+        System.out.println("enterGoogleEmailPassword Method");
+
+        if (emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) {
+            googleInputField().sendKeys(emailIdPwd);
+            System.out.println("Email Address entered");
+            return true;
+        } else if (!(emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) &&
+                !(emailIdPwd.length() < 8) &&
+                pwdValidator(emailIdPwd)) {
+            googleInputField().sendKeys(emailIdPwd);
+            System.out.println("Password entered");
+            return true;
+        }
+        return false;
+    }
+    public boolean enterAppleEmailPassword(String emailIdPwd) throws InterruptedException {
+        System.out.println("enterAppleEmailPassword Method");
+
+        if (emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) {
+            appleInputField().sendKeys(emailIdPwd);
+            System.out.println("Email Address entered");
+            return true;
+        } else if (!(emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) &&
+                !(emailIdPwd.length() < 8) &&
+                pwdValidator(emailIdPwd)) {
+            appleInputField().sendKeys(emailIdPwd);
             System.out.println("Password entered");
             return true;
         }
@@ -242,6 +308,7 @@ public class SignInPage {
         }
         return false;
     }
+  
     public boolean enterFacebookEmailId(String emailIdPwd) throws InterruptedException {
         System.out.println("enterFacebookEmailId Method");
 
@@ -260,7 +327,10 @@ public class SignInPage {
     }
 
     public boolean enterGoogleEmail(String emailPassword) throws InterruptedException {
+
         System.out.println("enterGoogleEmail Method");
+        return false;
+    }
 
         if (emailPassword.contains("@gmail.com") || emailPassword.contains("@yahoo.com")) {
             inputField().sendKeys(emailPassword);
@@ -318,17 +388,41 @@ public class SignInPage {
     public WebElement inputField() throws InterruptedException {
         System.out.println("inputField Method");
         driver.wait(2500);
-        fieldName = driver.findElement(By.xpath("//span[@role='label']")).getText();
-        System.out.println("Field Name: " + fieldName);
 
-        if (Objects.equals(fieldName, "Email address")) {
-            field = driver.findElement(By.xpath("//*[@id='username']"));
+        if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id='username']")))).isDisplayed()) {
             System.out.println("Email Address text field found");
-        } else {
-            field = driver.findElement(By.xpath("//*[@id='password']"));
+            return field;
+        } else if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id='password']")))).isDisplayed()) {
             System.out.println("Password text field found");
+            return field;
+        } return null;
+    }
+
+    public WebElement googleInputField() throws InterruptedException {
+        System.out.println("googleInputField Method");
+        driver.wait(2500);
+
+        if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='email']")))).isDisplayed()) {
+            System.out.println("Email Address text field found");
+            return field;
+        } else if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='password']")))).isDisplayed()) {
+            System.out.println("Password text field found");
+            return field;
+        } return null;
+    }
+
+    public WebElement appleInputField() throws InterruptedException {
+        System.out.println("appleInputField Method");
+        driver.wait(2500);
+
+        if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='text']")))).isDisplayed()) {
+            System.out.println("Email Address text field found");
+            return field;
+        } else if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='password']")))).isDisplayed()) {
+            System.out.println("Password text field found");
+            return field;
         }
-        return field;
+        return null;
     }
     public WebElement amazonInputField() throws InterruptedException {
         System.out.println("amazonInputField Method");

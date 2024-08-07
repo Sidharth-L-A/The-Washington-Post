@@ -19,8 +19,37 @@ Feature: To Land on The Washington Post Home Page
 ##      | the.washington.post.testing@gmail.com | UberP@ss123 |
 #
 #
-#  Scenario: New user is on home page and not signed in
-#    Given the user navigates to "https://www.washingtonpost.com/"
+
+  Scenario: New user is on home page and not signed in
+    Given the user navigates to "https://www.washingtonpost.com/"
+    Then User is on the "Home" Page
+#gbm
+    When User clicks on the "SearchMore" button
+    Then User is on the "SearchMore" Page
+#    Add Steps if necessary
+    When User clicks on the "NewsAlerts" button
+    Then User is on the "NewsAlerts" Page
+#    Add Steps if necessary
+    When User clicks on the "Politics" button
+    Then User is on the "Politics" Page
+    When User clicks on the "Back" button
+    Then User is on the "Home" Page
+    When User clicks on the "Opinions" button
+    Then User is on the "Opinions" Page
+    When User clicks on the "Back" button
+    Then User is on the "Home" Page
+    When User clicks on the "Style" button
+    Then User is on the "Style" Page
+    When User clicks on the "Back" button
+    Then User is on the "Home" Page
+##alka
+#    When User clicks on the "Investigations" button
+#    Then User is on the "Investigations" Page
+#    When User clicks on the "Back" button
+#    Then User is on the "Home" Page
+#    When User clicks on the "Climate" button
+#    Then User is on the "Climate" Page
+#    When User clicks on the "Back" button
 #    Then User is on the "Home" Page
 ##gbm
 #    When User clicks on the "Search & More" button

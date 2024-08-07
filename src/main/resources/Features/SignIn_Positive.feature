@@ -70,10 +70,10 @@ Feature: To Sign in into The Washington Post Account
     And User enters "<EmailID>"
     And User clicks on the "Google" button
     Then User should be on the Sign in with Google Page
-    And User enters "<EmailID>"
+    And User enters "<EmailID>" in Google
     And User clicks on the "Next" button
     Then User should be on the Sign in with Google Page
-    And User enters "<Password>"
+    And User enters "<Password>" in Google
     And User clicks on the "Next" button
     Then User is on the "Home" Page
     Then User is signed in to The Washington Post "<EmailID>"
@@ -88,9 +88,9 @@ Feature: To Sign in into The Washington Post Account
     And User enters "<EmailID>"
     And User clicks on the "Apple" button
     Then User should be on the Sign in with Apple Page
-    And User enters "<EmailID>"
+    And User enters "<EmailID>" in AppleID
     And User clicks on the "SignInArrow" button
-    And User enters "<Password>"
+    And User enters "<Password>" in AppleID
     And User clicks on the "PasswordArrow" button
     Then User should be on the Sign in with Apple Page
     And User clicks on the "Continue" button
