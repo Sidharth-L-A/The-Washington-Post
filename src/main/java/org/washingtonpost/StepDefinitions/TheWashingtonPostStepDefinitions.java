@@ -41,7 +41,6 @@ public class TheWashingtonPostStepDefinitions {
         stylePage = new StylePage(driver);
         searchMorePage = new SearchMorePage(driver);
         newsAlertsPage = new NewsAlertsPage(driver);
-
         signInWithAmazonPage = new EmailLinkVerificationPage(driver);
         signInWithFacebookPage = new EmailLinkVerificationPage(driver);
     }
@@ -86,7 +85,6 @@ public class TheWashingtonPostStepDefinitions {
             }
         }
     }
-
 
 //    @Then("User is on the {string} Page")
 //    public void userIsInWashingtonHomepage() {
@@ -158,6 +156,14 @@ public class TheWashingtonPostStepDefinitions {
                 commons.backButton();
                 System.out.println("<--- Clicked on 'Navigate Back' Button --->");
             }
+            case "Next slide"-> {
+                homePage.nextSlideButton(button).click();
+                System.out.println("<--- Clicked on 'SearchMore' Button --->");
+            }
+            case "Previous Slide" -> {
+                homePage.previousSlideButton(button).click();
+                System.out.println("<--- Clicked on 'SearchMore' Button --->");
+            }
             case null, default -> {
                 homePage.allButtons(button).click();
                 System.out.println("<--- Clicked on 'SearchMore' Button --->");
@@ -198,7 +204,6 @@ public class TheWashingtonPostStepDefinitions {
         Assert.assertTrue(signInPage.enterAmazonEmail(emailId));
         System.out.println("<--- Email Amazon ID  Entered successfully --->");
     }
-
 
     @And("User enters {string}")
     public void FacebooksigninEnters(String emailPassword) throws InterruptedException {
@@ -256,28 +261,28 @@ public class TheWashingtonPostStepDefinitions {
         System.out.println("<--- Error Message Displayed Successfully --->");
     }
 
-    @And("Error message is displayed")
+    @And("Error message is displayed in GoogleID")
     public void verifyErrorMessageGoogleID() throws InterruptedException {
         System.out.println("verifyErrorMessageGoogleID Method");
         Assert.assertTrue(signInPage.verifyGoogleIDEmailError());
         System.out.println("<--- Error Message Displayed Successfully --->");
     }
 
-    @And("Error message is displayed")
+    @And("Error message is displayed in GooglePassword")
     public void verifyErrorMessageGoogleIDPassword() throws InterruptedException {
         System.out.println("verifyErrorMessageGoogleIDPassword Method");
         Assert.assertTrue(signInPage.verifyGoogleIDPasswordEmailError());
         System.out.println("<--- Error Message Displayed Successfully --->");
     }
 
-    @And("Error message is displayed")
+    @And("Error message is displayed in ApplePassword")
     public void verifyErrorMessageAppleIDPassword() throws InterruptedException {
         System.out.println("verifyErrorMessageAppleIDPassword Method");
         Assert.assertTrue(signInPage.verifyAppleIDPasswordEmailError());
         System.out.println("<--- Error Message Displayed Successfully --->");
     }
 
-    @And("Error message is displayed")
+    @And("Error message is displayed in AppleID")
     public void verifyErrorMessageAppleID() throws InterruptedException {
         System.out.println("verifyErrorMessageAppleID Method");
         Assert.assertTrue(signInPage.verifyAppleIDEmailError());
@@ -346,7 +351,6 @@ public class TheWashingtonPostStepDefinitions {
         Assert.assertTrue(signInWithFacebookPage.SigninwithFacebook());
         System.out.println("<--- User is in Facebook sign in page --->");
     }
-
 
     @And("Error message is displayed")
     public void verifyErrorMessageAmazonID() throws InterruptedException {
