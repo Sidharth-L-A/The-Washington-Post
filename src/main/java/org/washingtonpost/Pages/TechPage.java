@@ -11,7 +11,7 @@ public class TechPage {
     TechPage techPage;
     WebElement page;
 
-    public TechPage(WebDriver driver) {
+    public TechPage(WebDriver driver) throws InterruptedException {
         this.driver = driver;
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);

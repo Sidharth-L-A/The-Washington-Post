@@ -11,7 +11,7 @@ public class InvestigationsPage {
     InvestigationsPage investigationsPage;
     WebElement page;
 
-    public InvestigationsPage(WebDriver driver) {
+    public InvestigationsPage(WebDriver driver) throws InterruptedException {
         this.driver = driver;
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);

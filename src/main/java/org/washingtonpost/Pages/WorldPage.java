@@ -11,7 +11,7 @@ public class WorldPage {
     WorldPage worldPage;
     WebElement page;
 
-    public WorldPage(WebDriver driver) {
+    public WorldPage(WebDriver driver) throws InterruptedException {
         this.driver = driver;
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);

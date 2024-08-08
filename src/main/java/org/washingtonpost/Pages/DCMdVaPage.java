@@ -11,7 +11,7 @@ public class DCMdVaPage {
     DCMdVaPage dCMdVaPage;
     WebElement page;
 
-    public DCMdVaPage (WebDriver driver) {
+    public DCMdVaPage (WebDriver driver) throws InterruptedException {
         this.driver = driver;
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);

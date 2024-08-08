@@ -12,7 +12,7 @@ public class PoliticsPage {
     PoliticsPage politicsPage;
     WebElement page;
 
-    public PoliticsPage (WebDriver driver) {
+    public PoliticsPage (WebDriver driver) throws InterruptedException {
         this.driver = driver;
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);

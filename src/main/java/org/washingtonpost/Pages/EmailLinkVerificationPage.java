@@ -19,7 +19,7 @@ public class EmailLinkVerificationPage {
     SignInPage signIn;
     PrivacyPolicy privacyPolicy;
 
-    public EmailLinkVerificationPage(WebDriver driver) {
+    public EmailLinkVerificationPage(WebDriver driver) throws InterruptedException {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         commons = new Commons(driver);

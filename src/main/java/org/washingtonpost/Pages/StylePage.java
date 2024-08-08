@@ -11,7 +11,7 @@ public class StylePage {
         org.washingtonpost.Pages.StylePage stylePage;
         WebElement page;
 
-        public StylePage(WebDriver driver) {
+        public StylePage(WebDriver driver) throws InterruptedException {
             this.driver = driver;
             signInPage = new SignInPage(driver);
             homePage = new HomePage(driver);

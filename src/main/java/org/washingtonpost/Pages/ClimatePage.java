@@ -11,7 +11,7 @@ public class ClimatePage {
     ClimatePage climatePage;
     WebElement page;
 
-    public ClimatePage (WebDriver driver) {
+    public ClimatePage (WebDriver driver) throws InterruptedException {
         this.driver = driver;
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);

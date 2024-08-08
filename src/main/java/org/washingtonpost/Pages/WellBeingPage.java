@@ -11,7 +11,7 @@ public class WellBeingPage {
     WellBeingPage wellBeingPage;
     WebElement page;
 
-    public WellBeingPage (WebDriver driver) {
+    public WellBeingPage (WebDriver driver) throws InterruptedException {
         this.driver = driver;
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);

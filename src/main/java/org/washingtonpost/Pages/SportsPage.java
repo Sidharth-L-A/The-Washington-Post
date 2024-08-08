@@ -11,7 +11,7 @@ public class SportsPage {
     SportsPage  sportsPage ;
     WebElement page;
 
-    public SportsPage  (WebDriver driver) {
+    public SportsPage  (WebDriver driver) throws InterruptedException {
         this.driver = driver;
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);

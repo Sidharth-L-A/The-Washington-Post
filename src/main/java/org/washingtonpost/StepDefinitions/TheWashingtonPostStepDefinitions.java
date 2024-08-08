@@ -30,9 +30,10 @@ public class TheWashingtonPostStepDefinitions {
     StylePage stylePage;
     SearchMorePage searchMorePage;
     NewsAlertsPage newsAlertsPage;
+    SubscribePage subscribePage;
     EmailLinkVerificationPage signInWithEmailPage, signInWithGooglePage, signInWithApplePage, signInWithAmazonPage, signInWithFacebookPage;
 
-    public TheWashingtonPostStepDefinitions() {
+    public TheWashingtonPostStepDefinitions() throws InterruptedException {
         WebDrivers webDrivers = new WebDrivers();
         driver = webDrivers.chromeBrowserDriverInit();
         homePage = new HomePage(driver);
@@ -67,19 +68,23 @@ public class TheWashingtonPostStepDefinitions {
     }
 
     @Then("User is on the {string} Page")
-    public void userIsOnTargetpage(String pageName) {
-        System.out.println("userIsOnTargetpage Method");
+    public void userIsOnTargetPage(String pageName) {
+        System.out.println("userIsOnTargetPage Method");
         switch (pageName) {
             case "Home" -> {
                 Assert.assertTrue(homePage.verifyUserIsInHomePage());
                 System.out.println("<--- The User is in Homepage --->");
             }
-            case "SearchMorePage" -> {
+            case "SignIn" -> {
+                Assert.assertTrue(signInPage.verifySignInPage());
+                System.out.println("<--- The User is in Homepage --->");
+            }
+            case "Search More" -> {
                 System.out.println("userIsInSearchMorePage Method");
                 Assert.assertTrue(searchMorePage.verifyUserIsInSearchMorePage());
                 System.out.println("<--- The User is in SearchMore Page --->");
             }
-            case "NewsAlertsPage" -> {
+            case "News Alerts" -> {
                 System.out.println("userIsInNewsAlertsPage Method");
                 Assert.assertTrue(newsAlertsPage.verifyUserIsInNewsAlertsPage());
                 System.out.println("<--- The User is in NewsAlerts Page --->");
@@ -126,27 +131,12 @@ public class TheWashingtonPostStepDefinitions {
                 Assert.assertTrue(sportsPage.verifyUserIsInSportsPage());
                 System.out.println("<--- The User is in Sports page --->");
             }
+            case "Subscribe" -> {
+                Assert.assertTrue(subscribePage.verifyUserIsInSubscribePage());
+                System.out.println("<--- The User is in Sports page --->");
+            }
         }
     }
-
-    @When("User hits {string} key")
-    public void userHitsKey() {
-        System.out.println("userHitsKey Method");
-    }
-
-//    @Then("User is on the {string} Page")
-//    public void userIsInWashingtonHomepage() {
-//        System.out.println("userIsInWashingtonHomepage Method");
-//        Assert.assertTrue(homePage.userIsInWashingtonHomepage());
-//        System.out.println("<--- The User is in Homepage --->");
-//    }
-
-//    @Then("The Washington Post homepage is opened")
-//    public void theWashingtonPostHomepageIsOpened() {
-//        System.out.println("theWashingtonPostHomepageIsOpened Method");
-//        Assert.assertTrue(driver.findElement(By.xpath("//*[@id='__next']/div/div[3]/div/div/a/span")).isDisplayed());
-//        System.out.println("<--- The Washington Post Homepage Opened --->");
-//    }
 
     @When("User clicks on the {string} button")
     public void userClicksOnButton(String button) {
@@ -217,26 +207,12 @@ public class TheWashingtonPostStepDefinitions {
         Assert.assertTrue(signInPage.enterEmailIdPassword(emailPassword));
         System.out.println("<--- Email ID & Password Entered successfully --->");
     }
-
-    @And("User enters {string}")
-    public void googleSignInEnters(String emailPassword) throws InterruptedException {
-        System.out.println("googleSignInEnters Method");
-        Assert.assertTrue(signInPage.enterGoogleEmail(emailPassword));
-        System.out.println("<--- Email Google ID & Password  Entered successfully --->");
-    }
   
     @Then("User is signed in to The Washington Post {string}")
     public void userSignedInIntoTheWashingtonPost(String accountName) {
         System.out.println("userSignedInIntoTheWashingtonPost Method");
         Assert.assertTrue(signInPage.verifySignIn(accountName));
         System.out.println("<--- Sign In Successful --->");
-    }
-  
-    @And("User enters {string}")
-    public void FacebooksigninEnters(String emailPassword) throws InterruptedException {
-        System.out.println("FacebooksigninEnters Method");
-        Assert.assertTrue(signInPage.enterFacebookEmail(emailPassword));
-        System.out.println("<--- Email Facebook ID  Entered successfully --->");
     }
 
     @And("User clicks on the {string} checkbox")
@@ -360,7 +336,7 @@ public class TheWashingtonPostStepDefinitions {
     @Then("User Account name is Displayed {string}")
     public void userAccountNameIsDisplayed(String accountName) throws InterruptedException {
         System.out.println("userAccountNameIsDisplayed Method");
-        Assert.assertTrue(homePage.verifyAccountNamePostSignin(accountName));
+        Assert.assertTrue(homePage.verifyAccountNamePostSignIn(accountName));
         System.out.println("<--- Sign In Successful --->");
     }
 
@@ -441,5 +417,33 @@ public class TheWashingtonPostStepDefinitions {
         Assert.assertTrue(signInPage.enterAppleEmailId(emailIdPassword));
         System.out.println("<--- Email ID Entered successfully --->");
 
+    }
+
+    @And("User should not be able to click SignUp button")
+    public void userShouldNotBeAbleToClickButton() {
+        System.out.println("userShouldNotBeAbleToClickButton Method");
+        Assert.assertFalse(signInPage.signUpButton().isEnabled());
+        System.out.println("<--- SignUp Button is Disabled --->");
+    }
+
+    @And("User opens Live & Trending sessions")
+    public void liveAndTrending() {
+        System.out.println("liveAndTrending method");
+        Assert.assertTrue(homePage.liveAndTrendingSessions());
+        System.out.println("<--- Live & Trending Sessions Verified --->");
+    }
+
+    @And("User clicks on the Article Author Name")
+    public void articleAuthorName() {
+        System.out.println("articleAuthorName method");
+        Assert.assertTrue(homePage.authorNameLinks());
+        System.out.println("<--- Article's Author's Pages Verified --->");
+    }
+
+    @And("User clicks on images")
+    public void userClicksOnImages() {
+        System.out.println("articleAuthorName method");
+        Assert.assertTrue(homePage.findAllImages());
+        System.out.println("<--- Article's Author's Pages Verified --->");
     }
 }

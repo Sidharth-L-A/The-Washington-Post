@@ -6,7 +6,7 @@ Feature: To Sign in into The Washington Post Account
     When User clicks on the "SignIn" button
     And User enters "<EmailID>"
     Examples:
-      | EmailID |
+      | EmailID                                |
       | xthe.washington.post.testing@gmail.com |
 
   Scenario Outline: Existing User Sign In with valid Email ID & invalid password
@@ -18,9 +18,9 @@ Feature: To Sign in into The Washington Post Account
     And User enters "<Password>"
     And User clicks on the "SignIn" button
     Then Error message is displayed
-#    Then Help for Sign-in is prompted "<EmailID>"
+    Then Help for Sign-in is prompted "<EmailID>"
     Examples:
-      | EmailID                               | Password    |
+      | EmailID                               | Password     |
       | the.washington.post.testing@gmail.com | xUberP@ss123 |
 
   Scenario Outline: New user Sign Up with invalid EmailID
@@ -45,7 +45,7 @@ Feature: To Sign in into The Washington Post Account
     And User clicks on the "agreeT&C" checkbox
     And User clicks on the "Next" button
     And User enters "<Password>"
-#    And User should not be able to click "SignUp" button
+    And User should not be able to click SignUp button
     Examples:
       | EmailID                               | Password    |
       | the.washington.post.testing@gmail.com | Abc123#     |
@@ -58,7 +58,7 @@ Feature: To Sign in into The Washington Post Account
     And User clicks on the "Email a sign in link" button
     Then Error message is displayed
     Examples:
-      | EmailID                     |
+      | EmailID                                |
       | xthe.washington.post.testing@gmail.com |
 
   Scenario Outline: Existing User Sign In using Google with Invalid EmailId
@@ -72,7 +72,7 @@ Feature: To Sign in into The Washington Post Account
     And User clicks on the "Next" button
     And Error message is displayed
     Examples:
-      | EmailID                               |
+      | EmailID                                |
       | xthe.washington.post.testing@gmail.com |
 
   Scenario Outline: Existing User Sign In using Google with valid mail Id & Invalid Pwd
@@ -88,7 +88,7 @@ Feature: To Sign in into The Washington Post Account
     And User clicks on the "Next" button
     And Error message is displayed
     Examples:
-      | EmailID                               | Password    |
+      | EmailID                               | Password     |
       | the.washington.post.testing@gmail.com | xUberP@ss123 |
 
   Scenario Outline: Existing User Sign In using AppleID with invalid Mail ID
@@ -102,7 +102,7 @@ Feature: To Sign in into The Washington Post Account
     And User clicks on the "SignInArrow" button
     And Error message is displayed
     Examples:
-      | EmailID                               |
+      | EmailID                                |
       | xthe.washington.post.testing@gmail.com |
 
   Scenario Outline: Existing User Sign In using AppleID with valid mail Id & Invalid Pwd
@@ -120,7 +120,6 @@ Feature: To Sign in into The Washington Post Account
     Examples:
       | EmailID                               | Password    |
       | the.washington.post.testing@gmail.com | xUberP@ss123 |
-
 
   Scenario Outline: Existing User Sign In with invalid AmazonID
     Given the user navigates to "https://www.washingtonpost.com/"
@@ -149,7 +148,7 @@ Feature: To Sign in into The Washington Post Account
     When User clicks on the "SignIn" button
     Then Error message is displayed
     Examples:
-      | EmailID                               | Password    |
+      | EmailID                               | Password     |
       | the.washington.post.testing@gmail.com | xUberP@ss123 |
 
   Scenario Outline: Existing User Sign In with invalid FacebookID
@@ -163,10 +162,10 @@ Feature: To Sign in into The Washington Post Account
     And User clicks on the "FacebookLogin" button
     Then Error message is displayed
     Examples:
-      | EmailID                               |
+      | EmailID                                |
       | xthe.washington.post.testing@gmail.com |
 
-  Scenario Outline: Existing User Sign In with  valid EmailId & invalid FacebookID Password
+  Scenario Outline: Existing User Sign In with valid EmailId & invalid FacebookID Password
     Given the user navigates to "https://www.washingtonpost.com/"
     Then User is on the "Home" Page
     When User clicks on the "SignIn" button
@@ -178,5 +177,5 @@ Feature: To Sign in into The Washington Post Account
     And User clicks on the "FacebookLogin" button
     Then Error message is displayed
     Examples:
-      | EmailID                               | Password    |
+      | EmailID                               | Password     |
       | the.washington.post.testing@gmail.com | xUberP@ss123 |
