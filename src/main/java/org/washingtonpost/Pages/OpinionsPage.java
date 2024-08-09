@@ -11,7 +11,7 @@ public class OpinionsPage {
         org.washingtonpost.Pages.OpinionsPage opinionsPage;
         WebElement page;
 
-        public OpinionsPage(WebDriver driver) {
+        public OpinionsPage(WebDriver driver) throws InterruptedException {
             this.driver = driver;
             signInPage = new SignInPage(driver);
             homePage = new HomePage(driver);

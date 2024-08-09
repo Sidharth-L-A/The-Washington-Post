@@ -22,7 +22,7 @@ public class UI {
     SignInPage signInPage;
     HomePage homepage;
 
-    public UI(WebDriver driver) {
+    public UI(WebDriver driver) throws InterruptedException {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         commons = new Commons(driver);

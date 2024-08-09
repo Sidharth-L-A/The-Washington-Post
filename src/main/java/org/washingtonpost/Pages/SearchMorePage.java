@@ -11,7 +11,7 @@ public class SearchMorePage {
     SearchMorePage searchMorePage;
     WebElement page;
 
-    public SearchMorePage (WebDriver driver) {
+    public SearchMorePage (WebDriver driver) throws InterruptedException {
         this.driver = driver;
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);

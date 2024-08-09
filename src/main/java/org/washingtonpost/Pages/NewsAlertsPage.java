@@ -11,7 +11,7 @@ public class NewsAlertsPage {
     NewsAlertsPage newsAlertsPage;
     WebElement page;
 
-    public NewsAlertsPage (WebDriver driver) {
+    public NewsAlertsPage (WebDriver driver) throws InterruptedException {
         this.driver = driver;
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);

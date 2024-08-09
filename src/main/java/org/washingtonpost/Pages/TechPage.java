@@ -4,25 +4,24 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class PoliticsPage {
-
+public class TechPage {
     WebDriver driver;
     SignInPage signInPage;
     HomePage homePage;
-    PoliticsPage politicsPage;
+    TechPage techPage;
     WebElement page;
 
-    public PoliticsPage (WebDriver driver) throws InterruptedException {
+    public TechPage(WebDriver driver) throws InterruptedException {
         this.driver = driver;
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);
-        politicsPage = new PoliticsPage(driver);
+        techPage = new TechPage(driver);
     }
 
-    public boolean verifyUserIsInPoliticsPage() {
-        System.out.println("verifyUserIsInPoliticsPage Method");
+    public boolean verifyUserIsInTechPage() {
+        System.out.println("verifyUserIsInTechPage Method");
         page = driver.findElement(By.xpath("//a[@class='gray-darkest']"));
-        System.out.println("'POLITICS' Page Header Found");
-        return page.getText().equalsIgnoreCase("Politics");
+        System.out.println("'TECH' Page Header Found");
+        return page.getText().equalsIgnoreCase("Tech");
     }
 }
