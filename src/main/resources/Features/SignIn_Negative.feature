@@ -130,7 +130,7 @@ Feature: To Sign in into The Washington Post Account
     Then User should be on the Amazon signIn Page
     And User enters "<EmailID>" in AmazonID
     And User clicks on the "Continue" button
-    Then Error message is displayed
+    Then Error message is displayed in AmazonID
     Examples:
       | EmailID                                |
       | xthe.washington.post.testing@gmail.com |
@@ -146,7 +146,7 @@ Feature: To Sign in into The Washington Post Account
     And User clicks on the "Continue" button
     And User enters "<Password>" in AmazonID
     When User clicks on the "SignIn" button
-    Then Error message is displayed
+    Then Error message is displayed in AmazonID Password
     Examples:
       | EmailID                               | Password     |
       | the.washington.post.testing@gmail.com | xUberP@ss123 |
@@ -160,7 +160,7 @@ Feature: To Sign in into The Washington Post Account
     Then User should be on the Facebook signIn Page
     And User enters "<EmailID>" in FacebookID
     And User clicks on the "FacebookLogin" button
-    Then Error message is displayed
+    Then Error message is displayed in FacebookID
     Examples:
       | EmailID                                |
       | xthe.washington.post.testing@gmail.com |
@@ -175,7 +175,7 @@ Feature: To Sign in into The Washington Post Account
     And User enters "<EmailID>" in FacebookID
     And User enters "<Password>" in FacebookID
     And User clicks on the "FacebookLogin" button
-    Then Error message is displayed
+    Then Error message is displayed in FacebookID Password
     Examples:
       | EmailID                               | Password     |
       | the.washington.post.testing@gmail.com | xUberP@ss123 |

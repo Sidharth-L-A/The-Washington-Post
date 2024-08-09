@@ -38,16 +38,16 @@ public class SignInPage {
     public WebElement signInButton() {
         System.out.println("signInButton Method");
 
-        String[] xpaths = {"//a[@aria-label='Sign in']", "//button[text()='Sign In']"};
+        String[] xPaths = {"//a[@aria-label='Sign in']", "//button[text()='Sign In']"};
 
-        for (String xpath : xpaths) {
+        for (String xPath : xPaths) {
             try {
-                button = driver.findElement(By.xpath(xpath));
+                button = driver.findElement(By.xpath(xPath));
                 buttonName = button.getText();
                 System.out.println("Button Found : " + buttonName);
                 break;
             } catch (NoSuchElementException e) {
-                System.out.println("Button not found using xpath [" + xpath + "]");
+                System.out.println("Button not found using xpath [" + xPath + "]");
             }
         }
         return button;
@@ -108,15 +108,15 @@ public class SignInPage {
         return button;
     }
 
-    public WebElement signinwithGoogleNextButton() {
-        System.out.println("signinwithGoogleNextButton Method");
+    public WebElement signInWithGoogleNextButton() {
+        System.out.println("signInWithGoogleNextButton Method");
         button = driver.findElement(By.xpath("//button[@class='VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe DuMIQc LQeN7 BqKGqe Jskylb TrZEUc lw1w4b']"));
         System.out.println("Next Button Found : " + button.getText());
         return button;
     }
 
-    public WebElement signinwithGooglePasswordNextButton() {
-        System.out.println("signinwithGooglePasswordNextButton Method");
+    public WebElement signInWithGooglePasswordNextButton() {
+        System.out.println("signInWithGooglePasswordNextButton Method");
         button = driver.findElement(By.xpath("//button[@class='VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe DuMIQc LQeN7 BqKGqe Jskylb TrZEUc lw1w4b']"));
         System.out.println("Next Button Found : " + button.getText());
         return button;
@@ -468,7 +468,7 @@ public class SignInPage {
     public boolean verifyAmazonIDPasswordEmailError() throws InterruptedException {
         System.out.println("verifyAmazonIDPasswordEmailError Method");
         driver.wait(3000);
-        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id=\"pass\"]"))));
+        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id='pass']"))));
         System.out.println("Error Message : " + field.getText());
         return field.isDisplayed();
     }
@@ -476,7 +476,7 @@ public class SignInPage {
     public boolean verifyFacebookIDPasswordEmailError() throws InterruptedException {
         System.out.println("verifyFacebookIDPasswordEmailError Method");
         driver.wait(3000);
-        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id=\"pass\"]"))));
+        field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id='pass']"))));
         System.out.println("Error Message : " + field.getText());
         return field.isDisplayed();
     }
