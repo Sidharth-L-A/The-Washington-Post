@@ -20,26 +20,6 @@ Feature: To Land on The Washington Post Home Page
   Scenario: New user is on home page and not signed in
     Given the user navigates to "https://www.washingtonpost.com/"
     Then User is on the "Home" Page
-#gbm
-    When User clicks on the "SearchMore" button
-    Then User is on the "SearchMore" Page
-#    Add Steps if necessary
-    When User clicks on the "NewsAlerts" button
-    Then User is on the "NewsAlerts" Page
-#    Add Steps if necessary
-    When User clicks on the "Politics" button
-    Then User is on the "Politics" Page
-    When User clicks on the "Back" button
-    Then User is on the "Home" Page
-    When User clicks on the "Opinions" button
-    Then User is on the "Opinions" Page
-    When User clicks on the "Back" button
-    Then User is on the "Home" Page
-    When User clicks on the "Style" button
-    Then User is on the "Style" Page
-    When User clicks on the "Back" button
-    Then User is on the "Home" Page
-#gbm
     When User clicks on the "Search & More" button
     Then User is on the "Search & More" Page
     When User clicks on the "News Alerts" button
@@ -56,7 +36,6 @@ Feature: To Land on The Washington Post Home Page
     Then User is on the "Style" Page
     When User clicks on the "Back" button
     Then User is on the "Home" Page
-# alka
     When User clicks on the "Investigations" button
     Then User is on the "Investigations" Page
     When User clicks on the "Back" button
@@ -85,7 +64,6 @@ Feature: To Land on The Washington Post Home Page
     Then User is on the "Sports" Page
     When User clicks on the "Back" button
     Then User is on the "Home" Page
-#sla
     When User clicks on the "Subscribe" button
     Then User is on the "Subscribe" Page
     When User clicks on the "Back" button
@@ -94,8 +72,8 @@ Feature: To Land on The Washington Post Home Page
     Then User is on the "Sign in" Page
     When User clicks on the "Back" button
     Then User is on the "Home" Page
+    When User clicks on the "next slide" button
+    When User clicks on the "previous slide" button
     And User opens Live & Trending sessions
     And User clicks on the Article Author Name
     And User clicks on images
-
-

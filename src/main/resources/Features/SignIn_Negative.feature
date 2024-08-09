@@ -70,7 +70,7 @@ Feature: To Sign in into The Washington Post Account
     Then User should be on the Sign in with Google Page
     And User enters "<EmailID>" in Google
     And User clicks on the "Next" button
-    And Error message is displayed
+    And Error message is displayed in GoogleID
     Examples:
       | EmailID                                |
       | xthe.washington.post.testing@gmail.com |
@@ -86,7 +86,7 @@ Feature: To Sign in into The Washington Post Account
     And User clicks on the "Next" button
     And User enters "<Password>" in Google
     And User clicks on the "Next" button
-    And Error message is displayed
+    And Error message is displayed in GooglePassword
     Examples:
       | EmailID                               | Password     |
       | the.washington.post.testing@gmail.com | xUberP@ss123 |
@@ -100,7 +100,7 @@ Feature: To Sign in into The Washington Post Account
     Then User should be on the Sign in with Apple Page
     And User enters "<EmailID>" in AppleID
     And User clicks on the "SignInArrow" button
-    And Error message is displayed
+    And Error message is displayed in AppleID
     Examples:
       | EmailID                                |
       | xthe.washington.post.testing@gmail.com |
@@ -116,7 +116,7 @@ Feature: To Sign in into The Washington Post Account
     And User clicks on the "SignInArrow" button
     And User enters "<Password>" in AppleID
     And User clicks on the "PasswordArrow" button
-    And Error message is displayed
+    And Error message is displayed in ApplePassword
     Examples:
       | EmailID                               | Password    |
       | the.washington.post.testing@gmail.com | xUberP@ss123 |
