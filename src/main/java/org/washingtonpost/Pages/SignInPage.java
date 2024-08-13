@@ -5,46 +5,51 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import java.time.Duration;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SignInPage {
     WebDriver driver;
-    WebDriverWait wait;
-    WebElement button, field, checkBox;
-    String buttonName, fieldName, signUpPrompt;
-    Commons commons;
-    EmailLinkVerificationPage linkVerificationPage;
-    EmailLinkVerificationPage SignInWithGooglePage;
-    PrivacyPolicy privacyPolicy;
-    NeedHelpPage needHelpPage;
 
-    public SignInPage(WebDriver driver) throws InterruptedException {
+    public SignInPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        commons = new Commons(driver);
-        linkVerificationPage = new EmailLinkVerificationPage(driver);
-        SignInWithGooglePage = new EmailLinkVerificationPage(driver);
-        privacyPolicy = new PrivacyPolicy(driver);
-        needHelpPage = new NeedHelpPage(driver);
     }
 
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebElement button, field, checkBox;
+    String buttonName, fieldName, signUpPrompt;
+
     public boolean verifySignInPage() {
+        System.out.println("verifySignInPage Method");
         field = driver.findElement(By.xpath("//h1[@data-test-id='signin-header']"));
         return field.getText().equalsIgnoreCase("Sign In");
     }
 
-    public WebElement signInButton() {
+    public WebElement signInButton() throws InterruptedException {
         System.out.println("signInButton Method");
-
-        String[] xPaths = {"//a[@aria-label='Sign in']", "//button[text()='Sign In']"};
+        UI ui = new UI(driver);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String[] xPaths = {"//a[@aria-label='Sign in']", "//button[text()='Sign In']", "//button[@data-test-id='sign-in-btn']"};
 
         for (String xPath : xPaths) {
             try {
                 button = driver.findElement(By.xpath(xPath));
                 buttonName = button.getText();
                 System.out.println("Button Found : " + buttonName);
+
+                boolean isColorCorrect = wait.until(driver -> {
+                    String buttonColor = (String) js.executeScript(
+                            "return window.getComputedStyle(arguments[0]).getPropertyValue('background-color');",
+                            button);
+                    return buttonColor.equals("rgba(0, 0, 0, 0)") || buttonColor.equals("rgb(22, 109, 252)");
+                });
+
+                Assert.assertTrue(isColorCorrect);
+                System.out.println("Button Color Verified");
+
+                Assert.assertTrue(ui.buttonColorChange(button));
                 break;
             } catch (NoSuchElementException e) {
                 System.out.println("Button not found using xpath [" + xPath + "]");
@@ -53,9 +58,9 @@ public class SignInPage {
         return button;
     }
 
-    public WebElement signUpButton() {
+    public WebElement signUpButton() throws InterruptedException {
         System.out.println("signUpButton Method");
-
+        UI ui = new UI(driver);
         signUpPrompt = driver.findElement(By.xpath("//*[@id='__next']/div/div[2]/div/div/div/div[3]")).getText();
         System.out.println("Verifying Sign-Up Prompt from Sign-In page: " + signUpPrompt);
 
@@ -63,20 +68,44 @@ public class SignInPage {
 //        JavascriptExecutor js = (JavascriptExecutor) driver;
 //        js.executeScript("window.scrollTo(arguments[0], arguments[1]);", 0, 550);
 
-        buttonName = driver.findElement(By.xpath("//*[@id='__next']/div/div[2]/div/div/div/div[3]/a")).getText();
-        System.out.println("Button Name: " + buttonName);
-
         button = driver.findElement(By.xpath("//*[@id='__next']/div/div[2]/div/div/div/div[3]/a"));
-        System.out.println("Sign Up Button found");
+        System.out.println("Button Name: " + button.getText());
+
+//        button = driver.findElement(By.xpath("//*[@id='__next']/div/div[2]/div/div/div/div[3]/a"));
+//        buttonName = button.getCssValue("Background-color");
+//        System.out.println("Sign Up Button found");
+//        Assert.assertTrue(ui.verifyWhiteButtonColor(buttonName));
+//        Assert.assertTrue(ui.buttonColorChange(button));
         return button;
     }
 
     public WebElement nextButton() {
         System.out.println("nextButton Method");
+        WebElement button = null;
 
-        button = driver.findElement(By.xpath("//button[@data-test-id='sign-in-btn']"));
-        buttonName = button.getText();
-        System.out.println("Button Found : " + buttonName);
+        try {
+            Thread.sleep(2000);
+            button = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@data-test-id='sign-in-btn']"))));
+        } catch (Exception e) {
+            try {
+                Thread.sleep(2000);
+                button = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@data-test-id='signup-btn']"))));
+            } catch (Exception ex) {
+                System.out.println("XXX--- Next Button Not Found ---XXX");
+            }
+        }
+        return button;
+    }
+
+    public WebElement googleNextButton() throws InterruptedException {
+        System.out.println("googleNextButton Method");
+        Thread.sleep(2000);
+        try {
+            button = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//span[text()='Next']"))));
+            System.out.println("Button Found : " + button.getText());
+        } catch (Exception ex) {
+            System.out.println("XXX--- Google Next Button Not Found ---XXX");
+        }
         return button;
     }
 
@@ -86,10 +115,39 @@ public class SignInPage {
         buttonName = driver.findElement(By.xpath("//*[@id='__next']/div/div[2]/div/div/div/button")).getText();
         System.out.println("Button Name: " + buttonName);
 
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        boolean isColorCorrect = wait.until(driver -> {
+            String buttonColor = (String) js.executeScript(
+                    "return window.getComputedStyle(arguments[0]).getPropertyValue('background-color');",
+                    button);
+            System.out.println("Next button Color : " + buttonColor);
+            return buttonColor.equals("rgb(22, 109, 252)");
+        });
+
+        Assert.assertTrue(isColorCorrect);
         if (Objects.equals(buttonName, "Continue")) {
             button = driver.findElement(By.xpath("//*[@id='__next']/div/div[2]/div/div/div/button"));
             System.out.println("Continue Button found");
         }
+        return button;
+    }
+
+    public WebElement appleSignInContinueButton() {
+        System.out.println("continueButton Method");
+
+        button = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div[text()='Continue']"))));
+        System.out.println("Button Found : " + button.getText());
+
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        boolean isColorCorrect = wait.until(driver -> {
+//            String buttonColor = (String) js.executeScript(
+//                    "return window.getComputedStyle(arguments[0]).getPropertyValue('background-color');",
+//                    button);
+//            System.out.println("Next button Color : " + buttonColor);
+//            return buttonColor.equals("rgb(22, 109, 252)");
+//        });
+//
+//        Assert.assertTrue(isColorCorrect);
         return button;
     }
 
@@ -121,16 +179,10 @@ public class SignInPage {
         System.out.println("Next Button Found : " + button.getText());
         return button;
     }
+
     public WebElement signInWithAppleSignInArrowButton() {
         System.out.println("signInWithAppleSignInArrowButton Method");
-        button = driver.findElement(By.xpath("//button[@id='sign-in']"));
-        System.out.println("Next Button Found : " + button.getText());
-        return button;
-    }
-
-    public WebElement signInWithApplePasswordArrowButton() {
-        System.out.println("signInWithApplePasswordArrowButton Method");
-        button = driver.findElement(By.xpath("//button[@id='sign-in']"));
+        button = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//button[@id='sign-in']"))));
         System.out.println("Next Button Found : " + button.getText());
         return button;
     }
@@ -141,58 +193,63 @@ public class SignInPage {
         System.out.println("Next Button Found : " + button.getText());
         return button;
     }
-    public WebElement linkSignInButton(){
+
+    public WebElement linkSignInButton() {
         System.out.println("linkSignInButton Method");
         button = driver.findElement(By.xpath("//button[@data-test-id='pml-btn']"));
         System.out.println("Button Found : " + button.getText());
         return button;
     }
 
-    public boolean enterEmailIdPassword(String emailIdPwd) throws InterruptedException {
+    public boolean enterEmailIdPassword(String emailIdPwd, String fieldType) throws InterruptedException {
         System.out.println("enterEmailIdPassword Method");
         if (emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) {
-            inputField().sendKeys(emailIdPwd);
+            inputField(fieldType).sendKeys(emailIdPwd);
             System.out.println("Email Address entered");
             return true;
-        } else if (!(emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) &&
+        } else if (!(emailIdPwd.contains("@gmail.com")) && !(emailIdPwd.contains("@yahoo.com")) &&
                 !(emailIdPwd.length() < 8) &&
                 pwdValidator(emailIdPwd)) {
-            inputField().sendKeys(emailIdPwd);
+            inputField(fieldType).sendKeys(emailIdPwd);
             System.out.println("Password entered");
             return true;
         }
         return false;
     }
 
-    public boolean enterGoogleEmailId(String emailIdPwd) throws InterruptedException {
+    public boolean enterGoogleEmailId(String fieldType, String emailIdPwd) throws InterruptedException {
         System.out.println("enterGoogleEmailId Method");
 
         if (emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) {
-            googleInputField().sendKeys(emailIdPwd);
+            googleInputField(fieldType).sendKeys(emailIdPwd);
             System.out.println("Email Address entered");
             return true;
         } else if (!(emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) &&
                 !(emailIdPwd.length() < 8) &&
                 pwdValidator(emailIdPwd)) {
-           googleInputField().sendKeys(emailIdPwd);
+           googleInputField(fieldType).sendKeys(emailIdPwd);
             System.out.println("Password entered");
             return true;
         }
         return false;
     }
 
-    public boolean enterAppleEmailId(String emailIdPwd) throws InterruptedException {
+    public boolean enterAppleEmailId(String emailIdPwd, String fieldType) throws InterruptedException {
         System.out.println("enterAppleEmailId Method");
 
         if (emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) {
-            appleInputField().sendKeys(emailIdPwd);
+            appleInputField(fieldType).sendKeys(emailIdPwd);
             System.out.println("Email Address entered");
             return true;
         } else if (!(emailIdPwd.contains("@gmail.com") || emailIdPwd.contains("@yahoo.com")) &&
                 !(emailIdPwd.length() < 8) &&
                 pwdValidator(emailIdPwd)) {
-            appleInputField().sendKeys(emailIdPwd);
+            appleInputField(fieldType).sendKeys(emailIdPwd);
             System.out.println("Password entered");
+            return true;
+        } else if (emailIdPwd.length() == 6) {
+            appleInputField(fieldType).sendKeys(emailIdPwd);
+            System.out.println("Apple Two Factor Authentication Code entered");
             return true;
         }
         return false;
@@ -254,45 +311,73 @@ public class SignInPage {
                 specialCharMatcher.matches();
     }
 
-    public WebElement inputField() throws InterruptedException {
+    public WebElement inputField(String fieldType) throws InterruptedException {
         System.out.println("inputField Method");
-        driver.wait(2500);
-
-        if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id='username']")))).isDisplayed()) {
+        if (fieldType.equalsIgnoreCase("EmailId")) {
+            Thread.sleep(2000);
+            field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@id='username']"))));
+            Assert.assertTrue(field.isDisplayed());
             System.out.println("Email Address text field found");
-            return field;
-        } else if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id='password']")))).isDisplayed()) {
+        } else {
+            field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@id='password']"))));
+            Assert.assertTrue(field.isDisplayed());
             System.out.println("Password text field found");
-            return field;
-        } return null;
-    }
-
-    public WebElement googleInputField() throws InterruptedException {
-        System.out.println("googleInputField Method");
-        driver.wait(2500);
-
-        if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='email']")))).isDisplayed()) {
-            System.out.println("Email Address text field found");
-            return field;
-        } else if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='password']")))).isDisplayed()) {
-            System.out.println("Password text field found");
-            return field;
-        } return null;
-    }
-
-    public WebElement appleInputField() throws InterruptedException {
-        System.out.println("appleInputField Method");
-        driver.wait(2500);
-
-        if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='text']")))).isDisplayed()) {
-            System.out.println("Email Address text field found");
-            return field;
-        } else if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='password']")))).isDisplayed()) {
-            System.out.println("Password text field found");
-            return field;
         }
-        return null;
+        return field;
     }
+
+    public WebElement googleInputField(String fieldType) throws InterruptedException {
+        System.out.println("googleInputField Method");
+        Thread.sleep(2500);
+
+        if (fieldType.equalsIgnoreCase("EmailId")) {
+            field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='email']"))));
+            Assert.assertTrue(field.isDisplayed());
+            System.out.println("Email Address text field found");
+        } else {
+            field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='password']"))));
+            Assert.assertTrue(field.isDisplayed());
+            System.out.println("Password text field found");
+        } return field;
+    }
+
+    public WebElement appleInputField(String fieldType) {
+        System.out.println("appleInputField Method");
+
+        if (fieldType.equalsIgnoreCase("EmailId")) {
+            field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='text']"))));
+            Assert.assertTrue(field.isDisplayed());
+            System.out.println("Email Address text field found");
+        } else if (fieldType.equalsIgnoreCase("Password")) {
+            field = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type='password']"))));
+            Assert.assertTrue(field.isDisplayed());
+            System.out.println("Password text field found");
+        } return field;
+    }
+
+    public boolean appleTwoFactorAuth(String twoFactorAuthCode) {
+        System.out.println("appleTwoFactorAuth Method");
+
+        boolean result = false;
+        WebElement securityCodeContainers = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='security-code-container force-ltr']"))));
+        System.out.println("Apple Two Factor Authentication field found");
+
+        List<WebElement> twoFactorAuthBoxes = securityCodeContainers.findElements(By.xpath("//div/input[@class='form-control force-ltr form-textbox-input char-field']"));
+        System.out.println("Apple Two Factor Authentication Code Containers found");
+
+        if (twoFactorAuthBoxes.size() == twoFactorAuthCode.length()) {
+            System.out.println("Injecting the Two Factor Authentication Code :");
+            for (int codeContainer = 0; codeContainer < twoFactorAuthBoxes.size(); codeContainer++) {
+                WebElement twoFactorAuthCodeInputBox = twoFactorAuthBoxes.get(codeContainer);
+                String code = String.valueOf(twoFactorAuthCode.charAt(codeContainer));
+                twoFactorAuthCodeInputBox.sendKeys(code);
+                System.out.println(code);
+                result = !twoFactorAuthCodeInputBox.getText().isEmpty();
+            }
+        } else throw new IllegalArgumentException("Lengths of 'Two Factor Auth Code' & 'Code Input Field' does not match ");
+        return result;
+    }
+
     public WebElement amazonInputField() throws InterruptedException {
         System.out.println("amazonInputField Method");
         driver.wait(2500);
@@ -321,8 +406,12 @@ public class SignInPage {
         return null;
     }
 
-    public boolean needHelpToSignInLink(String emailId) throws InterruptedException {
+    public boolean needHelpToSignInLink(String fieldType, String emailId) throws InterruptedException {
         System.out.println("needHelpToSignInLink Method");
+        EmailLinkVerificationPage linkVerificationPage = new EmailLinkVerificationPage(driver);
+        Commons commons = new Commons(driver);
+        NeedHelpPage needHelpPage = new NeedHelpPage(driver);
+
         driver.wait(3000);
 
         button = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[@class='red underline']"))));
@@ -342,8 +431,8 @@ public class SignInPage {
         Thread.sleep(3000);
 
         // input box verify (Email ID) 4
-        inputField().click();
-        inputField().sendKeys(emailId);
+        inputField(fieldType).click();
+        inputField(fieldType).sendKeys(emailId);
         Thread.sleep(3000);
 
         // data-test-id="forgot-password-btn" - send link to reset password button 5
@@ -367,6 +456,7 @@ public class SignInPage {
         Thread.sleep(3000);
 
         // need help ? button 10
+
         commons.needHelpButton().click();
         Assert.assertTrue(needHelpPage.verifyNeedHelpPage());
         Thread.sleep(3000);
@@ -481,16 +571,12 @@ public class SignInPage {
         return field.isDisplayed();
     }
 
-    public boolean verifySignIn(String accountName) {
+    public boolean verifySignIn(String accountName) throws InterruptedException {
         System.out.println("verifySignIn Method");
-        try {
-            driver.wait(3500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        buttonName = driver.findElement(By.xpath("//span[@class='wpds-c-gRqkNc']")).getText();
+        Thread.sleep(3500);
+        buttonName = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//span[@class='wpds-c-gRqkNc']")))).getText();
         System.out.println("Account Name: " + buttonName);
-        return buttonName.contains(accountName);
+        return accountName.contains(buttonName);
     }
 
     public boolean verifyCheckBox(String checkboxIntention) {
@@ -512,11 +598,12 @@ public class SignInPage {
 
     public boolean editEmailId() throws InterruptedException {
         System.out.println("editEmailId Method");
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         fieldName = driver.findElement(By.xpath("//div[@data-test-id='current-email']")).getText();
         System.out.println("Previously Entered Email ID: " + fieldName);
 
         // Change button
+        Commons commons = new Commons(driver);
         button = commons.changeButton();
         button.click();
         return true;

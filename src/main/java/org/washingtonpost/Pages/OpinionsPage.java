@@ -6,16 +6,10 @@ import org.openqa.selenium.WebElement;
 
 public class OpinionsPage {
         WebDriver driver;
-        SignInPage signInPage;
-        HomePage homePage;
-        org.washingtonpost.Pages.OpinionsPage opinionsPage;
         WebElement page;
 
-        public OpinionsPage(WebDriver driver) throws InterruptedException {
+        public OpinionsPage(WebDriver driver) {
             this.driver = driver;
-            signInPage = new SignInPage(driver);
-            homePage = new HomePage(driver);
-            opinionsPage = new org.washingtonpost.Pages.OpinionsPage(driver);
         }
 
         public boolean verifyUserIsInOpinionsPage() {

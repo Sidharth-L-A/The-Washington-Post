@@ -6,16 +6,10 @@ import org.openqa.selenium.WebElement;
 
 public class SportsPage {
     WebDriver driver;
-    SignInPage signInPage;
-    HomePage homePage;
-    SportsPage  sportsPage ;
     WebElement page;
 
-    public SportsPage  (WebDriver driver) throws InterruptedException {
+    public SportsPage  (WebDriver driver) {
         this.driver = driver;
-        signInPage = new SignInPage(driver);
-        homePage = new HomePage(driver);
-        sportsPage  = new SportsPage (driver);
     }
 
     public boolean verifyUserIsInSportsPage () {

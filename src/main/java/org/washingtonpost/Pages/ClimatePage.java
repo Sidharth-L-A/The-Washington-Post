@@ -6,16 +6,10 @@ import org.openqa.selenium.WebElement;
 
 public class ClimatePage {
     WebDriver driver;
-    SignInPage signInPage;
-    HomePage homePage;
-    ClimatePage climatePage;
     WebElement page;
 
-    public ClimatePage (WebDriver driver) throws InterruptedException {
-        this.driver = driver;
-        signInPage = new SignInPage(driver);
-        homePage = new HomePage(driver);
-        climatePage = new ClimatePage(driver);
+    public ClimatePage (WebDriver driver) {
+            this.driver = driver;
     }
 
     public boolean verifyUserIsInClimatePage() {

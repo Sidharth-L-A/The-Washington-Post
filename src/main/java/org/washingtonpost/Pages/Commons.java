@@ -5,15 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class Commons {
-    /*
-    This class is intended to contain all the elements & objects
-    that are common for all pages
-    */
-
     WebDriver driver;
     WebElement button;
 
-    // Constructor to initialize WebDriver
     public Commons(WebDriver driver) {
         this.driver = driver;
     }
@@ -39,8 +33,7 @@ public class Commons {
 
     public WebElement changeButton() {
         System.out.println("changeButton Method");
-        // should go to the Commons page
-        button = driver.findElement(By.xpath("//button[@class='underline pointer ml-xxs gray-dark va-m dib']"));
+        button = driver.findElement(By.xpath("//a[@class='underline pointer ml-xxs gray-dark va-m dib']"));
         System.out.println("Button Found : " + button.getText());
         return button;
     }
