@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b550aa54-1480-400e-8ad8-caf7ee7664ec" name="Changes" comment="Sid : Initial UI segregation for all components">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SubscribePage.java" afterDir="false" />
+    <list default="true" id="ac9111a9-e2e6-4316-a863-6519d96afdf8" name="Changes" comment="Sid : Homepage - Article Authors, Buttons, Live Sessions, Trending Sessions.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/ClimatePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/ClimatePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/Commons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/Commons.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/DCMdVaPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/DCMdVaPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/EmailLinkVerificationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/EmailLinkVerificationPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/HomePage.java" afterDir="false" />
@@ -15,153 +15,60 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/NewsAlertsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/NewsAlertsPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/OpinionsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/OpinionsPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/PoliticsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/PoliticsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/PrivacyPolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/PrivacyPolicy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SearchMorePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SearchMorePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SignInPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SportsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SportsPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/StylePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/StylePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SubscribePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/SubscribePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/TechPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/TechPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/WellBeingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/WellBeingPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/WorldPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/Pages/WorldPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/washingtonpost/StepDefinitions/TheWashingtonPostStepDefinitions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Features/HomePage_Positive.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/HomePage_Positive.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost_Negative.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/OpenWashingtonPost_Negative.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Negative.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Negative.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Features/SignIn_Positive.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="alka_signin_using_amazon_and_facebook" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Sidharth-L-A&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Sidharth-L-A/The-Washington-Post.git&quot;,
-    &quot;accountId&quot;: &quot;bfdd5225-92fc-433d-b5f7-96c7f1e0aeb7&quot;
-  }
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 5
-}</component>
-  <component name="ProjectId" id="2jdSpmfPU631xzzx44P2H0xAmue" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2kPlB3rZTpKCWrI15STlyEYQ2YK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;TestNG.Cucumber TestNg Runner.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;sla__homePage&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sla/Test3/TheWashingtonPost/src/main/resources/TestNg.xml&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/sla/Test3/TheWashingtonPost/src/main/java/org/example/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.1150748&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;XML&quot;
-    ]
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TestNG.Cucumber TestNg Runner.executor": "Run",
+    "git-widget-placeholder": "sla__homePage__sub",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b550aa54-1480-400e-8ad8-caf7ee7664ec" name="Changes" comment="" />
-      <created>1721715649271</created>
+      <changelist id="ac9111a9-e2e6-4316-a863-6519d96afdf8" name="Changes" comment="Sid : Homepage - Article Authors, Buttons, Live Sessions, Trending Sessions." />
+      <created>1723192955980</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1721715649271</updated>
+      <updated>1723192955980</updated>
     </task>
-    <task id="LOCAL-00001" summary="Sid : Automated an existing user's Sign-In process. Tests will fail due to a mismatch in the application's response speed and test execution speed.">
-      <option name="closed" value="true" />
-      <created>1721924205041</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1721924205041</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Sid : Automated a new user's Sign-Up process, and a new user attempts to change Email ID during Sign-Up, Implemented test code to verify UI changes on buttons, Validating Passwords.">
-      <option name="closed" value="true" />
-      <created>1721998289406</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1721998289406</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Sid : Sign Pending : Amazon, FaceBook, Google, Apple, &amp; all Negative Cases.">
-      <option name="closed" value="true" />
-      <created>1722456853956</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1722456853956</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Sid : Sign-Up elements UI (Positions) pending.">
-      <option name="closed" value="true" />
-      <created>1722536257280</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1722536257280</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Sid : Automated an existing user's Sign-In process. Tests will fail due to a mismatch in the application's response speed and test execution speed." />
-    <MESSAGE value="Sid : Automated a new user's Sign-Up process, and a new user attempts to change Email ID during Sign-Up, Implemented test code to verify UI changes on buttons, Validating Passwords." />
-    <MESSAGE value="Sid : Sign Pending : Amazon, FaceBook, Google, Apple, &amp; all Negative Cases." />
-    <MESSAGE value="Sid : Sign-Up elements UI (Positions) pending." />
-    <MESSAGE value="Sid : Initial UI segregation for all components" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sid : Initial UI segregation for all components" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/washingtonpost/Main.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Sid : Homepage - Article Authors, Buttons, Live Sessions, Trending Sessions." />
+    <option name="LAST_COMMIT_MESSAGE" value="Sid : Homepage - Article Authors, Buttons, Live Sessions, Trending Sessions." />
   </component>
 </project>

@@ -6,16 +6,10 @@ import org.openqa.selenium.WebElement;
 
 public class NewsAlertsPage {
     WebDriver driver;
-    SignInPage signInPage;
-    HomePage homePage;
-    NewsAlertsPage newsAlertsPage;
     WebElement page;
 
-    public NewsAlertsPage (WebDriver driver) throws InterruptedException {
+    public NewsAlertsPage (WebDriver driver) {
         this.driver = driver;
-        signInPage = new SignInPage(driver);
-        homePage = new HomePage(driver);
-        newsAlertsPage = new NewsAlertsPage(driver);
     }
 
     public boolean verifyUserIsInNewsAlertsPage() {

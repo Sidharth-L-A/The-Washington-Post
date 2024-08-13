@@ -6,16 +6,10 @@ import org.openqa.selenium.WebElement;
 
 public class StylePage {
         WebDriver driver;
-        SignInPage signInPage;
-        HomePage homePage;
-        org.washingtonpost.Pages.StylePage stylePage;
         WebElement page;
 
-        public StylePage(WebDriver driver) throws InterruptedException {
+        public StylePage(WebDriver driver) {
             this.driver = driver;
-            signInPage = new SignInPage(driver);
-            homePage = new HomePage(driver);
-            stylePage = new org.washingtonpost.Pages.StylePage(driver);
         }
 
         public boolean verifyUserIsInStylePage() {

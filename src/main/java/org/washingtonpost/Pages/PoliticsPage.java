@@ -5,18 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class PoliticsPage {
-
     WebDriver driver;
-    SignInPage signInPage;
-    HomePage homePage;
-    PoliticsPage politicsPage;
     WebElement page;
 
-    public PoliticsPage (WebDriver driver) throws InterruptedException {
-        this.driver = driver;
-        signInPage = new SignInPage(driver);
-        homePage = new HomePage(driver);
-        politicsPage = new PoliticsPage(driver);
+    public PoliticsPage (WebDriver driver) {
+    this.driver = driver;
     }
 
     public boolean verifyUserIsInPoliticsPage() {

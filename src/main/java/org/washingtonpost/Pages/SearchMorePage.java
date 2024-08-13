@@ -6,16 +6,10 @@ import org.openqa.selenium.WebElement;
 
 public class SearchMorePage {
     WebDriver driver;
-    SignInPage signInPage;
-    HomePage homePage;
-    SearchMorePage searchMorePage;
     WebElement page;
 
-    public SearchMorePage (WebDriver driver) throws InterruptedException {
+    public SearchMorePage (WebDriver driver) {
         this.driver = driver;
-        signInPage = new SignInPage(driver);
-        homePage = new HomePage(driver);
-        searchMorePage = new SearchMorePage(driver);
     }
 
     public boolean verifyUserIsInSearchMorePage() {

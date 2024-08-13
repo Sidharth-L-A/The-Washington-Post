@@ -7,26 +7,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import java.util.List;
-
+import java.time.Duration;
 import java.util.List;
 
 public class HomePage {
     WebDriver driver;
-    WebDriverWait wait;
-    WebElement button, masterLogo, article, link, pauseButton, field, playPauseButton, timestamp, rewind15Button, forward15Button, muteButton, volumeSlider, playbackSpeedButton, minimizeButton, closeButton, podcastHeader;
-    String currentTab, articleUrl, linkUrl, buttonName, initialTimestamp, timestampAfterForward, timestampAfterRewind;
-    SignInPage signInPage;
-    HomePage homePage;
-    JavascriptExecutor js;
 
-    // Constructor to initialize WebDriver
-    public HomePage(WebDriver driver) throws InterruptedException {
+    public HomePage(WebDriver driver) {
         this.driver = driver;
-        signInPage = new SignInPage(driver);
-        homePage = new HomePage(driver);
-        js = (JavascriptExecutor) driver;
     }
+
+    WebElement button, masterLogo, article, link, pauseButton, field, playPauseButton, timestamp, rewind15Button, forward15Button, muteButton, volumeSlider, playbackSpeedButton, minimizeButton, closeButton, podcastHeader;
+    String currentTab, articleUrl, url, linkUrl, expectedUrl, currentUrl, buttonName, initialTimestamp, timestampAfterForward, timestampAfterRewind;
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     public WebElement subscribeButton() {
         System.out.println("subscribeButton Method");
@@ -423,6 +417,7 @@ public class HomePage {
 
     public boolean verifyAccountNamePostSignIn(String accountName) throws InterruptedException {
         System.out.println("verifyAccountNamePostSignIn Method");
+        SignInPage signInPage = new SignInPage(driver);
         Assert.assertTrue(verifyUserIsInHomePage());
         ((JavascriptExecutor) driver).executeScript("window.open();");
         currentTab = driver.getWindowHandle();
@@ -464,9 +459,10 @@ public class HomePage {
         return result;
     }
 
-    public boolean verifyUserIsInHomePage() {
+    public boolean verifyUserIsInHomePage() throws InterruptedException {
         System.out.println("verifyUserIsInHomePage Method");
-        masterLogo = driver.findElement(By.xpath("//*[@class='wpds-c-fBqPWp masthead_svg__wplogo']"));
+        Thread.sleep(5000);
+        masterLogo = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@class='wpds-c-fBqPWp masthead_svg__wplogo']"))));
         System.out.println("'The Washington Post' Logo found");
         return masterLogo.isDisplayed();
     }

@@ -9,15 +9,9 @@ import java.time.Duration;
 public class SubscribePage {
     WebElement field;
     WebDriver driver;
-    WebDriverWait wait;
-    PrivacyPolicy privacyPolicy;
-    NeedHelpPage needHelpPage;
 
     public SubscribePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        privacyPolicy = new PrivacyPolicy(driver);
-        needHelpPage = new NeedHelpPage(driver);
     }
 
     public boolean verifyUserIsInSubscribePage() {

@@ -6,16 +6,10 @@ import org.openqa.selenium.WebElement;
 
 public class DCMdVaPage {
     WebDriver driver;
-    SignInPage signInPage;
-    HomePage homePage;
-    DCMdVaPage dCMdVaPage;
     WebElement page;
 
-    public DCMdVaPage (WebDriver driver) throws InterruptedException {
+    public DCMdVaPage (WebDriver driver) {
         this.driver = driver;
-        signInPage = new SignInPage(driver);
-        homePage = new HomePage(driver);
-        dCMdVaPage = new DCMdVaPage(driver);
     }
 
     public boolean verifyUserIsInDCMdVaPage() {
